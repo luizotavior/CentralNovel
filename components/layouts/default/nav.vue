@@ -1,48 +1,154 @@
 <template>
-    <nav id="default-nav">
-        <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">Novels</a></li>
-            <li><a href="">Grupos</a></li>
-            <li><a href="https://discordapp.com/invite/qCjSsdX" class="" target="_blank">Discord</a></li>
-            <li><a href="">Aliança</a></li>
-            <li><a href="">Contato</a></li>
-        </ul>
-    </nav>
+  <nav
+    id="menu-secundario"
+    class="navbar"
+    role="navigation"
+    aria-label="main navigation">
+    <div class="navbar-brand">
+      <a
+        :class="['navbar-burger','burger', navbar.responsive ? 'is-active' : '']"
+        role="button"
+        aria-label="menu"
+        aria-expanded="false"
+        data-target="navbarBasicExample"
+        @click="navbar.responsive = !navbar.responsive">
+        <span aria-hidden="true"/>
+        <span aria-hidden="true"/>
+        <span aria-hidden="true"/>
+      </a>
+    </div>
+
+    <div
+      id="navbarBasicExample"
+      :class="['navbar-menu', navbar.responsive ? 'is-active' : '']">
+      <div class="navbar-start">
+        <a class="navbar-item" href="#">
+          <img src="images/logo/logo-quadrada.png" alt="">
+        </a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="https://bulma.io/documentation/overview/start/">
+            Gêneros
+          </a>
+          <div class="navbar-dropdown is-boxed">
+            <a class="navbar-item" href="https://bulma.io/documentation/overview/start/">
+              Overview
+            </a>
+            <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
+              Modifiers
+            </a>
+            <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
+              Columns
+            </a>
+            <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
+              Layout
+            </a>
+            <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
+              Form
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
+              Elements
+            </a>
+            <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
+              Components
+            </a>
+          </div>
+        </div>
+        <b-tooltip label="Tooltip bottom"
+          position="is-bottom">
+        <a class="navbar-item" href="https://bulma.io/">
+          Novels
+        </a>
+        </b-tooltip>
+        <b-tooltip label="Tooltip bottom"
+          position="is-bottom">
+        <a class="navbar-item" href="https://bulma.io/">
+          Grupos
+        </a>
+        </b-tooltip>
+        <b-tooltip label="Tooltip bottom"
+          position="is-bottom">
+          <a class="navbar-item" href="https://bulma.io/">
+            Ranked
+          </a>
+        </b-tooltip>
+      </div>
+      <div class="navbar-end">
+        <b-tooltip label="Tooltip bottom"
+          position="is-bottom">
+          <a class="navbar-item" href="https://bulma.io/">
+            Fórum
+          </a>
+        </b-tooltip>
+        <b-tooltip label="Tooltip bottom"
+          position="is-bottom">
+          <a class="navbar-item" href="https://bulma.io/">
+            Login
+          </a>
+        </b-tooltip>
+        <div class="navbar-item has-dropdown is-hoverable">
+          
+          <a class="navbar-link">
+            <div class="avatar-circle">
+              <img
+                src="/images/avatar/default.jpg"
+                alt="">
+            </div>
+          </a>
+          <div class="navbar-dropdown is-right">
+            <a class="navbar-item">
+              Perfil
+            </a>
+            <a
+              class="navbar-item"
+              @click="$auth.logout();">
+              Logout
+            </a>
+            <hr class="navbar-divider">
+            <div class="navbar-item">
+              Version 4.0
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      navbar: {
+        responsive: false,
+        search: null,
+      }
+    };
+  },
+  computed:{
+  },
+};
+</script>
+
 <style lang="scss" scoped>
-    @import "@/assets/sass/layout/_grid.scss";
-    @import "@/assets/sass/helpers/_variables.scss";
-    nav#default-nav{
-        border-top: 1px solid rgba(0,0,0,0.54);
-        border-bottom: 1px solid rgba(0,0,0,0.54);
-        display: flex;
-        margin-top: 10px;
-        margin-bottom: 20px;
-        @extend %justify-center;
-        ul{
-            padding: 0px;
-            margin: 10px;
-            display: flex;
-            flex-direction: row;
-            list-style: none;
-            flex-wrap: wrap;
-            @extend %justify-center;
-            li{
-                padding-top: 5px;
-                padding-bottom: 5px;
-                padding-left: 10px;
-                padding-right: 10px;
-                a{
-                    text-decoration: none;
-                    color: $gray-01;
-                    &:hover,
-                    &.active{
-                        color: $primary;
-                    }
-                }
-            }
-        }
+  nav#menu-secundario {
+    background-color: #fff;
+    height: 65px;
+    box-shadow: 3px 0px 6px #888888;
+    width: 100%;
+    div.avatar-circle {
+      height: 38px;
+      width: 38px;
+      img {
+        border-radius: 50%;
+        height: 100%;
+        width: 100%;
+        max-height: 100%;
+      }
     }
+  }
+  #navbarBasicExample{
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 </style>

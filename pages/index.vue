@@ -8,7 +8,6 @@
 
 export default {
   name: 'Home',
-  layout: "v4",
   components: {
 
   },

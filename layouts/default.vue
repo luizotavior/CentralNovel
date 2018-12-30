@@ -1,19 +1,19 @@
 <template>
   <div id="layout-default">
-    <default-header/>
+    <default-nav/>
+    <slider/>
     <nuxt/>
-    <default-legado/>
-    <default-footer/>
   </div>
 </template>
 
 <script>
-  import defaultHeader from '@/components/layouts/default/header'
+  import defaultNav from '@/components/layouts/default/nav'
+  import slider from '@/components/layouts/default/slider'
 
   export default {
-    name: "Layout Default",
+    name: "Layout",
     components: {
-      defaultHeader
+      defaultNav,slider
     },
     data() {
       return {
@@ -27,10 +27,8 @@
   #layout-default {
     display: flex;
     flex-direction: column;
-    background-image: url('/images/bg/nuvens.jpg');
-    background-repeat: repeat-y;
     background-size: 100%; 
     font-family: 'Source Sans Pro', sans-serif;
-	  font-weight: 400;
+    font-weight: 400;
   }
 </style>
