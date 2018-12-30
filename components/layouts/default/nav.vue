@@ -57,38 +57,23 @@
             </a>
           </div>
         </div>
-        <b-tooltip label="Tooltip bottom"
-          position="is-bottom">
-        <a class="navbar-item" href="https://bulma.io/">
+        <a class="navbar-link" href="https://bulma.io/">
           Novels
         </a>
-        </b-tooltip>
-        <b-tooltip label="Tooltip bottom"
-          position="is-bottom">
-        <a class="navbar-item" href="https://bulma.io/">
+        <a class="navbar-link" href="https://bulma.io/">
           Grupos
         </a>
-        </b-tooltip>
-        <b-tooltip label="Tooltip bottom"
-          position="is-bottom">
-          <a class="navbar-item" href="https://bulma.io/">
+          <a class="navbar-link" href="https://bulma.io/">
             Ranked
           </a>
-        </b-tooltip>
       </div>
       <div class="navbar-end">
-        <b-tooltip label="Tooltip bottom"
-          position="is-bottom">
           <a class="navbar-item" href="https://bulma.io/">
             Fórum
           </a>
-        </b-tooltip>
-        <b-tooltip label="Tooltip bottom"
-          position="is-bottom">
           <a class="navbar-item" href="https://bulma.io/">
             Login
           </a>
-        </b-tooltip>
         <div class="navbar-item has-dropdown is-hoverable">
           
           <a class="navbar-link">
