@@ -24,7 +24,7 @@ export default {
   #page-home{
     position: relative;
     margin: 0 auto;
-    margin-top: -102px;
+    margin-top: -5.3%;
     @extend %row;
     max-width: 1036px;
     width: 100%;
