@@ -14,7 +14,4 @@
 
 <style lang="scss">
     @import "@/assets/sass/themes/_theme.scss";
-    .agile{
-        z-index: -2;
-    }
 </style>

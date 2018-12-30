@@ -28,6 +28,7 @@ export default {
     @extend %row;
     max-width: 1036px;
     width: 100%;
+    z-index: 1;
     &:before {
       position: absolute;
       z-index: -1;
