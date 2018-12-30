@@ -1,19 +1,31 @@
 <template>
   <div id="layout-default">
-    <default-nav/>
-    <slider/>
+    <default-header/>
     <nuxt/>
+    <default-footer/>
   </div>
 </template>
 
 <script>
-  import defaultNav from '@/components/layouts/default/nav'
-  import slider from '@/components/layouts/default/slider'
+  import defaultHeader from '@/components/layouts/default/header'
+  import defaultFooter from '@/components/layouts/default/footer'
 
   export default {
     name: "Layout",
     components: {
-      defaultNav,slider
+      defaultHeader,defaultFooter
+    },
+    head() {
+      return {
+        title: "Central Novel",
+        meta: [
+          {
+            hid: "description",
+            name: "description",
+            content: "My custom description"
+          }
+        ]
+      }
     },
     data() {
       return {
