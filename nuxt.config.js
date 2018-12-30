@@ -35,6 +35,7 @@ module.exports = {
   */
   plugins: [
     'plugins/vue-agile.js',
+    'plugins/vue-mq.js',
   ],
 
   /*
