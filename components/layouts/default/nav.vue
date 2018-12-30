@@ -29,7 +29,7 @@
           <img src="images/logo/logo-quadrada.png" alt="">
         </a>
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="https://bulma.io/documentation/overview/start/">
+          <a class="navbar-item" href="https://bulma.io/documentation/overview/start/">
             Gêneros
           </a>
           <div class="navbar-dropdown is-boxed">
