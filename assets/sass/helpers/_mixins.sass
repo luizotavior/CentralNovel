@@ -1,0 +1,21 @@
+//Titulo: Div/Imagem Responsive
+//Descrição:
+//Criar elementos escalonáveis (geralmente imagens / imagens de fundo) que mantêm uma proporção.
+// ----
+//Example:
+//  div {
+//       @include responsive-ratio(16,9);
+//  }
+// ----
+@mixin responsive-ratio($x,$y, $pseudo: false) {
+    $padding: unquote( ( $y / $x ) * 100 + '%' );
+    @if $pseudo {
+        &:before {
+            @include pseudo($pos: relative);
+            width: 100%;
+            padding-top: $padding;
+        }
+    } @else {
+        padding-top: $padding;
+    }
+}
