@@ -5,6 +5,9 @@
     role="navigation"
     aria-label="main navigation">
     <div class="navbar-brand">
+      <a class="navbar-item is-hidden-desktop" href="#">
+        <img src="images/logo/logo-quadrada.png" alt="">
+      </a>
       <a
         :class="['navbar-burger','burger', navbar.responsive ? 'is-active' : '']"
         role="button"
@@ -22,7 +25,7 @@
       id="navbarBasicExample"
       :class="['navbar-menu', navbar.responsive ? 'is-active' : '']">
       <div class="navbar-start">
-        <a class="navbar-item" href="#">
+        <a class="navbar-item is-hidden-touch " href="#">
           <img src="images/logo/logo-quadrada.png" alt="">
         </a>
         <div class="navbar-item has-dropdown is-hoverable">
