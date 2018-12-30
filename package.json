@@ -20,7 +20,8 @@
     "nuxt-buefy": "^0.2.1",
     "nuxt-sass-resources-loader": "^2.0.5",
     "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1"
+    "style-loader": "^0.23.1",
+    "vue-agile": "^0.3.7"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
