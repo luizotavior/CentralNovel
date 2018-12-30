@@ -1,5 +1,9 @@
 <template>
-    <section>
+    <section id="feed-table">
+        <div class="feed-table-header">
+            <h2>Ultimas Atualizações</h2>
+        </div>
+
         <b-table
             :data="data"
             :loading="loading"
@@ -101,60 +105,75 @@
     }
 </script>
 
+<style lang="scss" >
+</style>
+
 <style lang="scss">
-    .table{
-        background-color: transparent;
-        line-height: normal;
-        border-color: #e3e4ea;
-        width: 100%;
-        overflow-x: auto;
-        .table-title{
-            color: #83848f;
-            font-weight: 400;
-            font-size: 14px;
+    section#feed-table{
+        div.feed-table-header{
+            margin-bottom: 22px;
+            h2{
+                font-size: 32px; 
+            }
+            
         }
-        tbody{
-            border-color: #e3e4ea;
-            td{
-                font-weight: 300;
+        .table{
+            background-color: transparent;
+            line-height: normal;
+            width: 100%;
+            overflow-x: auto;
+            .table-title{
                 color: #83848f;
-                a{
-                    color: #000;
-                }
-                a,span{
-                    display: block;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                }
-                &:hover{
-                    text-decoration: underline;
-                }
-                .__genero{
-                    max-width: 7rem;
+                font-weight: 400;
+                font-size: 14px;
+            }
+            th,td{
+                padding-left: 0px;
+                border-width: 0 0 1px;
+                border-color: #e3e4ea;
+            }
+            tbody{
+                td{
+                    font-weight: 300;
                     color: #83848f;
-                }
-                .__titulo{
-                    max-width: 17rem;
-                    @media (max-width: 768px) {
+                    a{
+                        color: #000;
+                    }
+                    a,span{
+                        display: block;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                    .__genero{
+                        max-width: 7rem;
+                        color: #83848f;
+                    }
+                    .__titulo{
+                        max-width: 17rem;
+                        @media (max-width: 768px) {
+                            max-width: 7rem;
+                        }
+                    }
+                    .__release{
+                        max-width: 13rem;
+                        @media (max-width: 768px) {
+                            max-width: 7rem;
+                        }
+                    }
+                    .__autor{
                         max-width: 7rem;
                     }
-                }
-                .__release{
-                    max-width: 13rem;
-                    @media (max-width: 768px) {
+                    .__tradutor{
                         max-width: 7rem;
                     }
-                }
-                .__autor{
-                    max-width: 7rem;
-                }
-                .__tradutor{
-                    max-width: 7rem;
-                }
-                .__time{
-                    max-width: 7rem;
-                    color: #83848f;
+                    .__time{
+                        max-width: 7rem;
+                        color: #83848f;
+                    }
                 }
             }
         }
