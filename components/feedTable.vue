@@ -105,11 +105,9 @@
     }
 </script>
 
-<style lang="scss" >
-</style>
-
 <style lang="scss">
     section#feed-table{
+        padding: 12px;
         div.feed-table-header{
             margin-bottom: 22px;
             h2{
