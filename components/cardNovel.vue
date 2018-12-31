@@ -12,17 +12,34 @@
             <a class="__genero" href="#">Cenário Futurista</a>
         </div>
         <div class="footer-card">
+            <star-rating v-if="rating" :current-rating="Math.random()*5"/>
         </div>
     </div>
 </template>
 
 <script>
+import starRating from '@/components/starRating.vue';
+
 export default {
-    
+    components:{
+        starRating,
+    },
+    props: {
+        data: {
+            type: Array,
+            default: () => []
+        },
+        rating: {
+            type: Boolean,
+            default: false
+        },
+    },
 }
 </script>
 
 <style lang="scss" scoped>
+    @import "@/assets/sass/layout/_grid.scss";
+    @import '@/assets/sass/helpers/_variables.scss';
     .card-novel{
         display: flex;
         flex-direction: column;
