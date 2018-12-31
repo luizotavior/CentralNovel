@@ -105,11 +105,11 @@ export default {
                     color: #000;
                     border-radius: 4px;
                     background-color: #fff;
+                    min-width: 145px;
                     @media (max-width: 768px) {
                         margin-bottom: 8px;
                         margin-right: 7px;
                         margin-left: 7px;
-                        min-width: 140px;
                         span{
                             padding:6px;
                         }
