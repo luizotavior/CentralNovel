@@ -22,7 +22,8 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "vue-agile": "^0.3.7",
-    "vue-mq": "^1.0.1"
+    "vue-mq": "^1.0.1",
+    "vue-slick": "^1.1.15"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
