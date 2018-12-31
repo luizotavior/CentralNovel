@@ -30,11 +30,14 @@ export default {
     components: {
         cardNovel,Slick
     },
+    props: {
+
+    },
     data() {
         return {
             slickOptions: {
                 slidesToShow: 7,
-                slidesToScroll: 1,
+                slidesToScroll: 7,
                 infinite: false,
                 responsive: [
                     {
@@ -43,42 +46,53 @@ export default {
                             slidesToShow: 6,
                             slidesToScroll: 6,
                             infinite: false,
-                            dots: false
+                            dots: false,
+                            arrows: false,
                         }
                     },
                     {
                         breakpoint: 1100,
                         settings: {
                             slidesToShow: 5,
-                            slidesToScroll: 5
+                            slidesToScroll: 5,
+                            dots: false,
+                            arrows: false,
                         }
                     },
                     {
                         breakpoint: 750,
                         settings: {
                             slidesToShow: 4,
-                            slidesToScroll: 4
+                            slidesToScroll: 4,
+                            dots: false,
+                            arrows: false,
                         }
                     },
                     {
                         breakpoint: 620,
                         settings: {
                             slidesToShow: 3,
-                            slidesToScroll: 3
+                            slidesToScroll: 3,
+                            dots: false,
+                            arrows: false,
                         }
                     },
                     {
                         breakpoint: 460,
                         settings: {
                             slidesToShow: 2,
-                            slidesToScroll: 2
+                            slidesToScroll: 2,
+                            dots: false,
+                            arrows: false,
                         }
                     },
                     {
                         breakpoint: 310,
                         settings: {
                             slidesToShow: 1,
-                            slidesToScroll: 1
+                            slidesToScroll: 1,
+                            dots: false,
+                            arrows: false,
                         }
                     }
                 ]
@@ -146,13 +160,115 @@ export default {
     @import 'slick-carousel/slick/slick.css';
   
     .list-novel{
+        margin-bottom: 48px;
         @extend %row;
         padding: 12px;
         display:flex;
         flex-direction: column;
         width: 100%;
+        div.list-novel-header{
+            margin-bottom: 22px;
+            h2{
+                font-size: 32px; 
+            }
+            
+        }
         .carousel-container{
             width: 100%;
         }
     }
+    // Default Variables
+
+    // Slick icon entity codes outputs the following
+    // "\2190" outputs ascii character "←"
+    // "\2192" outputs ascii character "→"
+    // "\2022" outputs ascii character "•"
+
+    $slick-font-path: "./fonts/" !default;
+    $slick-font-family: "slick" !default;
+    $slick-loader-path: "./" !default;
+    $slick-arrow-color: #000 !default;
+    $slick-prev-character: url('/images/left-arrow.svg') !default;
+    $slick-next-character: url('/images/right-arrow.svg') !default;
+    $slick-opacity-default: 0.75 !default;
+    $slick-opacity-on-hover: 1 !default;
+    $slick-opacity-not-active: 0.25 !default;
+
+    .slick-prev,
+    .slick-next {
+        position: absolute;
+        display: block;
+        height: 40px;
+        width: 40px;
+        line-height: 0px;
+        font-size: 0px;
+        cursor: pointer;
+        background: transparent;
+        color: transparent;
+        top: 50%;
+        -webkit-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+        padding: 0;
+        border: none;
+        outline: none;
+        &:hover, &:focus {
+            outline: none;
+            background: transparent;
+            &:before {
+                opacity: $slick-opacity-on-hover;
+            }
+        }
+        &.slick-disabled{
+            display: none !important;
+            opacity: 0;
+            &:before {
+                opacity: 0;
+                &:before {
+                    opacity: 0;
+                }
+            }
+
+        }
+        &:before {
+            font-family: $slick-font-family;
+            font-size: 20px;
+            line-height: 1;
+            color: $slick-arrow-color;
+            opacity: $slick-opacity-default;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    }
+
+    .slick-prev {
+        left: -45px;
+        [dir="rtl"] & {
+            left: auto;
+            right: -45px;
+        }
+        &:before {
+            content: $slick-prev-character;
+
+            [dir="rtl"] & {
+                content: $slick-next-character;
+            }
+        }
+    }
+
+    .slick-next {
+        right: -45px;
+        [dir="rtl"] & {
+            left: -45px;
+            right: auto;
+        }
+        &:before {
+            content: $slick-next-character;
+            [dir="rtl"] & {
+                content: $slick-prev-character;
+            }
+        }
+    }
+
+
 </style>
