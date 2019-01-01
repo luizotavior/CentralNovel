@@ -6,7 +6,7 @@
     aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item is-hidden-desktop" href="#">
-        <img src="images/logo/logo-quadrada.png" alt="">
+        <img src="images/logo/logo-quadrada.png" alt="Logo Central Novel">
       </a>
       <a
         :class="['navbar-burger','burger', navbar.responsive ? 'is-active' : '']"
@@ -25,53 +25,34 @@
       id="navbarBasicExample"
       :class="['navbar-menu', navbar.responsive ? 'is-active' : '']">
       <div class="navbar-start">
-        <a class="navbar-item is-hidden-touch " href="#">
-          <img src="images/logo/logo-quadrada.png" alt="">
+        <a class="navbar-item is-hidden-touch " href="#" title="Central Novel">
+          <img src="images/logo/logo-quadrada.png" alt="Logo Central Novel">
         </a>
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-item" href="https://bulma.io/documentation/overview/start/">
+          <a class="navbar-item" href="#" title="Gêneros">
             Gêneros
           </a>
           <div class="navbar-dropdown is-boxed">
-            <a class="navbar-item" href="https://bulma.io/documentation/overview/start/">
-              Overview
-            </a>
-            <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
-              Modifiers
-            </a>
-            <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
-              Columns
-            </a>
-            <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
-              Layout
-            </a>
-            <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
-              Form
-            </a>
-            <hr class="navbar-divider">
-            <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
-              Elements
-            </a>
-            <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
-              Components
+            <a class="navbar-item" href="#" title="Romance">
+              Romance
             </a>
           </div>
         </div>
-        <a class="navbar-link" href="https://bulma.io/">
+        <a class="navbar-item" href="#">
           Novels
         </a>
-        <a class="navbar-link" href="https://bulma.io/">
+        <a class="navbar-item" href="#">
           Grupos
         </a>
-          <a class="navbar-link" href="https://bulma.io/">
+          <a class="navbar-item" href="#">
             Ranked
           </a>
       </div>
       <div class="navbar-end">
-          <a class="navbar-item" href="https://bulma.io/">
+          <a class="navbar-item" href="#">
             Fórum
           </a>
-          <a class="navbar-item" href="https://bulma.io/">
+          <a class="navbar-item" href="#">
             Login
           </a>
         <div class="navbar-item has-dropdown is-hoverable">
