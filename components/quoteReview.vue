@@ -5,14 +5,24 @@
                 <p>É como um pokemon. Mas os monstros estão tentando te matar.</p>
             </blockquote>
             <span>-- Monster Paradise</span>
-            <img class="quotation-left" src="/images/quotation-left-mark.svg" alt="">
-            <img class="quotation-right" src="/images/quotation-right-mark.svg" alt="">
+            <svg-filler class="quotation-left" path="images/quotation-left-mark.svg" fill="#e3e3e5" width="50px" height="50px"/>
+            <svg-filler class="quotation-right" path="images/quotation-right-mark.svg" fill="#e3e3e5" width="50px" height="50px"/>
         </a>
         <div class="review-action">
             <a href="#" class="button is-primary" title="Sign In">Sign In</a>
         </div>
     </div>
 </template>
+
+<script>
+import SvgFiller from 'vue-svg-filler'
+export default {
+    components:{
+        SvgFiller
+    }
+}
+</script>
+
 
 <style lang="scss" scoped>
     @import "@/assets/sass/layout/_grid.scss";
