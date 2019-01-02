@@ -1,8 +1,5 @@
 <template>
     <div id="suggested-tags">
-        <div class="suggested-tags-header">
-            <h2>Tags Sugeridas</h2>
-        </div>
         <ul>
             <li class="column is-3">
                 <a href="#">
@@ -79,14 +76,6 @@ export default {
     @import '@/assets/sass/helpers/_variables.scss';
     #suggested-tags{
         margin-bottom: 48px;
-        div.suggested-tags-header{
-            padding: 12px;
-            margin-bottom: 22px;
-            h2{
-                font-size: 32px; 
-            }
-            
-        }
         ul{
             @extend %row;
             display: flex;
