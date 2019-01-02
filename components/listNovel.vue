@@ -1,26 +1,21 @@
 <template>
     <div class="list-novel">
-        <div class="list-novel-header">
-            <h2>{{ title }}</h2>
-            <a class="see-more" v-if="seeMore != null" :href="seeMore">Veja Mais</a>
-        </div>
-        <div class="carousel-container">
+        <div v-if="mode == 1" class="mode-one-container">
             <slick
                 ref="slick"
                 :options="slickOptions">
-                <card-novel :rating="true"/>
-                <card-novel :rating="true"/>
-                <card-novel :rating="true"/>
-                <card-novel :rating="true"/>
-                <card-novel :rating="true"/>
-                <card-novel :rating="true"/>
-                <card-novel :rating="true"/>
-                <card-novel :rating="true"/>
-                <card-novel :rating="true"/>
-                <card-novel :rating="true"/>
+                <card-novel :rating="true" v-for="n in 10" :key="n"/>
             </slick>
 
         </div>
+        <ul v-if="mode == 2" class="mode-two-container">
+            <li v-for="n in 9" :key="n" :class="{
+            'the-fives': n >1 && n <= 5 ,
+            'is-hidden-tablet-only ': n > (9-2),
+            }">
+                <card-novel :rating="true" :sinopse="n == 1"/>
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -40,6 +35,10 @@ export default {
         seeMore: {
             type: String,
             default: null
+        },
+        mode: {
+            type: Number,
+            default: 1
         },
     },
     data() {
@@ -114,7 +113,7 @@ export default {
 }
 </script>
 
-<style lang="scss" >
+<style lang="scss">
     @import "@/assets/sass/layout/_grid.scss";
     @import '@/assets/sass/helpers/_variables.scss';
     @import 'slick-carousel/slick/slick.css';
@@ -122,28 +121,72 @@ export default {
     .list-novel{
         margin-bottom: 48px;
         @extend %row;
-        padding: 0 12px;
         display:flex;
         flex-direction: column;
         width: 100%;
-        div.list-novel-header{
-            margin-bottom: 22px;
-            display: flex;
-            flex-direction: row;
-            @extend %justify-between;
-            @extend %vertical-align-middle;
-            h2{
-                font-size: 32px; 
-            }
-            a.see-more{
-                min-width: 62px;
-            }
-            
-        }
-        .carousel-container{
+        .mode-one-container{
             width: 100%;
         }
+        .mode-two-container{
+            margin-right: auto;
+            margin-left: auto;
+            padding-left: 10px;
+            li{
+                float: left;
+                padding: 0 14px;
+                @extend %col-2;
+                &:first-child{
+                    @extend %col-4;
+                    background-color: #fff;
+                    height: 100%;
+                    padding: 20px;
+                    .card-novel{
+                        .header-card{
+                            h3{
+                                font-size: 20px;
+                            }
+                            .__image{
+                                margin: 10px auto 15px auto;
+                            }
+                        }
+                        .body-card{
+                            margin-bottom: 4px;
+                            .__genero{
+                                font-size: 16px;
+                            }
+                        }
+                        .footer-card{
+                            .star-rating{
+                                margin-bottom: 8px;
+                            }
+                        }
+                        
+                    }
+                }
+                .card-novel{
+                    padding: 0px;
+                }
+                &.the-fives{
+                    margin-bottom: 24px;
+                }
+                @media (min-width: 769px) and (max-width: 1087px){
+                    width: 20%;
+                    &:first-child{
+                    }
+                }
+                @media (max-width: 900px) {
+                    display: none;
+                    &:first-child{
+                        display: flex;
+                        width: 100%;
+                        margin: 0;
+                    }
+                }
+            }
+        }
     }
+</style>
+<style lang="scss" >
     // Default Variables
 
     // Slick icon entity codes outputs the following
