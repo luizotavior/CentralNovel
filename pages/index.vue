@@ -1,16 +1,27 @@
 <template>
   <div id="page-home">
     <quote-review/>
-    <list-novel title="Power Ranking" seeMore="#"/>
-    <list-novel title="Popular" seeMore="#"/>
-    <list-novel title="Tendências de Histórias Originais" seeMore="#"/>
-    <list-novel title="Novos na Central Novel" seeMore="#"/>
+    <topic-title title="Novos Lançamentos em Andamento"/>
+    <list-novel :mode="2"/>
+    <topic-title title="Recommended"/>
+    <list-novel :mode="2"/>
+    <topic-title title="Power Ranking" seeMore="#"/>
+    <list-novel/>
+    <topic-title title="Popular" seeMore="#"/>
+    <list-novel/>
+    <topic-title title="Tendências de Histórias Originais" seeMore="#"/>
+    <list-novel/>
+    <topic-title title="Novos na Central Novel"/>
+    <list-novel seeMore="#"/>
+    <topic-title title="Tags Sugeridas"/>
     <suggested-tags/>
+    <topic-title title="Ultimas Atualizações"/>
     <feed-table/>
   </div>
 </template>
 
 <script>
+import topicTitle from '@/components/topicTitle.vue';
 import suggestedTags from '@/components/suggestedTags.vue';
 import feedTable from '@/components/feedTable.vue';
 import listNovel from '@/components/listNovel.vue';
@@ -19,10 +30,11 @@ import quoteReview from '@/components/quoteReview.vue';
 export default {
   name: 'Home',
   components: {
+    topicTitle,
     suggestedTags,
     feedTable,
     listNovel,
-    quoteReview
+    quoteReview,
   },
   data() {
     return {
