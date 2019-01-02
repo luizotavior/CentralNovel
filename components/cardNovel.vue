@@ -13,6 +13,9 @@
         </div>
         <div class="footer-card">
             <star-rating v-if="rating" :current-rating="Math.random()*5"/>
+            <div v-if="sinopse">
+                <p>With the rising tide of steam power and machinery, who can come close to being a Beyonder? Shrouded in the fog of history and darkness, who or what is the lurking evil that murmurs into our ears? Waking up to be faced with a string of mysteries, Zhou... </p>
+            </div>
         </div>
     </div>
 </template>
@@ -33,6 +36,10 @@ export default {
             type: Boolean,
             default: false
         },
+        sinopse: {
+            type: Boolean,
+            default: false
+        },
     },
 }
 </script>
@@ -50,12 +57,13 @@ export default {
                     display: flex;
                     overflow: hidden;
                     margin-bottom: 8px;
-                    img{
+                    .__image{
                         max-width: 100%;
                         transform: ease-out .3s;
                         -moz-transition: all 0.3s;
                         -webkit-transition: all 0.3s;
                         transition: all 0.3s;
+                        max-height: 260px;
                         &:hover{
                             -moz-transform: scale(1.1);
                             -webkit-transform: scale(1.1);
@@ -64,7 +72,7 @@ export default {
                     }
                 }
                 h3{
-                    font-weight: 700;
+                    font-weight: 400;
                     color: #000;
                     padding-left: 1px;
                     font-size: 16px;
