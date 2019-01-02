@@ -1,9 +1,5 @@
 <template>
     <section id="feed-table">
-        <div class="feed-table-header">
-            <h2>Ultimas Atualizações</h2>
-        </div>
-
         <b-table
             :data="data"
             :loading="loading"
@@ -108,13 +104,7 @@
 <style lang="scss">
     section#feed-table{
         padding: 12px;
-        div.feed-table-header{
-            margin-bottom: 22px;
-            h2{
-                font-size: 32px; 
-            }
-            
-        }
+        padding-top: 0px;
         .table{
             background-color: transparent;
             line-height: normal;
