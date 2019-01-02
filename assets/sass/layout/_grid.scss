@@ -45,6 +45,14 @@ $flx-column_width: (100%/$flx-column_number) - 2*$flx-margin !default;
   flex-wrap: wrap;
   box-sizing: border-box;
 }
+@mixin grid-margin {
+  margin-right: $flx-margin;
+  margin-left: $flx-margin;
+}
+@mixin grid-padding {
+  padding-right: $flx-padding;
+  padding-left: $flx-padding;
+}
 
 /* Columns
 ------------------------------------------------*/
@@ -61,8 +69,8 @@ $flx-column_width: (100%/$flx-column_number) - 2*$flx-margin !default;
     width: ($number-of-cols * $flx-column_width) + ((($number-of-cols - 1) * 2) * $flx-margin);
   }
 
-  @extend %margin;
-  @extend %padding;
+  @include grid-margin;
+  @include grid-padding;
   box-sizing: border-box;
 }
 
