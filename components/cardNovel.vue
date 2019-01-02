@@ -3,7 +3,10 @@
         <div class="header-card">
             <a href="#">
                 <i>
-                    <img class="__image" src="https://centralnovel.com.br/storage/novels/velho-mestre.jpg" alt="">
+                    <div class="imagem-container">
+                        <img class="__image" src="https://centralnovel.com.br/storage/novels/velho-mestre.jpg" alt="">
+                        <span v-if="original" class="__original">Original</span>
+                    </div>
                 </i>
                 <h3>Velho Mestre</h3>
             </a>
@@ -36,6 +39,10 @@ export default {
             type: Boolean,
             default: false
         },
+        original: {
+            type: Boolean,
+            default: false
+        },
         sinopse: {
             type: Boolean,
             default: false
@@ -57,18 +64,36 @@ export default {
                     display: flex;
                     overflow: hidden;
                     margin-bottom: 8px;
-                    .__image{
-                        max-width: 100%;
-                        transform: ease-out .3s;
-                        -moz-transition: all 0.3s;
-                        -webkit-transition: all 0.3s;
-                        transition: all 0.3s;
-                        max-height: 260px;
-                        &:hover{
-                            -moz-transform: scale(1.1);
-                            -webkit-transform: scale(1.1);
-                            transform: scale(1.1);
+                    @extend %justify-center;
+                    @extend %vertical-align-middle;
+                    div.imagem-container{
+                        position: relative;
+                        overflow: hidden;
+                        .__image{
+                            max-width: 100%;
+                            transform: ease-out .3s;
+                            -moz-transition: all 0.3s;
+                            -webkit-transition: all 0.3s;
+                            transition: all 0.3s;
+                            max-height: 260px;
+                            &:hover{
+                                -moz-transform: scale(1.1);
+                                -webkit-transform: scale(1.1);
+                                transform: scale(1.1);
+                            }
                         }
+                    }
+                    .__original{
+                        top:0;
+                        right:0;
+                        position: absolute;
+                        padding: 2px 8px;
+                        text-transform: uppercase;
+                        color: #fff;
+                        border-radius: 0 0 0 8px;
+                        font-weight: 400;
+                        font-size: 12px;
+                        background-color: #3b66f5;
                     }
                 }
                 h3{

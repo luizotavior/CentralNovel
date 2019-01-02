@@ -145,9 +145,12 @@ export default {
                             h3{
                                 font-size: 20px;
                             }
-                            .__image{
+                            i{
                                 margin: 10px auto 15px auto;
+                                .__image{
+                                }
                             }
+                                
                         }
                         .body-card{
                             margin-bottom: 4px;
