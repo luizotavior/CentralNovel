@@ -2,7 +2,7 @@
     <footer>
         <div class="columns">
             <div class="column is-4 column-first">
-                <a href="#" title="Central Novel"><img src="images/logo/logo-quadrada.png" alt="Logo Central Novel"></a>
+                <a href="#" title="Central Novel"><img src="/images/logo/logo-quadrada.png" alt="Logo Central Novel"></a>
                 <div>
                     <p class="social">
                         <a href="https://www.facebook.com/centralnovel" title="Facebook"><b-icon icon="facebook"/></a>
