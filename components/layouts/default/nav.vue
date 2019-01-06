@@ -6,7 +6,7 @@
     aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item is-hidden-desktop" href="#">
-        <img src="images/logo/logo-quadrada.png" alt="Logo Central Novel">
+        <img src="/images/logo/logo-quadrada.png" alt="Logo Central Novel">
       </a>
       <a
         :class="['navbar-burger','burger', navbar.responsive ? 'is-active' : '']"
@@ -26,7 +26,7 @@
       :class="['navbar-menu', navbar.responsive ? 'is-active' : '']">
       <div class="navbar-start">
         <a class="navbar-item is-hidden-touch " href="#" title="Central Novel">
-          <img src="images/logo/logo-quadrada.png" alt="Logo Central Novel">
+          <img src="/images/logo/logo-quadrada.png" alt="Logo Central Novel">
         </a>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-item" href="#" title="Gêneros">
