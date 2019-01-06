@@ -35,12 +35,15 @@
 </script>
 
 <style lang="scss">
+  @import "@/assets/sass/layout/_grid.scss";
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,700');
   #layout-default {
     display: flex;
     flex-direction: column;
     background-size: 100%; 
     font-family: 'Source Sans Pro', sans-serif;
+    min-height: 100vh;
+    @extend %justify-between;
     font-weight: 400;
   }
   html{
