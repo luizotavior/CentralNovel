@@ -49,8 +49,7 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "@/assets/sass/layout/_grid.scss";
-  @import '@/assets/sass/helpers/_variables.scss';
+  @import "@/assets/sass/main.scss";
   #page-home{
     display: flex;
     flex-direction: column;

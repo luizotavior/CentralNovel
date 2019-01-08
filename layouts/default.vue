@@ -35,7 +35,7 @@
 </script>
 
 <style lang="scss">
-  @import "@/assets/sass/layout/_grid.scss";
+  @import "@/assets/sass/main.scss";
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,700');
   #layout-default {
     display: flex;
