@@ -100,6 +100,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import "@/assets/sass/themes/_theme.scss";
   nav#menu-secundario {
     background-color: #fff;
     height: 65px;
