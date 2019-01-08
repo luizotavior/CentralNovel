@@ -103,7 +103,7 @@ export default {
   nav#menu-secundario {
     background-color: #fff;
     height: 65px;
-    box-shadow: 3px 0px 6px #888888;
+    border-bottom: 1px solid #dcdce2;
     width: 100%;
     div.avatar-circle {
       height: 38px;
