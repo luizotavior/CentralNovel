@@ -1,0 +1,80 @@
+div#recomend-popular
+    @extend $row
+    Recomend-Novel(6)
+    margin 0 auto
+main#home
+    @extend $row
+    margin 0 auto
+    flex-wrap wrap
+    flex-direction row
+    @extend $justify-between
+    margin-top 50px
+    div#principal
+        col(8)
+        min-height 300px
+        margin-left 0px
+        padding-bottom 30px
+        div#lancamentos
+            margin 0px 
+            padding-bottom 20px
+            h2
+                text-align left
+                small
+                    color gray-01   
+                    SourceSansPro(regular)
+                    font-size 14px
+                    a
+                        color gray-01   
+                        text-decoration none 
+                        &.hover
+                            &:hover
+                                color cor-01
+    div#lateral
+        col(4)
+        display flex
+        flex-direction column
+        padding 0px
+        margin 0px
+        min-width 260px
+        div.painel
+            margin-right 0px
+            &:first-child
+                margin-top 0px
+        div#lancamento-noticia
+            Recomend-Noticia(1)
+        div#recomend-novel
+            Recomend-Novel(2)
+        div#cadastro
+            padding 10px
+    
+
+
+/* Menor que 960 */
+@media (max-width: 959px){}
+
+/* Tablet Portrait ao padrão 960 */
+@media (min-width: 768px) and (max-width: 959px){}
+/* Todos tamanhos de mobile */
+@media (max-width: 767px)
+    main#home
+        flex-direction column
+        div#principal
+            col(10)
+            margin 0 auto
+        div#lateral
+            col(10)
+            margin 0 auto
+/* Mobile em landscape a tablet Portrait */
+@media (min-width: 480px) and (max-width: 767px){}
+/* Mobile em portrait a mobile em landscape */
+@media (max-width: 479px)
+    main#home
+        flex-direction column
+        div#principal
+            col(12)
+            margin 0 auto
+        div#lateral
+            col(12)
+            margin 0 auto
+    div#recomend-novel
+        Recomend-Novel(2)

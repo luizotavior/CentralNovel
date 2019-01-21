@@ -1,0 +1,73 @@
+div.perfil
+    height 250px
+    col(5)
+    display flex
+    flex-direction row
+    flex-warp wrap
+    position relative
+    div.esquerda
+        col(7)
+        height 100%
+        padding-top 20px
+        padding-bottom 20px
+        padding-left 15px
+        display flex
+        flex-direction column
+        @extend $justify-between
+        div.informacoes
+            display flex
+            flex-direction column
+            span.username
+                SourceSansPro(semi-bold)
+                text-transform: capitalize;
+                font-size 32px
+                font-weight 400
+            span.nome
+                font-size 22px
+                SourceSansPro(light)
+            div.wallet
+                display flex
+                flex-direction row
+                flex-wrap wrap
+                margin-top 5px
+                span
+                    SourceSansPro(light)
+                    margin-right 10px
+        div.identidade
+            display flex
+            flex-direction row
+            flex-wrap wrap
+            margin-top 5px
+            span
+                SourceSansPro(light)
+                margin-right 10px
+                border 1px solid cor-01
+                border-radius 5px
+                color cor-01
+                padding 6px 12px 6px 12px
+                box-shadow: 0 1px 2px rgba(0,0,0,0.16), 0 1px 2px rgba(0,0,0,0.23);
+                cursor pointer
+
+
+    div.direita
+        col(5)
+        height 100%
+        border-left 1px solid gray-02
+        padding 15px
+        display flex
+        flex-direction row
+        @extend $vertical-align-middle
+
+        a
+            img
+                width 100%
+                border-radius 90px
+                cursor pointer
+
+    div.menu
+        position absolute
+        top 3px
+        right 7px
+        font-size 20px
+        a
+            color gray-01

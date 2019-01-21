@@ -1,0 +1,87 @@
+main#dashboard
+    div#barra-lateral
+        div.content
+            margin-top 20px
+            transform: skew(+6deg) translateX(0px);
+            display flex
+            flex-direction column
+            width 50%
+            @extend $justify-right
+            @extend $vertical-align-middle
+            text-align: center
+            padding-left 45% 
+            img.logo
+                width 70%
+            a.hamburger-open,a.hamburger-close
+                margin-top 20px
+                cursor pointer
+                i
+                    color white
+            a.hamburger-close
+                display none;
+            nav#nav-dashboard
+                display flex
+                flex-direction column
+                position relative
+                width 100%
+                margin-top 5px
+                display none
+                ul
+                    display flex
+                    flex-direction column
+                    list-style: none
+                    margin 0px
+                    padding 0px
+                    position absolute
+                    top 0
+                    left 0
+                    width 100%
+                    li
+                        padding 10px
+                        display flex
+                        flex-direction row
+                        a
+                            display flex
+                            flex-direction row
+                            flex-wrap no-wrap
+                            text-decoration: none
+                            color white
+                            i.fa
+                                padding-right 6px
+
+    
+/* Menor que 960 */
+@media (max-width: 959px)
+    main#dashboard
+        div#barra-lateral
+            div.content
+                nav#nav-dashboard
+                    ul
+                        li
+                            text-align: center
+                            mq-justify(center)
+                            a
+                                span
+                                    display none
+
+/* Tablet Portrait ao padrão 960 */
+@media (min-width: 768px) and (max-width: 959px) {}
+/* Todos tamanhos de mobile */
+@media (max-width: 767px){}
+/* Mobile em landscape a tablet Portrait */
+@media (min-width: 480px) and (max-width: 767px) {}
+/* Mobile em portrait a mobile em landscape */
+@media (max-width: 479px)
+    main#dashboard
+        div#barra-lateral
+            div.content
+                padding-left 33%
+                img.logo
+                    width 45px
+                nav#nav-dashboard
+                    ul
+                        li
+                            padding-left 0px
+                            a
+                                i.fa
+                                    padding-right 0px

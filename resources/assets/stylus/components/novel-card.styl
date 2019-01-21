@@ -1,0 +1,43 @@
+div.card-novel
+    display flex
+    flex-direction column
+    @extend $justify-between
+    margin 0
+    padding 0
+    a
+        text-decoration none
+        img
+            width 100%
+            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+            border-radius 2px
+        h2
+            font-size 16px
+            padding-bottom 0px
+        span.tag
+            display flex
+            color black
+            margin-top 5px
+            margin-bottom 5px
+            font-size 14px
+            vertical-align: top
+        &:hover
+            span.tag
+                color black
+                text-decoration: underline;
+            h2
+                color cor-01
+                text-decoration: underline;
+
+/* Menor que 960 */
+@media (max-width: 959px){}
+
+/* Tablet Portrait ao padrão 960 */
+@media (min-width: 768px) and (max-width: 959px) {}
+/* Todos tamanhos de mobile */
+@media (max-width: 767px)
+    div.novel-card
+        width 100%
+/* Mobile em landscape a tablet Portrait */
+@media (min-width: 480px) and (max-width: 767px) {}
+/* Mobile em portrait a mobile em landscape */
+@media (max-width: 479px) {}

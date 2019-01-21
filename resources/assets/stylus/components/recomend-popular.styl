@@ -1,0 +1,23 @@
+div#ranked-background
+    background-image url('../images/bg/mountain.jpg')	
+    background-repeat: repeat-y;
+    background-size: 100%; //propotional resize
+    padding-top 20px
+    padding-bottom 20px
+    div.container
+        @extend $row
+        margin 0 auto
+        display flex
+        flex-direction column
+        height 100%
+        @extend $justify-center
+        @extend $vertical-align-middle
+        div#ranked
+            col(8)
+            Recomend-Novel(5)
+            padding 5px 15px 5px 15px
+
+@media (max-width: 767px)
+    div.container
+        div#ranked
+            col(12)

@@ -1,0 +1,201 @@
+html, body {
+    min-height: 100% !important;
+    height: 100%;
+}
+main#auth
+    display flex
+    height 100%
+    flex-direction row
+    margin 0 auto
+    @extend $justify-center
+    @extend $vertical-align-middle
+    overflow: auto;
+    div.container
+        display flex
+        flex-direction row
+        min-height 400px
+        height 80%
+        width 800px
+        background-color #0F0F0F
+        background-image: url('../images/pattern.png')
+        @extend $justify-between
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+        border-radius: 6px 6px 6px 6px
+        overflow: auto;
+        div#informacoes
+            col(5)
+            height 100%
+            margin 0px
+            right: 0
+            background #0F0F0F
+            background-image: url('../images/pattern.png')
+            -webkit-transform: skew(-6deg) translateX(50px);
+            -ms-transform: skew(-6deg) translateX(50px);
+            transform: skew(-6deg) translateX(50px);
+            div.content
+                height 100%
+                transform: skew(+6deg) translateX(-25px);
+                display flex
+                @extend $justify-center
+                @extend $vertical-align-middle
+                img.logo
+                    width 220px
+        div#painel
+            col(7)
+            height 100%
+            margin 0px
+            background-color cor-02
+            background-image: url('../images/pattern.png')
+            display flex
+            flex-direction column
+            @extend $justify-center
+            @extend $vertical-align-middle
+            a.back
+                btn()
+                display block
+                margin-bottom 5px
+                color cor-01
+                font-size 14px
+                width 240px
+                text-align: left
+                i
+                    margin-left 3px
+                    margin-right 3px
+                &:hover
+                    color gray-02
+
+            div.formulario
+                display flex
+                flex-direction column
+                background-color white
+                box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.37);
+                border-radius: 8px 8px 8px 8px
+                width 250px
+                div.form_header
+                    margin 0px
+                    display flex
+                    flex-direction row
+                    flex-wrap wrap
+                    @extend $justify-between
+                    @extend $vertical-align-middle
+                    box-shadow: 0 1px 6px -6px black;
+                    SourceSansPro(light)
+                    min-height 30px
+                    color cor-01
+                    padding 8px
+                    h1
+                        SourceSansPro(light)
+                        padding 0px
+                        margin 0px
+                        font-size 16px
+                        text-transform: uppercase
+                    a
+                        btn()
+                        color cor-01
+                        font-size 12px
+                        text-align right
+                        i
+                            margin-left 3px
+                            margin-right 3px
+                        &:hover
+                            color cor-02
+                    
+                form.form_body
+                    margin-top 5px
+                    padding 10px
+                    display flex
+                    flex-direction column
+                    @extend $justify-between
+                    min-height 200px
+                    div.form_group
+                        display flex
+                        flex-direction column
+                        div.form_element
+                            display flex
+                            flex-direction column
+                            padding-top 5px
+                            padding-bottom 5px
+                            &.horizontal
+                                flex-direction row
+                                @extend $vertical-align-middle
+                                a
+                                    btn()
+                                    color #777
+                                    font-size 12px
+                                    &:hover
+                                        color cor-01
+                                
+                            label,span
+                                SourceSansPro(light)
+                                color #777
+                                font-size 12px
+                                text-transform: uppercase
+                            input[type='text'],input[type='password'],input[type='email']
+                                padding-top 3px
+                                border none
+                                background transparent
+                                border-bottom 1px solid gray-02
+                            input[type='checkbox']
+                                margin-left 5px
+                                margin-right 5px
+                            .help-block
+                                SourceSansPro(light)
+                                color #777
+                                a
+                                    text-decoration none
+                                    color cor-01
+                                    &:hover
+                                        color #777
+                            &.has-error
+                                label,span
+                                    color red
+                                span
+                                    font-weight: 700
+                                input[type='text'],input[type='password'],input[type='email']
+                                    border-bottom 1px solid red
+
+                            &.submit
+                                input[type="submit"]
+                                    btn-padrao(cor-01)
+                                    padding 7px 3px 7px 3px
+                                    text-transform: uppercase
+                                    &:hover
+                                        background transparent
+                                        color cor-01
+/* Menor que 960 */
+@media (max-width: 959px){}
+
+/* Tablet Portrait ao padrão 960 */
+@media (min-width: 768px) and (max-width: 959px) {}
+/* Todos tamanhos de mobile */
+@media (max-width: 767px)
+    main#auth
+        div.container
+            background-color cor-02
+            div#informacoes
+                -webkit-transform: skew(-6deg) translateX(-30px);
+                -ms-transform: skew(-6deg) translateX(-30px);
+                transform: skew(-6deg) translateX(-30px);
+                div.content
+                    img.logo
+                        margin-left 80px
+                        width 125px
+           //div#painel
+/* Mobile em landscape a tablet Portrait */
+@media (min-width: 480px) and (max-width: 767px) {}
+/* Mobile em portrait a mobile em landscape */
+@media (max-width: 479px)
+    main#auth
+        div.container
+            min-height 290px
+            height 100%
+            border-radius 0px 0px 0px 0px
+            div#informacoes
+                display none
+            div#painel
+                display flex
+                col(12)
+                div.formulario
+                    display flex
+                    min-width 90%
+

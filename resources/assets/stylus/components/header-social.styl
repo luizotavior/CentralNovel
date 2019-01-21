@@ -1,0 +1,30 @@
+#nav-topo
+    @extend $row
+    flex-direction row
+    @extend $justify-between
+    margin 0 auto
+    ul
+        padding 0px
+        margin 10px
+        display flex
+        flex-direction row
+        list-style none
+        Roboto(regular)
+        li
+            padding-left 10px
+            padding-right 10px
+            a
+                color rgba(0,0,0,0.54);
+                text-decoration none
+    ul#nav-login-search
+        li
+            a
+                &:hover
+                    color cor-01
+    ul#nav-social
+        li
+            display flex
+            height 23px
+            @extend $justify-center
+            img 
+                height 25px;

@@ -1,0 +1,38 @@
+html, body
+    min-height: 100% !important;
+    height: 100%;
+
+main#dashboard
+    display flex
+    height 100%
+    flex-direction row
+    margin 0 auto
+    @extend $justify-right
+    @extend $vertical-align-top
+    overflow: auto;
+    @extend $row-fluid
+    position relative
+    div#barra-lateral
+        col(3)
+        height 100%
+        margin 0px
+        right: 0
+        background-color #0F0F0F
+        background-image: url('../images/pattern.png')
+        -webkit-transform: skew(-7deg) translateX(-50%);
+        -ms-transform: skew(-7deg) translateX(-50%);
+        transform: skew(-7deg) translateX(-50%);
+        position fixed
+        top 0
+        left 0
+    div#main
+        col(10)
+        margin 0px
+        padding 0px
+        display flex
+        flex-direction row
+        flex-wrap wrap
+        margin-top 20px
+
+
+

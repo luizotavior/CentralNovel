@@ -1,0 +1,50 @@
+div.card-noticia
+    display flex
+    flex-direction column
+    margin 0
+    margin-top 10px
+    margin-bottom 10px
+    color black;
+    a.extcn
+        text-decoration none
+        display flex
+        flex-direction column
+        color black;
+        text-align left
+        img
+            width 100%
+            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+            border-radius 2px
+            display inline-block
+            width 100%
+            height auto
+        h3
+            color cor-01
+            font-size 16px
+            padding-bottom 0px
+            margin-bottom 5px
+        span
+            color gray-01
+            text-align right
+            font-size 14px
+            margin-top 10px
+        &:hover
+            span
+                color cor-01
+            h2
+                color cor-01
+                text-decoration: underline;
+
+/* Menor que 960 */
+@media (max-width: 959px){}
+
+/* Tablet Portrait ao padrão 960 */
+@media (min-width: 768px) and (max-width: 959px) {}
+/* Todos tamanhos de mobile */
+@media (max-width: 767px)
+    div.card-noticia
+        width 100%
+/* Mobile em landscape a tablet Portrait */
+@media (min-width: 480px) and (max-width: 767px) {}
+/* Mobile em portrait a mobile em landscape */
+@media (max-width: 479px) {}

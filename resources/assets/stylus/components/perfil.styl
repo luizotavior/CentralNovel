@@ -1,0 +1,239 @@
+main#novel,main#grupo
+	@extend $row
+	margin 0 auto
+	flex-wrap wrap
+	flex-direction row
+	@extend $justify-between
+	div#principal
+		col(8)
+		display flex
+		flex-direction column
+		padding 0px
+		margin 0px
+		div.painel
+			margin-right 0px
+		#series,#grupo
+			display flex
+			flex-direction column
+			.series_header,.grupo_header
+				display flex
+				flex-direction row
+				padding 6px
+				div.capa
+					padding-top 3px
+					display flex
+					@extend $justify-center
+					@extend $vertical-align-middle
+					col(4)
+					img
+						width 100%
+				div.dados
+					col(8)
+					padding-left 10px
+					position relative
+					h1
+						SourceSansPro(regular)
+						text-align left
+						font-size 36px
+						margin-top 10px
+						margin-bottom 15px
+						span
+							font-size: 12px;
+							line-height: 20px;
+							display: inline-block;
+							height: 20px;
+							padding: 0 .8em;
+							vertical-align: middle;
+							color: #fff;
+							border-radius: 40px;
+							background-color: #000;
+					p.descricao
+						display flex
+						text-align: left
+						color black
+					div.info-capitulos
+						display flex
+						flex-direction row
+						margin-left 5px
+						span
+							font-size 16px
+							margin-top 5px
+							margin-bottom 5px
+					ul.lista-tags
+						display flex
+						flext-direction row
+						flex-wrap wrap
+						margin 0px
+						padding 0px
+						margin-top 15px
+						margin-bottom 15px
+						list-style-type: none;
+						li.item-tag
+							padding 0px
+							margin 0px
+							a.tag
+								text-decoration none
+								font-size: 12px;
+								line-height: 18px;
+								display: inline-block;
+								overflow: hidden;
+								height: 18px;
+								margin-right: 8px;
+								padding: 0 .8em;
+								vertical-align: middle;
+								white-space: nowrap;
+								text-overflow: ellipsis;
+								color: cor-01;
+								border: 1px solid;
+								border-radius: 30px;
+								margin-top 5px
+								&:hover
+									background-color cor-01
+									color white
+					
+					ul.lista-detalhes
+						display flex
+						flext-direction row
+						flex-wrap wrap
+						margin 0px
+						padding 0px
+						margin-top 5px
+						margin-bottom 5px
+						list-style-type: none;
+						li
+							margin 0px
+							padding 0px
+							p
+								span
+									font-weight 700
+									padding-left 5px
+									padding-right 5px
+								a
+									text-decoration none
+									color black
+					div#rating
+						display flex
+						flext-direction row
+						flex-wrap wrap
+						margin-top 10px
+						margin-bottom 10px
+						@extend $vertical-align-middle
+					div.acao
+						display flex
+						flext-direction row
+						a.btn
+							padding  5px 15px 5px 15px
+							margin 10px
+							&.ler
+								btn-padrao(cor-01);
+								width 100px
+							&.favoritar
+								btn-border(cor-01);
+								margin-left 30px
+								padding  5px 15px 5px 15px
+							&.patrocinar
+								btn-border(cor-01);
+							i
+								margin-right 10px
+					div.action-admin
+						position absolute 
+						top 5px
+						right 5px
+						i,svg
+							color cor-01
+			.series_body,.grupo_body
+				text-align left
+				h2
+					color black
+					font-size 24px
+					text-transform none
+				div.sinopse
+					display flex
+					flex-direction column
+					text-align left
+					div.sinopse-content
+						text-align left
+						font-size 16px
+						line-height: 1.8;
+						SourceSansPro(light)
+				div.raw
+					display flex
+					flex-direction column
+					ul.lista-raws
+						display flex
+						flext-direction row
+						flex-wrap wrap
+						margin 0px
+						padding 0px
+						margin-top 15px
+						margin-bottom 15px
+						list-style-type: none;
+						li.item-raw
+							padding 0px
+							margin 0px
+							a.raw
+								text-decoration none
+								font-size: 12px;
+								line-height: 18px;
+								display: inline-block;
+								overflow: hidden;
+								height: 18px;
+								margin-right: 8px;
+								padding: 0 .8em;
+								vertical-align: middle;
+								white-space: nowrap;
+								text-overflow: ellipsis;
+								color: cor-01;
+								border: 1px solid;
+								border-radius: 30px;
+								&:hover
+									background-color cor-01
+									color white
+								
+			.series_footer,.grupo_footer
+				display flex
+				flex-direction row
+				padding 6px
+	div#lateral
+		col(4)
+		display flex
+		flex-direction column
+		padding 0px
+		margin 0px
+		h2
+			font-size 18px
+		div.painel
+			margin-right 0px
+		div#lancamento-noticia
+			Recomend-Noticia(1)
+		div#recomend-novel
+			Recomend-Novel(2)
+
+/* Menor que 960 */
+@media (max-width: 959px){}
+
+/* Tablet Portrait ao padrão 960 */
+@media (min-width: 768px) and (max-width: 959px) {}
+/* Todos tamanhos de mobile */
+@media (max-width: 767px)
+	main#novel,main#grupo
+		flex-direction column
+		div#principal
+			col(12)
+			margin 0 auto
+		div#lateral
+			col(12)
+			margin 0 auto
+/* Mobile em landscape a tablet Portrait */
+@media (min-width: 480px) and (max-width: 767px){}
+/* Mobile em portrait a mobile em landscape */
+@media (max-width: 479px)
+	main#novel,main#grupo
+		div#principal
+			div#series,div#grupo
+				div.series_header,div#grupo_header
+					flex-direction column
+					div.capa
+						col(12)
+					div.dados
+						col(12)

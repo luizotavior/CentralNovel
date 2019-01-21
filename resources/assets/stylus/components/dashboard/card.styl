@@ -1,0 +1,36 @@
+.card
+    background-color white
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    border-radius 4px
+    margin-left 10px
+    margin-right 10px
+    margin-bottom 20px
+    div.card-header
+        margin 0px
+        display flex
+        flex-direction row
+        flex-wrap wrap
+        @extend $justify-between
+        @extend $vertical-align-middle
+        box-shadow: 0 3px 6px -6px black;
+        SourceSansPro(light)
+        min-height 30px
+        color cor-01
+        padding 8px
+        h1
+            SourceSansPro(light)
+            padding 0px
+            margin 0px
+            font-size 16px
+            text-transform: uppercase
+    div.card-body
+        margin-top 5px
+        padding 10px
+        display flex
+        flex-direction column
+        @extend $justify-between
+        &.table
+            min-height: .01%;
+            overflow: auto;
+            padding 0px
+            padding-top 10px

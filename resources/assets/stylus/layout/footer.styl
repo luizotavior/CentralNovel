@@ -1,0 +1,131 @@
+footer 
+    display flex
+    flex-direction column
+    background color-escura
+    div.expandido
+        color black
+        background-color white
+        padding-top 40px
+        padding-bottom 20px
+        div.listas
+            @extend $row
+            display flex
+            flex-direction row
+            margin 0 auto
+            @extend $justify-around
+            padding-bottom 15px
+            div.lista
+                display flex
+                flex-direction column
+                padding: 0px
+                line-height: 27px;
+                width 20%
+                height 100%
+                h2
+                    font-size: 16px
+                    padding 0
+                    margin 0
+                    text-transform uppercase
+                    font-family: 'SourceSansPro-Light';
+                ul
+                    padding: 0px
+                    padding-top: 5px
+                    margin: 0px
+                    font-family: 'SourceSansPro-light';
+                    
+                    li
+                        text-decoration: none;
+                        list-style:none;
+                        font-size: 14px
+                        a
+                            text-decoration none
+                            font-family: 'SourceSansPro-light';
+                            font-weight 400
+                            color: #111111
+                            &:hover
+                                color cor-01
+                        &.active
+                            font-weight 700
+                div.logo
+                    height 140px
+                    text-align center
+                    img
+                        height 100%
+    div.mini
+        @extend $row-fluid
+        display flex
+        flex-direction row
+        background-color #111111
+        color white
+        text-decoration none
+        @extend $vertical-align-middle
+        @extend $justify-between
+        padding 0px 5px
+        .lado-esquerdo
+            col(3)
+            color white
+            a
+                text-decoration none
+                color gray-01
+                padding 0 4px
+                .fa
+                    background-color: white
+                    color color-prim2
+                    border-radius 50%
+                    font-size: 14px
+                .fa-facebook
+                    padding 5px 8px
+                &:hover
+                    color cor-01
+        div.centro
+            col(6)
+            text-align center
+            a
+                text-decoration none
+                color white
+        .lado-direito
+            col(3)
+            @extend $justify-center
+            p
+                text-align right
+                font-size 12px
+
+/* Menor que 960 */
+@media (max-width: 959px){}
+
+/* Tablet Portrait ao padrão 960 */
+@media (min-width: 768px) and (max-width: 959px) {}
+/* Todos tamanhos de mobile */
+@media (max-width: 767px)
+    footer
+        div.expandido
+            div.listas
+                display flex
+                flex-direction row
+                flex-wrap wrap
+                div.lista
+                    margin-top 20px
+                    padding-left 1%
+                    width 31%
+                div.lista:nth-child(1)
+                    display none
+
+        
+/* Mobile em landscape a tablet Portrait */
+@media (min-width: 480px) and (max-width: 767px) {}
+/* Mobile em portrait a mobile em landscape */
+@media (max-width: 479px)
+    footer
+        div.expandido
+            div.listas
+                display flex
+                flex-direction row
+                flex-wrap wrap
+                div.lista
+                    margin-top 20px
+                    padding-left 5%
+                    width 45%
+                div.lista:nth-child(1)
+                    display none
+                div.lista:nth-child(4)
+                    display none

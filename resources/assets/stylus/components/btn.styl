@@ -1,0 +1,32 @@
+btn()
+    display flex
+    @extend $justify-center
+    @extend $vertical-align-middle
+    text-decoration none
+    text-align center
+
+btn-padrao(n)
+    btn()
+    border 2px solid n
+    color white
+    Roboto(regular)
+    background-color: n;
+    border-radius 3px
+    &.active,
+    &:hover
+        cursor pointer
+        background-color n
+        color white
+btn-border(n)
+    btn()
+    border 2px solid n
+    color n
+    Roboto(regular)
+    background-color: transparent
+    border-radius 3px
+    padding 4px
+    &.active,
+    &:hover
+        cursor pointer
+        background-color n
+        color white

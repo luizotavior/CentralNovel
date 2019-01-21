@@ -1,0 +1,34 @@
+div.favoritos
+    height 250px
+    col(5)
+    display flex
+    flex-direction column
+    flex-warp wrap
+    position relative
+    .card-body
+        table
+            border-spacing: 0;
+            border-collapse: collapse;
+            width 100%
+            tbody
+                tr
+                    display flex
+                    flex-direction row
+                    flex-wrap no-wrap
+                    td
+                        SourceSansPro(light)
+                        padding 10px
+                        border-top 1px solid gray-02
+                        border-bottom 1px solid gray-02
+                        white-space nowrap
+                        text-overflow ellipsis
+                        display block
+                        overflow hidden
+                    td:nth-child(1)
+                        width 60%
+                    td:nth-child(2)
+                        width 20%
+                        text-align center
+                    td:nth-child(3)
+                        width 10%
+                        text-align right

@@ -1,0 +1,35 @@
+Recomend-Grupo(content-value)
+	@extend $row
+	flex-direction column
+	h2
+		text-align left
+		small
+			color gray-01   
+			SourceSansPro(regular)
+			font-size 14px
+			a
+				color gray-01   
+				text-decoration none 
+				&.hover
+					&:hover
+						color cor-01
+				
+	ul.recomend-grupos
+		display flex
+		flex-direction row
+		flex-wrap wrap
+		list-style none
+		margin 0
+		padding 0
+		width 100%
+		li.recomend-item
+			display flex
+			width (100% / content-value) - 2 * 0.52083%
+			margin 0
+			padding 0
+			position relative
+			padding 0.52083%
+			margin-bottom 15px
+			a
+				img
+					min-width 100%

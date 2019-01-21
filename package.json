@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "devDependencies": {
+    "axios": "^0.17",
+    "browser-sync": "^2.18.13",
+    "browser-sync-webpack-plugin": "^1.2.0",
+    "cross-env": "^5.1",
+    "jquery": "^3.2",
+    "laravel-mix": "^1.0",
+    "lodash": "^4.17.10",
+    "popper.js": "^1.14.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "sw-precache-webpack-plugin": "^0.11.5",
+    "vue": "^2.5.16"
+  },
+  "dependencies": {
+    "buefy": "^0.7.1",
+    "font-awesome": "^4.7.0",
+    "vue-adblock": "0.0.3",
+    "vue-loader": "^14.0.2",
+    "vue-resource": "^1.5.0",
+    "vue-template-compiler": "^2.5.16",
+    "vuejs-paginate": "^2.0.1"
+  }
+}

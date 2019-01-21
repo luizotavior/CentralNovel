@@ -1,0 +1,53 @@
+div.table-responsive
+    min-height: .01%;
+    overflow-x: auto;
+table.feed-table,table-datatables
+    width: 100%;
+    max-width: 100%;
+    margin 0 auto
+    padding-top 10px
+    padding-bottom 20px
+    border none !important
+    thead,
+    tbody
+        th
+            color cor-01
+            padding-bottom 5px
+            border none !important
+        tr
+            display flex
+            border-bottom 1px solid #999999 !important
+            text-align left
+            SourceSansPro(light)
+            td
+                padding-top 10px
+                padding-bottom 10px
+                text-align: left
+                border none !important
+                white-space nowrap
+                text-overflow ellipsis
+                display block
+                overflow hidden
+            th:nth-child(1),
+            td:nth-child(1)
+                padding-left 10px
+                width 30%
+                min-width 100px
+            th:nth-child(2),
+            td:nth-child(2)
+                min-width 100px
+            th:nth-child(3),
+            td:nth-child(3)
+                width 25%
+                min-width 100px
+            th:nth-child(4),
+            td:nth-child(4)
+                width 20%
+                padding-right 10px
+                min-width 100px
+            a
+                text-decoration none
+                color black
+                &.active,
+                &:hover
+                    color cor-01

@@ -1,0 +1,53 @@
+div#main
+    div.painel-admin
+        col(11)
+        padding 10px
+        display flex
+        fex-direction column
+        a.btn
+            btn-padrao(cor-01)
+        form
+            display flex
+            flex-direction column
+            margin-bottom 20px
+            div.form-content
+                displey flex
+                flext-direction column
+                h2
+                    font-size 14px
+                    text-align: left
+                div.form-options
+                    display flex
+                    flex-direction row
+                    flex-wrap: wrap
+                    input[type="text"]
+                        width 100%
+                        height 30px
+                    a,
+                    label,
+                    input[type="submit"]
+                        display flex
+                        @extend $justify-center
+                        @extend $vertical-align-middle
+                        btn-border(cor-01);
+                        padding 6px
+                        min-width 18px
+                        max-width 180px
+                        margin-top 5px
+                        margin-left 3px
+                        margin-right 3px
+                        text-decoration none
+                        font-size 12px
+                        white-space nowrap
+                        text-overflow ellipsis
+                        display block
+                        overflow hidden
+                        cursor pointer
+                        &:hover
+                            background-color white
+                            color cor-01
+                    input[type="checkbox"],
+                    input[type="radio"]
+                        display none
+
+            

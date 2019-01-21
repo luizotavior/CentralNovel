@@ -1,0 +1,123 @@
+div.form_dashboard
+    display flex
+    flex-direction row
+    flex-wrap wrap
+    col(8)
+form.form_default
+    display flex
+    flex-direction row
+    flex-wrap wrap
+    col(12)
+    fieldset
+        display flex
+        flex-direction column
+        border none
+        padding 0px
+        margin 0px
+        &.capa
+            col(5)
+            margin-top 15px
+            margin-bottom 15px
+            @extend $justify-center
+            .form_element
+                label
+                    img.capa
+                        width 100%
+                        margin 0 auto
+            &:hover
+                span.legenda
+                    color cor-01
+        .form_element
+            display flex
+            flex-direction column
+            padding-top 5px
+            padding-bottom 5px
+            &.horizontal
+                flex-direction row
+                @extend $vertical-align-middle
+            label,span
+                SourceSansPro(light)
+                color #777
+                font-size 12px
+                text-transform: uppercase
+            label.click
+                cursor pointer
+            input[type='file']
+                display none
+            span.legenda
+                SourceSansPro(light)
+                font-size 12px
+                color gray-01
+            a
+                btn()
+                color #777
+                font-size 12px
+                &:hover
+                    color cor-01
+            input[type='text'],input[type='password'],input[type='email'],.select2-selection
+                padding-top 3px
+                border none
+                background transparent
+                border-bottom 1px solid gray-02
+            input[type='checkbox']
+                margin-left 5px
+                margin-right 5px
+            textarea
+                min-height 200px
+            &.has-error
+                label,span
+                    color red
+                span
+                    font-weight: 700
+                input[type='text'],input[type='password'],input[type='email']
+                    border-bottom 1px solid red
+            input[type='submit']
+                btn-padrao(cor-01)
+                padding 7px 3px 7px 3px
+                height 40px;
+                text-transform: uppercase
+                &:hover
+                    background transparent
+                    color cor-01
+            .select2-selection__choice
+                display block
+                btn-border(cor-01);
+                padding 3px
+                text-decoration none
+                font-size 11px
+                white-space nowrap
+                text-overflow ellipsis
+                display block
+                overflow hidden
+                .select2-selection__choice__remove
+                    color cor-01
+                &:hover
+                    .select2-selection__choice__remove
+                        color white
+            
+        &.info-principal
+            col(6)
+        &.info-geral
+            col(12)
+        &.action
+            display flex
+            flex-direction row
+            col(12)
+            @extend $justify-right
+            .form_element
+                text-align right
+        
+    
+/* Menor que 960 */
+@media (max-width: 959px){}
+
+/* Tablet Portrait ao padrão 960 */
+@media (min-width: 768px) and (max-width: 959px) {}
+/* Todos tamanhos de mobile */
+@media (max-width: 767px)
+    div.form_dashboard
+        col(12)
+/* Mobile em landscape a tablet Portrait */
+@media (min-width: 480px) and (max-width: 767px) {}
+/* Mobile em portrait a mobile em landscape */
+@media (max-width: 479px) {}

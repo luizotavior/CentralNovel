@@ -1,0 +1,118 @@
+main#novels
+    @extend $row
+    margin 0 auto
+    display flex
+    flex-direction column
+    @extend $justify-center
+    @extend $vertical-align-middle
+    div#options
+        col(12)
+        padding-top 10px
+        padding-left 5px
+        padding-right 5px
+        padding-bottom 10px
+        form
+            display flex
+            flex-direction column
+            div.form-content
+                displey flex
+                flext-direction column
+                h2
+                    font-size 14px
+                    text-align: left
+                div.form-options
+                    display flex
+                    flex-direction row
+                    flex-wrap: wrap
+                    input[type="text"]
+                        width 100%
+                        height 30px
+                    a,
+                    label,
+                    input[type="submit"]
+                        display flex
+                        @extend $justify-center
+                        @extend $vertical-align-middle
+                        btn-border(cor-01);
+                        padding 6px
+                        min-width 18px
+                        max-width 180px
+                        margin-top 5px
+                        margin-left 3px
+                        margin-right 3px
+                        text-decoration none
+                        font-size 12px
+                        white-space nowrap
+                        text-overflow ellipsis
+                        display block
+                        overflow hidden
+                        cursor pointer
+                        &:hover
+                            background-color white
+                            color cor-01
+                    input[type="checkbox"],
+                    input[type="radio"]
+                        display none
+                    input[type="checkbox"]:checked + label,
+                    input[type="radio"]:checked + label
+                        background-color cor-01
+                        color white
+                &.controll
+                    display flex
+                    @extend $justify-center
+                    @extend $vertical-align-middle
+                    margin-top 20px
+                    input
+                        display flex
+                        @extend $justify-center
+                        @extend $vertical-align-middle
+                        btn-border(cor-01);
+                        margin 10px
+                        padding 5px 15px 5px 15px
+                        font-size 16px
+                span#button-advanced
+                    display flex
+                    @extend $justify-left
+                    cursor pointer
+                    color gray-01   
+                    SourceSansPro(regular)
+                    font-size 14px
+                    text-align: left
+                    margin-left 10px
+
+                    &:hover
+                        color cor-01
+    div#novels
+        col(12)
+        min-height 300px
+        margin-top 0px
+        div#result-novels
+            Recomend-Novel(6)
+            padding 15px
+            padding-top 0px
+
+
+
+/* Menor que 960 */
+@media (max-width: 959px)
+    main#novels
+        div#novels
+                div#result-novels
+                    Recomend-Novel(4)
+
+/* Tablet Portrait ao padrão 960 */
+@media (min-width: 768px) and (max-width: 959px) {}
+/* Todos tamanhos de mobile */
+@media (max-width: 767px)
+    main#novels
+        div#novels
+                div#result-novels
+                    Recomend-Novel(3)
+/* Mobile em landscape a tablet Portrait */
+@media (min-width: 480px) and (max-width: 767px) {}
+/* Mobile em portrait a mobile em landscape */
+@media (max-width: 479px)
+    main#novels
+        div#novels
+                div#result-novels
+                    Recomend-Novel(2)
