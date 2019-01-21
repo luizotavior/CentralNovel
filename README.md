@@ -1,18 +1,29 @@
-# CentralNovel v.3
+<p align="center"><img align="center" src="https://centralnovel.com.br/images/logo/main-logo.png"/></p>
+<p align="center">
+  <a href="https://discord.gg/qCjSsdX"><img src="https://badgen.net/badge/Discord/join-us/7289DA" alt="Discord"></a>
+</p>
 
-## Build Setup
+> Central Novel um Sistema *Web* para catalogação de *Novel*.
 
+
+## Links
+
+
+- 👉 [Central Novel V.4](https://beta.centralnovel.com.br)
+- 👉 [Central Novel V.3](https://centralnovel.com.br)
+- 💬 Chat: [Discord](https://discord.gg/qCjSsdX)
+
+Run:
 ``` bash
+# copy .env.example to .env and configure
+$ cp .env.example .env
+
 # install dependencies
 $ npm install
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+# install dependencies
+$ composer install
 
-# build for production and launch server
-$ npm run build
-$ npm start
-
-# generate static project
-$ npm run generate
+# serve with hot reload at localhost:8000
+$ php artisan serve
 ```
