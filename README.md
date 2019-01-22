@@ -9,7 +9,6 @@
 ## Links
 
 
-- 👉 [Central Novel V.4](https://beta.centralnovel.com.br)
 - 👉 [Central Novel V.3](https://centralnovel.com.br)
 - 💬 Chat: [Discord](https://discord.gg/qCjSsdX)
 
