@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>https://centralnovel.com.br/</loc>
+  <changefreq>always</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/Home</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/Grupos</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/Novels</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/Forum</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/Publicidade</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/Sobre</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/Contato</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/3lobos</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/alianca-novel</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/casadanovel</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/centralofslaves</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/empirenovels</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/heroi-undead</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/kote-brasil</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/kuork</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/lmsnovel</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/miriadesalternativas</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/novel-mania</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/palaciododao</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/seed</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/thyros-traducoes</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/vulks-novels</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/walkerfield</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/dsptbr</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/ggwpsubs</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/'+base+'link?id='+data.dados[i].grupo_id+'&amp;link='+data.dados[i].link+'</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/asuranovel</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/batatatd</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/boyslovebrasil</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/ciclonelivros</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/civmaniacnovels</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/cloudnovels</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/cosmosnovels</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/douqian</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/fourleavescan</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/incognitonovels</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/infinitenovels</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/kaslluplast</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/LifeHourglass</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/templodamiko</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/monktom</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/monstranslator</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/keepnaipsss</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/noveltraducoes</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/pbsbrazil</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/peanutnovels</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/reikipriject</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/rebirthofthelegendary</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/rodvusnovels</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/saikai-scan</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/saikai-scan-combo</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/saoln</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/shiraorismhq</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/shuichisama</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/star-traducoes</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/steinsgod</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/traduzindonovels</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/velhogrimorio</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/vulcannovels</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/yggwntradutor</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/cadastrar</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/novels/cadastrar</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://centralnovel.com.br/grupos/crack-novels</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+</urlset>
