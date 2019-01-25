@@ -18,21 +18,17 @@ class ImageRepository
             }else{
                 $fileName .= '.' . $extension; 
             }
-            $destinationPath = public_path("storage/".$destino);
-            $url = $destino.$fileName;
-
-            $fullPath = $destinationPath.$fileName;
-
-            if (!file_exists($destinationPath)) {
-                File::makeDirectory($destinationPath, 0775);
-            }
 
             $image = Image::make($file)
                 ->resize($size[0], $size[1]);
-            $image->save($fullPath, 75);
 
-            return $url;
+            $resource = $image->stream()->detach();
 
+            $disk = \Storage::disk('gcs');
+            $image = Image::make($image)
+                ->resize($size[0], $size[1]);
+            $disk->put($destino.$fileName, $image->getEncoded());
+            return $destino.$fileName;
         } else {
             return null;
         }
