@@ -1,10 +1,10 @@
 @isset($grupo)
 <div class="card-grupo">
     <a href="{{route("grupo",$grupo->url)}}">
-        @if(Storage::disk('public')->exists($grupo->capa))
-            <img src="{{asset("storage/".$grupo->capa)}}" alt="{{$grupo->titulo}}">
+        @if(Storage::disk('gcs')->exists($grupo->capa))
+            <img src="{{ Storage::disk('gcs')->url($grupo->capa) }}" alt="{{$grupo->titulo}}">
         @else        
-            <img src="{{asset('images/grupos/default.jpg')}}" alt="Grupo sem capa">
+            <img src="{{ Storage::disk('gcs')->url('grupos/default.jpg')}}" alt="Grupo sem capa">
         @endif
         <h2>{{$grupo->nome}}</h2>
         <span class="tag">{!! $grupo->descricao !!}</span>

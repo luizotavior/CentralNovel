@@ -24,10 +24,10 @@
                                 </span>
                             @endif
                             <label class="click" for="capa">
-                            @if(isset($grupo) and Storage::disk('public')->exists($grupo->capa))
-                                <img class="capa" src="{{asset("storage/".$grupo->capa)}}" alt="{{$grupo->titulo}}">
+                            @if(isset($grupo) and Storage::disk('gcs')->exists($grupo->capa))
+                                <img class="capa" src="{{ Storage::disk('gcs')->url($grupo->capa) }}" alt="{{$grupo->titulo}}">
                             @else        
-                                <img class="capa" src="{{asset('images/grupos/default.jpg')}}" alt="Novel sem capa">
+                                <img class="capa" src="{{ Storage::disk('gcs')->url('grupos/default.jpg') }}" alt="Novel sem capa">
                             @endif
                             </label>
                             <input type="file" name="capa" id="capa"  accept=".jpg, .jpeg, .png">

@@ -14,10 +14,10 @@
 			<div id="grupo">
 				<div class="painel grupo_header">
 					<div class="capa">
-					@if(Storage::disk('public')->exists($grupo->capa))
-                        <img src="{{asset("storage/".$grupo->capa)}}" alt="{{$grupo->titulo}}">
+					@if(Storage::disk('gcs')->exists($grupo->capa))
+                        <img src="{{ Storage::disk('gcs')->url($grupo->capa) }}" alt="{{$grupo->titulo}}">
                     @else        
-                        <img src="{{asset('images/grupos/default.jpg')}}" alt="Grupo sem capa">
+                        <img src="{{ Storage::disk('gcs')->url('grupos/default.jpg')}}" alt="Grupo sem capa">
                     @endif
 					</div>
 					<div class="dados">

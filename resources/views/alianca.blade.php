@@ -58,10 +58,10 @@
                 @foreach($membros as $group)
                     <div id="group-{{$group->id}}" class="membro">
                         <a href="{{$group->site}}?utm_source=centralnovel&utm_medium=aliancanovel" target="_blank" title="{{$group->nome}}">
-                        @if(Storage::disk('public')->exists($group->capa))
-                            <img src="{{asset("storage/".$group->capa)}}" alt="{{$group->titulo}}" alt="{{$group->nome}}">
+                        @if(Storage::disk('gcs')->exists($group->capa))
+                            <img src="{{ Storage::disk('gcs')->url($group->capa) }}" alt="{{$group->titulo}}" alt="{{$group->nome}}">
                         @else        
-                            <img src="{{asset('images/grupos/default.jpg')}}" alt="{{$group->nome}}">
+                            <img src="{{ Storage::disk('gcs')->url('grupos/default.jpg')}}" alt="{{$group->nome}}">
                         @endif
                         <span>{{$group->nome}}</span>
                         </a>

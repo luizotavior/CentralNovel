@@ -24,10 +24,10 @@
                                 </span>
                             @endif
                             <label class="click" for="capa">
-                            @if(isset($novel) and Storage::disk('public')->exists($novel->capa))
-                                <img class="capa" src="{{asset("storage/".$novel->capa)}}" alt="{{$novel->titulo}}">
+                            @if(isset($novel) and Storage::disk('gcs')->exists($novel->capa))
+                                <img class="capa" src="{{ Storage::disk('gcs')->url($novel->capa) }}" alt="{{$novel->titulo}}">
                             @else        
-                                <img class="capa" src="{{asset('images/novels/default.jpg')}}" alt="Novel sem capa">
+                                <img class="capa" src="{{ Storage::disk('gcs')->url('novels/default.jpg') }}" alt="Novel sem capa">
                             @endif
                             </label>
                             <input type="file" name="capa" id="capa"  accept="image/jpeg" />

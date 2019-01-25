@@ -3,7 +3,7 @@
 @push('opengraph')
     @component('components.seo.opengraph',[
         'titulo' => $novel->titulo,
-        'imagem' => Storage::disk('public')->exists($novel->capa) ? 'x' : 's'
+        'imagem' => Storage::disk('gcs')->exists($novel->capa) ? 'x' : 's'
     ])
     @endcomponent
 @endpush
@@ -22,10 +22,10 @@
             <div id="series">
                 <div class="painel series_header">
                     <div class="capa">
-                    @if(Storage::disk('public')->exists($novel->capa))
-                        <img src="{{asset("storage/".$novel->capa)}}" alt="{{$novel->titulo}}">
+                    @if(Storage::disk('gcs')->exists($novel->capa))
+                        <img src="{{ Storage::disk('gcs')->url($novel->capa) }}" alt="{{$novel->titulo}}">
                     @else        
-                        <img src="{{asset('images/novels/default.jpg')}}" alt="Novel sem capa">
+                        <img src="{{ Storage::disk('gcs')->url('novels/default.jpg')}}" alt="Novel sem capa">
                     @endif
                         </div>
                     <div class="dados">
@@ -248,8 +248,8 @@
 {
   "@context": "http://schema.org/",
   "@type": "Book",
-    @if(Storage::disk('public')->exists($novel->capa))
-  "image": "{{asset("storage/".$novel->capa)}}",
+    @if(Storage::disk('gcs')->exists($novel->capa))
+  "image": "{{ Storage::disk('gcs')->url($novel->capa) }}",
     @endif
   "name": "{{$novel->titulo}}",
   "description": "{{$novel->sinopse}}",

@@ -9,8 +9,8 @@
     <meta name="language" CONTENT="pt-br" >
     @if(isset($grupo))
     <meta property="og:title" content="{{$grupo->nome}} - Central Novel">
-    @if(Storage::disk('public')->exists($grupo->capa))
-    <meta property="og:image" content="{{asset("storage/".$grupo->capa)}}">
+    @if(Storage::disk('gcs')->exists($grupo->capa))
+    <meta property="og:image" content="{{ Storage::disk('gcs')->url($grupo->capa) }}">
     @endif
     <meta property="og:type" content="article">
     <meta property='article:author' content='https://www.facebook.com/centralnovel' />
@@ -21,8 +21,8 @@
     <meta name="description" content="{{str_limit($grupo->nome." é uma Grupo Tradutor de WebNovel.".(($grupo->descricao != null and $grupo->descricao != '') ? " ".$grupo->descricao : '') ,200)}}"/>
     @elseif(isset($novel))
     <meta property="og:title" content="{{$novel->titulo}} - Central Novel">
-    @if(Storage::disk('public')->exists($novel->capa))
-    <meta property="og:image" content="{{asset("storage/".$novel->capa)}}">
+    @if(Storage::disk('gcs')->exists($novel->capa))
+    <meta property="og:image" content="{{ (Storage::disk('gcs')->exists($novel->capa) }}">
     @endif
     <meta property="og:title" content="{{(isset($titulo) ? $titulo : 'Central Novel')}}">
     <meta property="og:type" content="article">

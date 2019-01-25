@@ -99,10 +99,10 @@
 					<li class="recomend-item">
 						<div class="card-novel">
 							<a href="{{route("novel",$novel->url)}}">
-								@if(Storage::disk('public')->exists($novel->capa))
-									<img src="{{asset("storage/".$novel->capa)}}" alt="{{$novel->titulo}}">
+								@if(Storage::disk('gcs')->exists($novel->capa))
+									<img src="{{ Storage::disk('gcs')->url($novel->capa) }}" alt="{{$novel->titulo}}">
 								@else        
-									<img src="{{asset('images/novels/default.jpg')}}" alt="Novel sem capa">
+									<img src="{{ Storage::disk('gcs')->url('novels/default.jpg')}}" alt="Novel sem capa">
 								@endif
 								<h2>{{$novel->titulo}}</h2>
 							</a>
