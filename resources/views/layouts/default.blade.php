@@ -180,7 +180,7 @@
 				<p> CentralNovel &copy; 2018 - Desenvolvido com <span style="color: red;" alt="Amor">♥</span> no <a href="https://www.google.com.br/search?&q=Cidades+Vale+do+Paraiba">Vale do Paraiba</a> </p>
 			</div>
 			<div class="lado-direito">
-				<p>V3.0.224</p>
+				<p>V3.4.0</p>
 			</div>
 		</div>
 
