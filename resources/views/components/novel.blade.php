@@ -2,7 +2,7 @@
 <div class="card-novel">
     <a href="{{route("novel",$novel->url)}}">
         @if(Storage::disk('gcs')->exists($novel->capa))
-            <img src="{{ Storage::disk('gcs)->url($novel->capa) }}" alt="{{$novel->titulo}}">
+            <img src="{{ Storage::disk('gcs')->url($novel->capa) }}" alt="{{$novel->titulo}}">
         @else        
             <img src="{{ Storage::disk('gcs')->url('novels/default.jpg')}}" alt="Novel sem capa">
         @endif
