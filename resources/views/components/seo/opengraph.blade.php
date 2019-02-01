@@ -19,10 +19,10 @@
     <meta name="keywords" content="WebNovel, Tradução, Novels, Livros, Brasil">
     <meta property="og:description" content="{{str_limit($grupo->nome." é uma Grupo Tradutor de WebNovel.".(($grupo->descricao != null and $grupo->descricao != '') ? " ".$grupo->descricao : '') ,200)}}"/>
     <meta name="description" content="{{str_limit($grupo->nome." é uma Grupo Tradutor de WebNovel.".(($grupo->descricao != null and $grupo->descricao != '') ? " ".$grupo->descricao : '') ,200)}}"/>
-    @elseif(isset($novel))
+    @elsesif(isset($novel))
     <meta property="og:title" content="{{$novel->titulo}} - Central Novel">
     @if(Storage::disk('gcs')->exists($novel->capa))
-    <meta property="og:image" content="{{ (Storage::disk('gcs')->url($novel->capa) }}">
+    <meta property="og:image" content="{{ Storage::disk('gcs')->url($novel->capa) }}">
     @endif
     <meta property="og:title" content="{{ (isset($titulo) ? $titulo : 'Central Novel') }}">
     <meta property="og:type" content="article">
