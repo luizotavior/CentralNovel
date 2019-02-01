@@ -22,9 +22,9 @@
     @elseif(isset($novel))
     <meta property="og:title" content="{{$novel->titulo}} - Central Novel">
     @if(Storage::disk('gcs')->exists($novel->capa))
-    <meta property="og:image" content="{{ (Storage::disk('gcs')->exists($novel->capa) }}">
+    <meta property="og:image" content="{{ (Storage::disk('gcs')->url($novel->capa) }}">
     @endif
-    <meta property="og:title" content="{{(isset($titulo) ? $titulo : 'Central Novel')}}">
+    <meta property="og:title" content="{{ (isset($titulo) ? $titulo : 'Central Novel') }}">
     <meta property="og:type" content="article">
     <meta property='article:author' content='https://www.facebook.com/centralnovel' />
     <meta property="article:section" content="Novel">
