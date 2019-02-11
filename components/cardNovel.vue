@@ -4,7 +4,7 @@
             <a href="#">
                 <i>
                     <div class="imagem-container">
-                        <img class="__image" src="https://centralnovel.com.br/storage/novels/velho-mestre.jpg" alt="">
+                        <img class="__image" src="https://storage.googleapis.com/centralnovel.com.br/novels/velho-mestre.jpg" alt="">
                         <span v-if="original" class="__original">Original</span>
                     </div>
                 </i>
