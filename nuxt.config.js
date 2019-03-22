@@ -2,7 +2,7 @@ const env = require('dotenv').config()
 const pkg = require('./package')
 
 module.exports = {
-  mode: process.env.APP_MODE,
+  mode: 'universal',
 
   /*
   ** Headers of the page
@@ -34,7 +34,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    'plugins/vue-agile.js',
+    { src: '~/plugins/vue-agile', ssr: false },
     'plugins/vue-mq.js'
   ],
 
@@ -89,7 +89,7 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      
+
     }
   }
 }

@@ -21,7 +21,12 @@
 
 <script>
 import cardNovel from '@/components/cardNovel.vue';
-import Slick from 'vue-slick';
+ let Slick = null;
+if (process.browser) {
+    /* eslint-disable global-require */
+    Slick = require('vue-slick').default;
+    /* eslint-enable global-require */
+}
 export default {
     components: {
         cardNovel,Slick
@@ -117,7 +122,7 @@ export default {
     @import "@/assets/sass/layout/_grid.scss";
     @import '@/assets/sass/helpers/_variables.scss';
     @import 'slick-carousel/slick/slick.css';
-  
+
     .list-novel{
         margin-bottom: 48px;
         @extend %row;
@@ -150,7 +155,7 @@ export default {
                                 .__image{
                                 }
                             }
-                                
+
                         }
                         .body-card{
                             margin-bottom: 4px;
@@ -163,7 +168,7 @@ export default {
                                 margin-bottom: 8px;
                             }
                         }
-                        
+
                     }
                 }
                 .card-novel{
