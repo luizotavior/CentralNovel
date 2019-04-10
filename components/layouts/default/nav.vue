@@ -38,10 +38,10 @@
             </a>
           </div>
         </div>
-        <a class="navbar-item" href="#">
+        <a class="navbar-item" href="/novels">
           Novels
         </a>
-        <a class="navbar-item" href="#">
+        <a class="navbar-item" href="/grupos">
           Grupos
         </a>
           <a class="navbar-item" href="#">
@@ -56,7 +56,7 @@
             Login
           </a>
         <div class="navbar-item has-dropdown is-hoverable">
-          
+
           <a class="navbar-link">
             <div class="avatar-circle">
               <img
