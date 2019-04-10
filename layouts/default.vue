@@ -41,13 +41,13 @@
   #layout-default {
     display: flex;
     flex-direction: column;
-    background-size: 100%; 
+    background-size: 100%;
     font-family: 'Source Sans Pro', sans-serif;
     min-height: 100vh;
     @extend %justify-between;
     font-weight: 400;
   }
   html{
-    background-color: #f5f6fc;
+    background-color: #fff;
   }
 </style>
