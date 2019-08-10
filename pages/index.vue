@@ -3,18 +3,18 @@
     <default-slider/>
     <div class="container-page-home">
       <quote-review/>
-      <topic-title title="Novos Lançamentos em Andamento"/>
-      <list-novel :mode="2"/>
-      <topic-title title="Recommended"/>
-      <list-novel :mode="2"/>
-      <topic-title title="Power Ranking" seeMore="#"/>
-      <list-novel/>
+      <!-- <topic-title title="Novos Lançamentos em Andamento"/>
+      <list-novel :mode="2"/> -->
+      <!-- <topic-title title="Recommended"/>
+      <list-novel :mode="2"/> -->
+      <!-- <topic-title title="Power Ranking" seeMore="#"/>
+      <list-novel/> -->
       <topic-title title="Popular" seeMore="#"/>
-      <list-novel/>
+      <list-novel :api="'/ranked/novels/popular'"/>
       <topic-title title="Tendências de Histórias Originais" seeMore="#"/>
-      <list-novel/>
+      <list-novel :api="'/ranked/novels/originals'"/>
       <topic-title title="Novos na Central Novel"/>
-      <list-novel seeMore="#"/>
+      <list-novel :api="'/ranked/novels/news'"/>
       <topic-title title="Tags Sugeridas"/>
       <suggested-tags/>
       <topic-title title="Ultimas Atualizações"/>
