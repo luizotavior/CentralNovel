@@ -1,20 +1,20 @@
 <template>
-    <div class="list-novel">
+    <div class="list-novel" v-if="!isFetching">
         <div v-if="mode == 1" class="mode-one-container">
             <slick
                 ref="slick"
                 :options="slickOptions">
-                <card-novel :rating="true" v-for="n in 10" :key="n"/>
+                <card-novel :novel="novel" :rating="true" v-for="(novel, index) in novels" :key="index"/>
             </slick>
 
         </div>
         <ul v-if="mode == 2" class="mode-two-container">
-            <li v-for="n in perMode" :key="n" :class="{
-            'the-fives': n >1 && n <= 5 ,
-            'is-hidden-touch ': n > (perMode-2),
-            'is-hidden-mobile  ': n > (perMode-4),
+            <li v-for="(novel, index) in novels" :key="index" :class="{
+            'the-fives': index > 1 && index <= 5 ,
+            'is-hidden-touch ': index > (novels-2),
+            'is-hidden-mobile  ': index > (novels-4),
             }">
-                <card-novel :rating="true" :sinopse="n == 1"/>
+                <card-novel :novel="novel" :rating="true" :sinopse="index == 1"/>
             </li>
         </ul>
     </div>
@@ -38,6 +38,7 @@ export default {
             default: () => []
         },
         title: String,
+        api: String,
         seeMore: {
             type: String,
             default: null
@@ -50,6 +51,7 @@ export default {
     data() {
         return {
             perMode: 9,
+            isFetching: true,
             slickOptions: {
                 slidesToShow: 7,
                 slidesToScroll: 7,
@@ -116,6 +118,20 @@ export default {
         }
     },
     methods: {
+      listNovelData(){
+        this.isFetching = true
+        this.$axios.$get(this.api)
+          .then(data => {
+            this.novels = data.data
+            this.isFetching = false
+          })
+          .catch(error => {
+            this.isFetching = true
+          })
+      }
+    },
+    mounted() {
+      this.listNovelData()
     },
 }
 </script>
@@ -147,7 +163,6 @@ export default {
                     background-color: #fff;
                     height: 100%;
                     padding: 20px;
-                    margin-top: 24px;
                     .card-novel{
                         .header-card{
                             h3{

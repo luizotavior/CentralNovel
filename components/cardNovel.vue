@@ -4,18 +4,18 @@
             <a href="#">
                 <i>
                     <div class="imagem-container">
-                        <img class="__image" src="https://storage.googleapis.com/centralnovel.com.br/novels/velho-mestre.jpg" alt="">
-                        <span v-if="original" class="__original">Original</span>
+                        <img class="__image" :src="'https://storage.googleapis.com/centralnovel.com.br/'+getCapa" alt="">
+                        <span v-if="novel.linguagem_id == 1" class="__original">Original</span>
                     </div>
                 </i>
-                <h3>Velho Mestre</h3>
+                <h3>{{novel.titulo}}</h3>
             </a>
         </div>
         <div class="body-card">
             <a class="__genero" href="#">Cenário Futurista</a>
         </div>
         <div class="footer-card">
-            <star-rating v-if="rating" :current-rating="Math.random()*5"/>
+            <star-rating v-if="rating" :current-rating="isEmptyObject(novel.avg_rating) ? 0 : novel.avg_rating[0].aggregate"/>
             <div v-if="sinopse">
                 <p>With the rising tide of steam power and machinery, who can come close to being a Beyonder? Shrouded in the fog of history and darkness, who or what is the lurking evil that murmurs into our ears? Waking up to be faced with a string of mysteries, Zhou... </p>
             </div>
@@ -31,7 +31,7 @@ export default {
         starRating,
     },
     props: {
-        data: {
+        novel: {
             type: Array,
             default: () => []
         },
@@ -39,14 +39,24 @@ export default {
             type: Boolean,
             default: false
         },
-        original: {
-            type: Boolean,
-            default: false
-        },
         sinopse: {
             type: Boolean,
             default: false
         },
+    },
+    computed: {
+      getCapa: function () {
+        return this.novel.capa == null ? 'novels/default.jpg' : this.novel.capa
+      }
+    },
+    methods: {
+      isEmptyObject(obj) {
+        var name;
+
+        for (name in obj) return false;
+
+        return true;
+      }
     },
 }
 </script>
