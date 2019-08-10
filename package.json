@@ -28,7 +28,8 @@
     "vue-mq": "^1.0.1",
     "vue-slick": "^1.1.15",
     "vue": "^2.6.10",
-    "vue-svg-filler": "^1.0.6"
+    "vue-svg-filler": "^1.0.6",
+    "lodash": ">=4.17.13"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
