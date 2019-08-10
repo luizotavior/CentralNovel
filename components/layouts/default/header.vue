@@ -14,5 +14,8 @@
 </script>
 
 <style lang="scss" scoped>
-
+  @import "@/assets/sass/main.scss";
+  header{
+    padding-top: 80px;
+  }
 </style>
