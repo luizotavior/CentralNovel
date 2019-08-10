@@ -1,6 +1,6 @@
 <template>
     <main>
-      <no-ssr placeholder="Loading...">
+      <no-ssr>
         <agile :autoplay="true" :autoplaySpeed="6000" :arrows="false" :dots="false" :infinite="true">
             <div class="slide">
                 <img src="images/slides/slide_01.jpg" alt="">

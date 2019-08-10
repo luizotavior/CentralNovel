@@ -68,7 +68,8 @@ export default {
       &:before {
         position: absolute;
         z-index: -1;
-        width: 1200px;
+        width: 100%;
+        max-width: 1200px;
         height: 380px;
         top: 0px;
         content: '';
