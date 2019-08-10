@@ -16,22 +16,31 @@
             </template>
             <template slot-scope="props">
                 <b-table-column class="blabla" field="original_title" label="Gênero" :visible="($mq == 'mobile' ? false : true)">
-                    <a href="#" class="__genero">{{ props.row.original_title }}</a>
+                    <a href="#" class="__genero">{{ props.row.titulo }}</a>
                 </b-table-column>
                 <b-table-column field="original_title" label="Title">
-                    <a href="#" class="__titulo">{{ props.row.original_title }}</a>
+                    <nuxt-link  :to="'/novels/'+props.row.novel.url" class="__titulo">{{ props.row.novel == null ? '' : props.row.novel.titulo }}</nuxt-link >
                 </b-table-column>
                 <b-table-column field="original_title" label="Release">
-                    <a href="#" class="__release">{{ props.row.original_title }}</a>
+                    <a :href="props.row.url" target="_blank" class="__release">
+                      {{props.row.volume ? 'Arco '+props.row.arco+' ' : ''}}
+                      {{props.row.volume ? 'Volume '+props.row.volume+' ' : ''}}
+                      {{props.row.capitulo ? 'c'+props.row.capitulo+' ' : ''}}
+                      {{props.row.parte ? 'Parte '+props.row.parte+' ' : ''}}
+                    </a>
                 </b-table-column>
                 <b-table-column field="original_title" label="Autor" :visible="($mq == 'tablet' || $mq == 'mobile' ? false : true)">
-                    <a href="#" class="__autor">{{ props.row.original_title }}</a>
+                    <a href="#" class="__autor">{{ props.row.novel.autor == null ? '- - -' : props.row.novel.autor }}</a>
                 </b-table-column>
                 <b-table-column field="original_title" label="Tradutor" :visible="($mq == 'tablet' || $mq == 'mobile' ? false : true)">
-                    <a href="#" class="__tradutor">{{ props.row.original_title }}</a>
+                    <a href="#" class="__tradutor">{{ props.row.novel.tradutor == null ? '- - -' : props.row.novel.tradutor }}</a>
                 </b-table-column>
-                <b-table-column field="release_date" label="Time">
-                    <span class="__time">{{ props.row.release_date ? new Date(props.row.release_date).toLocaleDateString() : '' }}</span>
+                <b-table-column field="release_date" label="Time" class="not-overflow">
+                  <b-tooltip :label="$moment(props.row.published_at).format('LLL')">
+                    <span class="__time">
+                      {{ props.row.published_at ? $moment(props.row.published_at).endOf('day').fromNow() : '' }}
+                    </span>
+                  </b-tooltip>
                 </b-table-column>
 
             </template>
@@ -40,6 +49,8 @@
 </template>
 
 <script>
+  import moment from 'moment';
+  import momentTimezone from 'moment-timezone';
     export default {
         data() {
             return {
@@ -56,26 +67,24 @@
              */
             loadAsyncData() {
                 const params = [
-                    'api_key=bb6f51bef07465653c3e553d6ab161a8',
-                    'language=en-US',
-                    'include_adult=false',
-                    'include_video=false',
-                    `sort_by=${this.sortField}.${this.sortOrder}`,
-                    `page=${this.page}`
+                    `page=${this.page}`,
+                    `per_page=${this.perPage}`,
+                    `category=1`,
+                    `registered=1`,
+
                 ].join('&')
 
                 this.loading = true
-                this.$axios.get(`https://api.themoviedb.org/3/discover/movie?${params}`)
+                this.$axios.$get('/releases?'+params)
                     .then(({ data }) => {
-                        // api.themoviedb.org manage max 1000 pages
                         this.data = []
-                        let currentTotal = data.total_results
-                        if (data.total_results / this.perPage > 1000) {
+                        let currentTotal = data.total
+                        if (data.total / this.perPage > 1000) {
                             currentTotal = this.perPage * 1000
                         }
                         this.total = currentTotal
-                        data.results.forEach((item) => {
-                            item.release_date = item.release_date.replace(/-/g, '/')
+                        data.data.forEach((item) => {
+                            item.published_at = item.published_at.replace(/-/g, '/')
                             this.data.push(item)
                         })
                         this.loading = false
@@ -132,6 +141,7 @@
                         overflow: hidden;
                         white-space: nowrap;
                         text-overflow: ellipsis;
+
                     }
                     &:hover{
                         text-decoration: underline;
@@ -161,6 +171,9 @@
                     .__time{
                         max-width: 7rem;
                         color: #83848f;
+                    }
+                    &.not-overflow span{
+                        overflow: visible !important;
                     }
                 }
             }
