@@ -47,7 +47,8 @@ module.exports = {
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
     // Doc: https://buefy.github.io/#/documentation
-    'nuxt-buefy'
+    'nuxt-buefy',
+    ['@nuxtjs/google-tag-manager', { id: process.env.GOOGLE_TAG_MANAGER_ID }]
   ],
   /*
   ** Axios module configuration
