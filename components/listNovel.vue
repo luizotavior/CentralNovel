@@ -9,9 +9,10 @@
 
         </div>
         <ul v-if="mode == 2" class="mode-two-container">
-            <li v-for="n in 9" :key="n" :class="{
+            <li v-for="n in perMode" :key="n" :class="{
             'the-fives': n >1 && n <= 5 ,
-            'is-hidden-tablet-only ': n > (9-2),
+            'is-hidden-touch ': n > (perMode-2),
+            'is-hidden-mobile  ': n > (perMode-4),
             }">
                 <card-novel :rating="true" :sinopse="n == 1"/>
             </li>
@@ -48,6 +49,7 @@ export default {
     },
     data() {
         return {
+            perMode: 9,
             slickOptions: {
                 slidesToShow: 7,
                 slidesToScroll: 7,
@@ -145,6 +147,7 @@ export default {
                     background-color: #fff;
                     height: 100%;
                     padding: 20px;
+                    margin-top: 24px;
                     .card-novel{
                         .header-card{
                             h3{
@@ -182,7 +185,13 @@ export default {
                     &:first-child{
                     }
                 }
-                @media (max-width: 900px) {
+                @media (min-width: 501px) and (max-width: 768px){
+                    @include col(3);
+                    &:first-child{
+                      @include col(6);
+                    }
+                }
+                @media (max-width: 500px) {
                     display: none;
                     &:first-child{
                         display: flex;
