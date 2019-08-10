@@ -47,7 +47,7 @@
   @import "@/assets/sass/layout/_grid.scss";
   @import '@/assets/sass/helpers/_variables.scss';
     footer{
-        padding: 64px 0 56px;
+        padding: 64px 0 36px;
         background-color: #25253d;
         width: 100%;
         .columns{
@@ -67,7 +67,7 @@
                         align-content: center;
                         text-align: center;
                         .social{
-                            justify-content: center; 
+                            justify-content: center;
                         }
                         img{
                             height: 80px;
