@@ -26,6 +26,7 @@
     "nuxt": "^2.8.1",
     "nuxt-buefy": "^0.3.10",
     "nuxt-sass-resources-loader": "^2.0.5",
+    "nuxt-start": "^2.8.1",
     "sass-loader": "^7.2.0",
     "style-loader": "^0.23.1",
     "vue": "^2.6.10",
