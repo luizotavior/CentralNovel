@@ -11,32 +11,32 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxt/webpack": "^2.8.1",
-    "@nuxtjs/auth": "^4.8.1",
-    "@nuxtjs/axios": "^5.5.4",
-    "@nuxtjs/dotenv": "^1.4.0",
-    "@nuxtjs/google-tag-manager": "^2.2.1",
-    "@nuxtjs/moment": "^1.2.0",
-    "cross-env": "^5.2.0",
+    "@nuxt/webpack": "^2.10.2",
+    "@nuxtjs/auth": "^4.8.4",
+    "@nuxtjs/axios": "^5.8.0",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/google-tag-manager": "^2.3.1",
+    "@nuxtjs/moment": "^1.4.0",
+    "cross-env": "^5.2.1",
     "jquery": "^3.4.1",
     "lodash": ">=4.17.13",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.26",
-    "node-sass": "^4.12.0",
-    "nuxt": "^2.8.1",
-    "nuxt-buefy": "^0.3.10",
+    "moment-timezone": "^0.5.27",
+    "node-sass": "^4.13.0",
+    "nuxt": "^2.10.2",
+    "nuxt-buefy": "^0.3.19",
     "nuxt-env": "^0.1.0",
     "nuxt-sass-resources-loader": "^2.0.5",
-    "nuxt-start": "^2.8.1",
-    "sass-loader": "^7.2.0",
+    "nuxt-start": "^2.10.2",
+    "sass-loader": "^7.3.1",
     "style-loader": "^0.23.1",
-    "vue": "^2.6.10",
+    "vue": "^2.6.11",
     "vue-agile": "^0.3.7",
     "vue-mq": "^1.0.1",
     "vue-slick": "^1.1.15",
     "vue-svg-filler": "^1.0.6"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.4"
   }
 }
