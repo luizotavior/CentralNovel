@@ -25,6 +25,7 @@
     "node-sass": "^4.12.0",
     "nuxt": "^2.8.1",
     "nuxt-buefy": "^0.3.10",
+    "nuxt-env": "^0.1.0",
     "nuxt-sass-resources-loader": "^2.0.5",
     "nuxt-start": "^2.8.1",
     "sass-loader": "^7.2.0",

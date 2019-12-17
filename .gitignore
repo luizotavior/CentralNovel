@@ -81,3 +81,5 @@ dist
 .idea
 
 storage-key.json
+
+vendor/

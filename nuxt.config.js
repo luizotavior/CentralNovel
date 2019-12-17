@@ -1,4 +1,5 @@
-const env = require('dotenv').config()
+require('dotenv').config({ silent: process.env.NODE_ENV === 'production' })
+
 const pkg = require('./package')
 
 module.exports = {
@@ -45,7 +46,15 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/dotenv',
+    ['@nuxtjs/dotenv',{ silent: process.env.NODE_ENV === 'production' }],
+    ['nuxt-env', {
+      keys: [
+        'AUTH_CLIENT_ID',
+        'AUTH_CLIENT_SECRET',
+        'AUTH_SCOPE',
+        'AUTH_GRANT_TYPE',
+      ]
+    }],
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
     ['@nuxtjs/moment',['pt-br']],

@@ -1,18 +1,15 @@
 language: node_js
 node_js:
-  - "8"
-
+- stable
 cache:
   directories:
-  - "node_modules"
-
-# branches:
-#   only:
-#     -master
-
+  - node_modules
 install:
-  - npm install
-  - npm run generate
-
+- npm install
 script:
-  - echo "Skipping tests"
+- npm run generate
+deploy:
+  provider: heroku
+  api_key:
+    secure: qjXJbSmAJqrB+8E6uuMcSu8boC4Zoslv/lXlW2lnnWN740aLxWE4xNPx+doovDEZoDtuR6r+d26TGDyI8/bbv86z+Rart/lwbO+9xdvcsK6hH0i1OoYOvyDUEaX4yYpk5eSxiCuB0X/FkZF//3YOZwnpLJk8zVCWaV+ATKu1eTrM9NdjsFxgL4rt6/FBtN0/M/isagdxu8gCbpD00h+SILWBf95IWfDY1PZCNghfaAJaJNRagrwy6FZxW6MQH0GR6zGo7+1mfGxbflXqloqKzvsXk+CMNGILgh2YtUAc2RI6XYxIAGK/GpPRsmR2op4h5d7BhGGICZtZOAZOLStNNv19i/SmrLD9Aylhh8+PiEDInvK+9PnX8Fr4vNfHiEQ+UOijXFzKjhYJu013x9Zwhnnd9+8Py4QQZjPLq0HfkNzj4xeco1FOwFigipJ5qgv3kO5mRIRt7TKtv+8g2svkFKMtxVVRmTnc86/ONPuGxFxqoMkNXH64VdickTLyrl91lIk73XqS37Ego6qkt9F/bdBulOcEJsAHQclvl6Mj5hslqvQlE+JfVuTrPt6QPCEj9eB56ptQdkTMh2wZ7C7B1U4cnvc0kT/gprNNNHrpo5vmHOq+zmewfsT1wiBrMMZbFVCjUw+/3dMRb19TOe5Daw5mbcFIZvvirLYlieGULMs=
+  app: clienterei
