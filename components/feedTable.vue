@@ -1,182 +1,177 @@
 <template>
-    <section id="feed-table">
-        <b-table
-            :data="data"
-            :loading="loading"
-            paginated
-            backend-pagination
-            :total="total"
-            :per-page="perPage"
-            @page-change="onPageChange"
-            :mobile-cards="false">
-            <template slot-scope="props" slot="header">
-                <div class="table-title">
-                    {{ props.column.label }}
-                </div>
-            </template>
-            <template slot-scope="props">
-                <b-table-column class="blabla" field="original_title" label="Gênero" :visible="($mq == 'mobile' ? false : true)">
-                    <a href="#" class="__genero">{{ props.row.titulo }}</a>
-                </b-table-column>
-                <b-table-column field="original_title" label="Title">
-                    <nuxt-link  :to="'/novels/'+props.row.novel.url" class="__titulo">{{ props.row.novel == null ? '' : props.row.novel.titulo }}</nuxt-link >
-                </b-table-column>
-                <b-table-column field="original_title" label="Release">
-                    <a :href="props.row.url" target="_blank" class="__release">
-                      {{props.row.volume ? 'Arco '+props.row.arco+' ' : ''}}
-                      {{props.row.volume ? 'Volume '+props.row.volume+' ' : ''}}
-                      {{props.row.capitulo ? 'c'+props.row.capitulo+' ' : ''}}
-                      {{props.row.parte ? 'Parte '+props.row.parte+' ' : ''}}
-                    </a>
-                </b-table-column>
-                <b-table-column field="original_title" label="Autor" :visible="($mq == 'tablet' || $mq == 'mobile' ? false : true)">
-                    <a href="#" class="__autor">{{ props.row.novel.autor == null ? '- - -' : props.row.novel.autor }}</a>
-                </b-table-column>
-                <b-table-column field="original_title" label="Tradutor" :visible="($mq == 'tablet' || $mq == 'mobile' ? false : true)">
-                    <a href="#" class="__tradutor">{{ props.row.novel.tradutor == null ? '- - -' : props.row.novel.tradutor }}</a>
-                </b-table-column>
-                <b-table-column field="release_date" label="Time" class="not-overflow">
-                  <b-tooltip :label="$moment(props.row.published_at).format('LLL')">
-                    <span class="__time">
-                      {{ props.row.published_at ? $moment(props.row.published_at).endOf('day').fromNow() : '' }}
-                    </span>
-                  </b-tooltip>
-                </b-table-column>
-
-            </template>
-        </b-table>
-    </section>
+  <section id="feed-table">
+    <b-table
+      :data="data"
+      :loading="loading"
+      paginated
+      backend-pagination
+      :total="total"
+      :per-page="perPage"
+      @page-change="onPageChange"
+      :mobile-cards="false"
+    >
+      <template slot-scope="props" slot="header">
+        <div class="table-title">
+          {{ props.column.label }}
+        </div>
+      </template>
+      <template slot-scope="props">
+        <b-table-column field="original_title" label="Serie">
+          <nuxt-link :to="'/series/' + props.row.serie.slug" class="__titulo">{{
+            props.row.serie == null ? "" : props.row.serie.title
+          }}</nuxt-link>
+        </b-table-column>
+        <b-table-column field="original_title" label="Release">
+          <a :href="props.row.url" target="_blank" class="__release">
+            {{ props.row.arc ? "a" + props.row.arc + " " : "" }}
+            {{ props.row.volume ? "v" + props.row.volume + "" : "" }}
+            {{ props.row.chapter ? "c" + props.row.chapter + " " : "" }}
+            {{ props.row.part ? "p" + props.row.part + " " : "" }}
+          </a>
+        </b-table-column>
+        <b-table-column field="release_date" label="Data" class="not-overflow">
+          <b-tooltip :label="$moment(props.row.published_at).format('LLL')">
+            <span class="__time">
+              {{
+                props.row.published_at
+                  ? $moment(props.row.published_at).fromNow()
+                  : ""
+              }}
+            </span>
+          </b-tooltip>
+        </b-table-column>
+      </template>
+    </b-table>
+  </section>
 </template>
 
 <script>
-  import moment from 'moment';
-  import momentTimezone from 'moment-timezone';
-    export default {
-        data() {
-            return {
-                data: [],
-                total: 0,
-                loading: false,
-                page: 1,
-                perPage: 20
-            }
-        },
-        methods: {
-            /*
-             * Load async data
-             */
-            loadAsyncData() {
-                const params = [
-                    `page=${this.page}`,
-                    `per_page=${this.perPage}`,
-                    `category=1`,
-                    `registered=1`,
+export default {
+  data() {
+    return {
+      data: [],
+      total: 0,
+      loading: false,
+      page: 1,
+      perPage: 20
+    };
+  },
+  methods: {
+    /*
+     * Load async data
+     */
+    loadAsyncData() {
+      const params = [
+        "paginate=1",
+        `page=${this.page}`,
+        `per_page=${this.perPage}`
+      ].join("&");
 
-                ].join('&')
-
-                this.loading = true
-                this.$axios.$get('/releases?'+params)
-                    .then(({ data }) => {
-                        this.data = []
-                        let currentTotal = data.total
-                        if (data.total / this.perPage > 1000) {
-                            currentTotal = this.perPage * 1000
-                        }
-                        this.total = currentTotal
-                        data.data.forEach((item) => {
-                            item.published_at = item.published_at.replace(/-/g, '/')
-                            this.data.push(item)
-                        })
-                        this.loading = false
-                    })
-                    .catch((error) => {
-                        this.data = []
-                        this.total = 0
-                        this.loading = false
-                        throw error
-                    })
-            },
-            /*
-             * Handle page-change event
-             */
-            onPageChange(page) {
-                this.page = page
-                this.loadAsyncData()
-            },
-        },
-        mounted() {
-            this.loadAsyncData()
-        }
+      this.loading = true;
+      this.$axios
+        .$get("/releases?" + params)
+        .then(({ data }) => {
+          this.data = [];
+          let currentTotal = data.total;
+          if (data.total / this.perPage > 1000) {
+            currentTotal = this.perPage * 1000;
+          }
+          this.total = currentTotal;
+          data.data.forEach(item => {
+            item.published_at = item.published_at.replace(/-/g, "/");
+            this.data.push(item);
+          });
+          this.loading = false;
+        })
+        .catch(error => {
+          this.data = [];
+          this.total = 0;
+          this.loading = false;
+          throw error;
+        });
+    },
+    /*
+     * Handle page-change event
+     */
+    onPageChange(page) {
+      this.page = page;
+      this.loadAsyncData();
     }
+  },
+  mounted() {
+    this.loadAsyncData();
+  }
+};
 </script>
 
 <style lang="scss">
-    section#feed-table{
-        padding: 12px;
-        padding-top: 0px;
-        .table{
-            background-color: transparent;
-            line-height: normal;
-            width: 100%;
-            overflow-x: auto;
-            .table-title{
-                color: #83848f;
-                font-weight: 400;
-                font-size: 14px;
-            }
-            th,td{
-                padding-left: 0px;
-                border-width: 0 0 1px;
-                border-color: #e3e4ea;
-            }
-            tbody{
-                td{
-                    font-weight: 300;
-                    color: #83848f;
-                    a{
-                        color: #000;
-                    }
-                    a,span{
-                        display: block;
-                        overflow: hidden;
-                        white-space: nowrap;
-                        text-overflow: ellipsis;
-
-                    }
-                    &:hover{
-                        text-decoration: underline;
-                    }
-                    .__genero{
-                        max-width: 7rem;
-                        color: #83848f;
-                    }
-                    .__titulo{
-                        max-width: 17rem;
-                        @media (max-width: 768px) {
-                            max-width: 7rem;
-                        }
-                    }
-                    .__release{
-                        max-width: 13rem;
-                        @media (max-width: 768px) {
-                            max-width: 7rem;
-                        }
-                    }
-                    .__autor{
-                        max-width: 7rem;
-                    }
-                    .__tradutor{
-                        max-width: 7rem;
-                    }
-                    .__time{
-                        max-width: 7rem;
-                        color: #83848f;
-                    }
-                    &.not-overflow span{
-                        overflow: visible !important;
-                    }
-                }
-            }
-        }
+section#feed-table {
+  padding: 12px;
+  padding-top: 0px;
+  .table {
+    background-color: transparent;
+    line-height: normal;
+    width: 100%;
+    overflow-x: auto;
+    .table-title {
+      color: #83848f;
+      font-weight: 400;
+      font-size: 14px;
     }
+    th,
+    td {
+      padding-left: 0px;
+      border-width: 0 0 1px;
+      border-color: #e3e4ea;
+    }
+    tbody {
+      td {
+        font-weight: 300;
+        color: #83848f;
+        a {
+          color: #000;
+        }
+        a,
+        span {
+          display: block;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+        .__genero {
+          max-width: 7rem;
+          color: #83848f;
+        }
+        .__titulo {
+          max-width: 17rem;
+          @media (max-width: 768px) {
+            max-width: 7rem;
+          }
+        }
+        .__release {
+          max-width: 13rem;
+          @media (max-width: 768px) {
+            max-width: 7rem;
+          }
+        }
+        .__autor {
+          max-width: 7rem;
+        }
+        .__tradutor {
+          max-width: 7rem;
+        }
+        .__time {
+          max-width: 7rem;
+          color: #83848f;
+        }
+        &.not-overflow span {
+          overflow: visible !important;
+        }
+      }
+    }
+  }
+}
 </style>
