@@ -55,6 +55,9 @@ module.exports = {
   plugins: [{
       src: '~/plugins/vue-agile',
       ssr: false
+    }, {
+      src: '~/plugins/hotjar.js',
+      ssr: false
     },
     'plugins/vue-mq.js'
   ],
