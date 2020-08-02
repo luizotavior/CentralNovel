@@ -10,26 +10,46 @@
       @page-change="onPageChange"
       :mobile-cards="false"
     >
-      <template slot-scope="props" slot="header">
+      <template
+        slot-scope="props"
+        slot="header"
+      >
         <div class="table-title">
           {{ props.column.label }}
         </div>
       </template>
       <template slot-scope="props">
-        <b-table-column field="original_title" label="Serie">
-          <nuxt-link :to="'/series/' + props.row.serie.slug" class="__titulo">{{
+        <b-table-column
+          field="original_title"
+          label="Serie"
+        >
+          <nuxt-link
+            :to="'/series/' + props.row.serie.slug"
+            class="__titulo"
+          >{{
             props.row.serie == null ? "" : props.row.serie.title
           }}</nuxt-link>
         </b-table-column>
-        <b-table-column field="original_title" label="Release">
-          <a :href="props.row.url" target="_blank" class="__release">
+        <b-table-column
+          field="original_title"
+          label="Release"
+        >
+          <a
+            :href="props.row.url"
+            target="_blank"
+            class="__release"
+          >
             {{ props.row.arc ? "a" + props.row.arc + " " : "" }}
             {{ props.row.volume ? "v" + props.row.volume + "" : "" }}
             {{ props.row.chapter ? "c" + props.row.chapter + " " : "" }}
             {{ props.row.part ? "p" + props.row.part + " " : "" }}
           </a>
         </b-table-column>
-        <b-table-column field="release_date" label="Data" class="not-overflow">
+        <b-table-column
+          field="release_date"
+          label="Data"
+          class="not-overflow"
+        >
           <b-tooltip :label="$moment(props.row.published_at).format('LLL')">
             <span class="__time">
               {{
@@ -47,7 +67,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       data: [],
       total: 0,
@@ -60,7 +80,7 @@ export default {
     /*
      * Load async data
      */
-    loadAsyncData() {
+    loadAsyncData () {
       const params = [
         "paginate=1",
         `page=${this.page}`,
@@ -93,12 +113,12 @@ export default {
     /*
      * Handle page-change event
      */
-    onPageChange(page) {
+    onPageChange (page) {
       this.page = page;
       this.loadAsyncData();
     }
   },
-  mounted() {
+  mounted () {
     this.loadAsyncData();
   }
 };

@@ -20,9 +20,9 @@
     </div>
     <div class="body-card">
       <a
-        class="__genero"
+        class="__authors"
         href="#"
-      >Cenário Futurista</a>
+      >{{getAuthors}}</a>
     </div>
     <div class="footer-card">
       <star-rating
@@ -60,6 +60,11 @@ export default {
   computed: {
     getCapa: function () {
       return this.novel.image == null ? 'novels/default.jpg' : this.novel.image
+    },
+    getAuthors: function () {
+      return this.novel.authors == null ? '' : this.novel.authors.map(function (elem) {
+        return elem.name;
+      }).join(',')
     }
   },
   methods: {
@@ -133,13 +138,13 @@ export default {
     }
   }
   .body-card {
-    .__genero {
+    .__authors {
       font-size: 14px;
       color: #83848f;
       font-weight: 300;
     }
     &:hover {
-      .__genero {
+      .__authors {
         text-decoration: underline;
       }
     }
