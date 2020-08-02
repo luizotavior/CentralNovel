@@ -26,9 +26,12 @@
       <list-novel :api="'/series?paginate=false&limit=9&language=1&sortProperty=averageRating&sortDirection=desc'" />
       <topic-title title="Novos na Central Novel" />
       <list-novel :api="'/series?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'" />
-      <topic-title title="Tags Sugeridas" />
+      <topic-title title="Gêneros Sugeridas" />
       <suggested-tags />
-      <topic-title title="Ultimas Atualizações" />
+      <topic-title
+        id="updates"
+        title="Ultimas Atualizações"
+      />
       <feed-table />
     </div>
   </div>
@@ -60,6 +63,14 @@ export default {
 </script>
 
 <style lang="scss">
+.slick-track {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  .slick-slide {
+    height: auto;
+  }
+}
 @import "@/assets/sass/main.scss";
 #page-home {
   display: flex;
