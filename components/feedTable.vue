@@ -52,11 +52,7 @@
         >
           <b-tooltip :label="$moment(props.row.published_at).format('LLL')">
             <span class="__time">
-              {{
-                props.row.published_at
-                  ? $moment(props.row.published_at).fromNow()
-                  : ""
-              }}
+              {{ dateFromNow(props.row.published_at) }}<br>
             </span>
           </b-tooltip>
         </b-table-column>
@@ -80,6 +76,9 @@ export default {
     /*
      * Load async data
      */
+    dateFromNow (newDate) {
+      return newDate ? this.$moment(Date.parse(newDate)).fromNow() : ""
+    },
     loadAsyncData () {
       const params = [
         "paginate=1",
@@ -97,10 +96,7 @@ export default {
             currentTotal = this.perPage * 1000;
           }
           this.total = currentTotal;
-          data.data.forEach(item => {
-            item.published_at = item.published_at.replace(/-/g, "/");
-            this.data.push(item);
-          });
+          this.data = data.data;
           this.loading = false;
         })
         .catch(error => {
