@@ -27,7 +27,7 @@
           >
             <b-icon icon="compass"></b-icon> <span>Browse</span>
           </template>
-          <b-navbar-item href="#">
+          <b-navbar-item href="/series">
             <span>Novels</span>
           </b-navbar-item>
           <b-navbar-item @click="isComingSoon = true">
