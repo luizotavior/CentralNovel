@@ -5,15 +5,12 @@
         <div class="filter">
           <span class="__title">Gênero</span>
           <ul class="__options">
-            <li
-              v-for="(genre, index) in genres"
-              :key="index"
-            >
+            <li v-for="(genre, index) in genres" :key="index">
               <span
                 @click="selected.genre = genre.id"
                 :class="{
-              'active': genre.id == selected.genre ,
-              }"
+                  active: genre.id == selected.genre
+                }"
               >
                 {{ genre.name }}
               </span>
@@ -30,11 +27,9 @@
             :preselect-first="true"
             :allow-empty="false"
           >
-            <template
-              slot="singleLabel"
-              slot-scope="{ option }"
+            <template slot="singleLabel" slot-scope="{ option }">
+              {{ option.name }}</template
             >
-              {{ option.name }}</template>
           </multiselect>
           <multiselect
             v-model="selected.status"
@@ -45,11 +40,9 @@
             :preselect-first="true"
             :allow-empty="false"
           >
-            <template
-              slot="singleLabel"
-              slot-scope="{ option }"
+            <template slot="singleLabel" slot-scope="{ option }">
+              {{ option.name }}</template
             >
-              {{ option.name }}</template>
           </multiselect>
           <multiselect
             v-model="selected.sortOrder"
@@ -60,27 +53,31 @@
             :preselect-first="true"
             :allow-empty="false"
           >
-            <template
-              slot="singleLabel"
-              slot-scope="{ option }"
+            <template slot="singleLabel" slot-scope="{ option }">
+              {{ option.name }}</template
             >
-              {{ option.name }}</template>
           </multiselect>
         </div>
       </div>
     </div>
     <div class="section-series">
       <div class="__container">
-        <ul>
+        <ul
+          class="list-series"
+          v-infinite-scroll="loadMore"
+          infinite-scroll-disabled="paginate.busy"
+          infinite-scroll-distance="paginate.perPage"
+        >
           <li
-            v-for="(novel, index) in novels"
+            v-for="(novel, index) in series"
             :key="index"
+            style="margin-bottom: 2rem;"
+            data-aos="slide-up"
+            data-aos-offset="100"
+            data-aos-easing="ease-out-back"
+            data-aos-once="true"
           >
-            <card-novel
-              :novel="novel"
-              :rating="true"
-              :sinopse="index == 0"
-            />
+            <card-novel :novel="novel" :rating="true" />
           </li>
         </ul>
       </div>
@@ -89,13 +86,13 @@
 </template>
 
 <script>
-import cardNovel from '@/components/cardNovel.vue';
+import cardNovel from "@/components/cardNovel.vue";
 import Multiselect from "vue-multiselect";
 
 export default {
   name: "Novels",
   components: { cardNovel, Multiselect },
-  data () {
+  data() {
     return {
       genres: [
         {
@@ -135,16 +132,23 @@ export default {
       ],
       isFetching: true,
       series: [],
+      seriesInfo: [],
       selected: {
         genre: 0,
         status: null,
         language: null,
         sortOrder: null
+      },
+      paginate: {
+        busy: false,
+        limit: 20,
+        perPage: 24,
+        page: 0
       }
     };
   },
   methods: {
-    genresData () {
+    genresData() {
       this.isFetching = true;
       this.$axios
         .$get("/genres")
@@ -156,7 +160,7 @@ export default {
           this.isFetching = true;
         });
     },
-    StatusesData () {
+    StatusesData() {
       this.isFetching = true;
       this.$axios
         .$get("/statuses")
@@ -168,7 +172,7 @@ export default {
           this.isFetching = true;
         });
     },
-    LanguagesData () {
+    LanguagesData() {
       this.isFetching = true;
       this.$axios
         .$get("/languages")
@@ -180,28 +184,46 @@ export default {
           this.isFetching = true;
         });
     },
-    getNovelsData () {
-      this.isFetching = true
-      this.$axios.$get(
-        'series?' +
-        'genre=' + this.selected.genre +
-        'language=' + this.selected.language +
-        'status=' + this.selected.status
-      )
+    getNovelsData() {
+      this.isFetching = true;
+    },
+    loadMore() {
+      this.busy = true;
+      this.paginate.page++;
+      if (this.paginate.page > this.seriesInfo.last_page) {
+        console.log("Last Page!!!");
+        return;
+      }
+      this.$axios
+        .$get(
+          "series?" +
+            "genre=" +
+            this.selected.genre.id +
+            "&language=" +
+            this.selected.language.id +
+            "&status=" +
+            this.selected.status.id +
+            "&page=" +
+            this.paginate.page +
+            "&per_page=" +
+            this.paginate.perPage
+        )
         .then(data => {
-          this.series = data.data
-          this.isFetching = false
+          console.log("Adding 20 more data results");
+          this.series = this.series.concat(data.data.data);
+          this.seriesInfo = data.data;
+          this.busy = false;
         })
         .catch(error => {
-          this.isFetching = true
-        })
+          this.busy = false;
+        });
     }
   },
-  mounted () {
-    this.genresData()
-    this.StatusesData()
-    this.LanguagesData()
-    this.getNovelsData()
+  mounted() {
+    this.genresData();
+    this.StatusesData();
+    this.LanguagesData();
+    this.loadMore();
   }
 };
 </script>
@@ -269,6 +291,30 @@ export default {
         margin-top: 32px;
         .multiselect {
           @include col(4);
+        }
+      }
+    }
+  }
+  .section-series {
+    display: flex;
+    flex-direction: row;
+    @extend %justify-center;
+    .__container {
+      display: flex;
+      flex-direction: column;
+      @extend %row;
+      width: 100%;
+      padding-top: 12px;
+      padding-bottom: 32px;
+      ul.list-series {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: 38px;
+        li {
+          display: flex;
+          flex-direction: column;
+          @include col(2);
         }
       }
     }
