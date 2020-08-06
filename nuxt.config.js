@@ -58,6 +58,12 @@ module.exports = {
     }, {
       src: '~/plugins/hotjar.js',
       ssr: false
+    }, {
+      src: '~/plugins/aos.js',
+      ssr: false
+    }, {
+      src: '~/plugins/infiniteScroll.js',
+      ssr: false
     },
     'plugins/vue-mq.js'
   ],
