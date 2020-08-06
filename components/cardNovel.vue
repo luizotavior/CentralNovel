@@ -6,47 +6,47 @@
           <div class="imagem-container">
             <img
               class="__image"
-              :src="'https://storage.googleapis.com/centralnovel.com.br/'+getCapa"
+              :src="
+                'https://storage.googleapis.com/centralnovel.com.br/' + getCapa
+              "
               alt=""
+            />
+            <span v-if="novel.language_id == 1" class="__original"
+              >Original</span
             >
-            <span
-              v-if="novel.language_id == 1"
-              class="__original"
-            >Original</span>
           </div>
         </i>
-        <h3>{{novel.title}}</h3>
+        <h3>{{ novel.title }}</h3>
       </a>
     </div>
     <div class="body-card">
-      <a
-        class="__authors"
-        href="#"
-      >{{getAuthors}}</a>
+      <a class="__authors" href="#">{{ getAuthors }}</a>
     </div>
     <div class="footer-card">
-      <star-rating
-        v-if="rating"
-        :current-rating="novel.averageRating"
-      />
+      <star-rating v-if="rating" :current-rating="novel.averageRating" />
       <div v-if="sinopse">
-        <p>With the rising tide of steam power and machinery, who can come close to being a Beyonder? Shrouded in the fog of history and darkness, who or what is the lurking evil that murmurs into our ears? Waking up to be faced with a string of mysteries, Zhou... </p>
+        <p>
+          With the rising tide of steam power and machinery, who can come close
+          to being a Beyonder? Shrouded in the fog of history and darkness, who
+          or what is the lurking evil that murmurs into our ears? Waking up to
+          be faced with a string of mysteries, Zhou...
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import starRating from '@/components/starRating.vue';
+import starRating from "@/components/starRating.vue";
 
 export default {
   components: {
-    starRating,
+    starRating
   },
   props: {
     novel: {
-      type: Array,
-      default: () => []
+      type: Object,
+      default: () => {}
     },
     rating: {
       type: Boolean,
@@ -55,28 +55,32 @@ export default {
     sinopse: {
       type: Boolean,
       default: false
-    },
+    }
   },
   computed: {
-    getCapa: function () {
-      return this.novel.image == null ? 'novels/default.jpg' : this.novel.image
+    getCapa: function() {
+      return this.novel.image == null ? "novels/default.jpg" : this.novel.image;
     },
-    getAuthors: function () {
-      return this.novel.authors == null ? '' : this.novel.authors.map(function (elem) {
-        return elem.name;
-      }).join(',')
+    getAuthors: function() {
+      return this.novel.authors == null
+        ? ""
+        : this.novel.authors
+            .map(function(elem) {
+              return elem.name;
+            })
+            .join(",");
     }
   },
   methods: {
-    isEmptyObject (obj) {
+    isEmptyObject(obj) {
       var name;
 
       for (name in obj) return false;
 
       return true;
     }
-  },
-}
+  }
+};
 </script>
 
 <style lang="scss" scoped>
