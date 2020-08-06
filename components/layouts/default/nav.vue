@@ -71,7 +71,7 @@
         </b-navbar-item>
         <b-navbar-item @click="isComingSoon = true">
           <b-tooltip
-            label="Tooltip bottom"
+            label="Get the App"
             position="is-bottom"
             type="is-dark"
           >
@@ -80,7 +80,7 @@
         </b-navbar-item>
         <b-navbar-item @click="isComingSoon = true">
           <b-tooltip
-            label="Tooltip bottom"
+            label="Library"
             position="is-bottom"
             type="is-dark"
           >
@@ -89,7 +89,7 @@
         </b-navbar-item>
         <b-navbar-item @click="isComingSoon = true">
           <b-tooltip
-            label="Tooltip bottom"
+            label="Inbox"
             position="is-bottom"
             type="is-dark"
           >
@@ -98,7 +98,7 @@
         </b-navbar-item>
         <b-navbar-item @click="isComingSoon = true">
           <b-tooltip
-            label="Tooltip bottom"
+            label="Forum"
             position="is-bottom"
             type="is-dark"
           >
