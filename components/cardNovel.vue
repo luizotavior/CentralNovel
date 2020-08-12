@@ -1,7 +1,7 @@
 <template>
   <div class="card-novel">
     <div class="header-card">
-      <a href="#">
+      <a :href="'/series/'+novel.slug">
         <i>
           <div class="imagem-container">
             <img
@@ -11,19 +11,31 @@
               "
               alt=""
             />
-            <span v-if="novel.language_id == 1" class="__original"
-              >Original</span
-            >
+            <span
+              v-if="novel.language_id == 1"
+              class="__original"
+            >Original</span>
           </div>
         </i>
         <h3>{{ novel.title }}</h3>
       </a>
     </div>
     <div class="body-card">
-      <a class="__authors" href="#">{{ getAuthors }}</a>
+      <div
+        class="__authors"
+        v-for="(author, index) in novel.authors"
+        :key="index"
+      >
+        <a :href="'/authors/'+author.slug">
+          {{author.name}}
+        </a>
+      </div>
     </div>
     <div class="footer-card">
-      <star-rating v-if="rating" :current-rating="novel.averageRating" />
+      <star-rating
+        v-if="rating"
+        :current-rating="novel.averageRating"
+      />
       <div v-if="sinopse">
         <p>
           With the rising tide of steam power and machinery, who can come close
@@ -46,7 +58,7 @@ export default {
   props: {
     novel: {
       type: Object,
-      default: () => {}
+      default: () => { }
     },
     rating: {
       type: Boolean,
@@ -58,21 +70,12 @@ export default {
     }
   },
   computed: {
-    getCapa: function() {
+    getCapa: function () {
       return this.novel.image == null ? "novels/default.jpg" : this.novel.image;
     },
-    getAuthors: function() {
-      return this.novel.authors == null
-        ? ""
-        : this.novel.authors
-            .map(function(elem) {
-              return elem.name;
-            })
-            .join(",");
-    }
   },
   methods: {
-    isEmptyObject(obj) {
+    isEmptyObject (obj) {
       var name;
 
       for (name in obj) return false;
@@ -143,9 +146,11 @@ export default {
   }
   .body-card {
     .__authors {
-      font-size: 14px;
-      color: #83848f;
-      font-weight: 300;
+      a {
+        font-size: 14px;
+        color: #83848f;
+        font-weight: 300;
+      }
     }
     &:hover {
       .__authors {

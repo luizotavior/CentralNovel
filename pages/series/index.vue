@@ -5,11 +5,14 @@
         <div class="filter">
           <span class="__title">Gênero</span>
           <ul class="__options">
-            <li v-for="(genre, index) in genres" :key="index">
+            <li
+              v-for="(genre, index) in genres"
+              :key="index"
+            >
               <span
-                @click="selected.genre = genre.id"
+                @click="genreClick(genre)"
                 :class="{
-                  active: genre.id == selected.genre
+                  active: genre.id == selected.genre.id
                 }"
               >
                 {{ genre.name }}
@@ -24,25 +27,31 @@
             track-by="name"
             label="name"
             :options="languages"
+            @input="changeFilter()"
             :preselect-first="true"
             :allow-empty="false"
           >
-            <template slot="singleLabel" slot-scope="{ option }">
-              {{ option.name }}</template
+            <template
+              slot="singleLabel"
+              slot-scope="{ option }"
             >
+              {{ option.name }}</template>
           </multiselect>
           <multiselect
             v-model="selected.status"
             deselect-label="Can't remove this value"
             track-by="name"
             label="name"
+            @input="changeFilter"
             :options="statuses"
             :preselect-first="true"
             :allow-empty="false"
           >
-            <template slot="singleLabel" slot-scope="{ option }">
-              {{ option.name }}</template
+            <template
+              slot="singleLabel"
+              slot-scope="{ option }"
             >
+              {{ option.name }}</template>
           </multiselect>
           <multiselect
             v-model="selected.sortOrder"
@@ -50,12 +59,15 @@
             track-by="name"
             label="name"
             :options="sortOrder"
+            @input="changeFilter"
             :preselect-first="true"
             :allow-empty="false"
           >
-            <template slot="singleLabel" slot-scope="{ option }">
-              {{ option.name }}</template
+            <template
+              slot="singleLabel"
+              slot-scope="{ option }"
             >
+              {{ option.name }}</template>
           </multiselect>
         </div>
       </div>
@@ -77,7 +89,10 @@
             data-aos-easing="ease-out-back"
             data-aos-once="true"
           >
-            <card-novel :novel="novel" :rating="true" />
+            <card-novel
+              :novel="novel"
+              :rating="true"
+            />
           </li>
         </ul>
       </div>
@@ -92,7 +107,7 @@ import Multiselect from "vue-multiselect";
 export default {
   name: "Novels",
   components: { cardNovel, Multiselect },
-  data() {
+  data () {
     return {
       genres: [
         {
@@ -134,21 +149,30 @@ export default {
       series: [],
       seriesInfo: [],
       selected: {
-        genre: 0,
-        status: null,
-        language: null,
+        genre: {
+          id: 0,
+          name: "Todos"
+        },
+        status: {
+          id: 0,
+          name: "Todos"
+        },
+        language: {
+          id: 0,
+          name: "Todos"
+        },
         sortOrder: null
       },
       paginate: {
         busy: false,
         limit: 20,
-        perPage: 24,
+        perPage: 12,
         page: 0
       }
     };
   },
   methods: {
-    genresData() {
+    genresData () {
       this.isFetching = true;
       this.$axios
         .$get("/genres")
@@ -160,7 +184,7 @@ export default {
           this.isFetching = true;
         });
     },
-    StatusesData() {
+    StatusesData () {
       this.isFetching = true;
       this.$axios
         .$get("/statuses")
@@ -172,7 +196,7 @@ export default {
           this.isFetching = true;
         });
     },
-    LanguagesData() {
+    LanguagesData () {
       this.isFetching = true;
       this.$axios
         .$get("/languages")
@@ -184,29 +208,35 @@ export default {
           this.isFetching = true;
         });
     },
-    getNovelsData() {
-      this.isFetching = true;
+    genreClick (genre) {
+      this.selected.genre = genre
+      this.changeFilter()
     },
-    loadMore() {
-      this.busy = true;
-      this.paginate.page++;
-      if (this.paginate.page > this.seriesInfo.last_page) {
+    changeFilter () {
+      this.paginate.page = 0
+      this.series = []
+      this.loadMore()
+    },
+    loadMore () {
+      if (this.paginate.page >= this.seriesInfo.last_page) {
         console.log("Last Page!!!");
         return;
       }
+      this.busy = true;
+      this.paginate.page++;
       this.$axios
         .$get(
           "series?" +
-            "genre=" +
-            this.selected.genre.id +
-            "&language=" +
-            this.selected.language.id +
-            "&status=" +
-            this.selected.status.id +
-            "&page=" +
-            this.paginate.page +
-            "&per_page=" +
-            this.paginate.perPage
+          "genre=" +
+          this.selected.genre.id +
+          "&language=" +
+          this.selected.language.id +
+          "&status=" +
+          this.selected.status.id +
+          "&page=" +
+          this.paginate.page +
+          "&per_page=" +
+          this.paginate.perPage
         )
         .then(data => {
           console.log("Adding 20 more data results");
@@ -219,7 +249,7 @@ export default {
         });
     }
   },
-  mounted() {
+  mounted () {
     this.genresData();
     this.StatusesData();
     this.LanguagesData();

@@ -16,7 +16,7 @@ export default {
     defaultHeader,
     defaultFooter
   },
-  head() {
+  head () {
     return {
       title: "Central Novel",
       meta: [
@@ -28,7 +28,7 @@ export default {
       ]
     };
   },
-  data() {
+  data () {
     return {};
   }
 };
