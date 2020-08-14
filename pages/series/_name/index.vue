@@ -31,8 +31,8 @@
                   <li>
                     <b-icon icon="heart"></b-icon> Em {{serie.favorites_count}} Bibliotecas
                   </li>
-                  <li>
-                    <b-icon icon="eye"></b-icon> 1M Visualizações
+                  <li v-if="analytics && analytics >= 1">
+                    <b-icon icon="eye"></b-icon> {{analytics}} Visualizações
                   </li>
                 </ul>
               </div>
@@ -131,11 +131,13 @@ export default {
   },
   data () {
     return {
-      serie: {}
+      serie: {},
+      analytics: 0
     }
   },
   mounted () {
     this.serieData()
+    this.analyticsData()
   },
 
   computed: {
@@ -145,12 +147,22 @@ export default {
   },
   methods: {
     serieData () {
-      this.$axios.$get('/series?paginate=0&releases_mounth=1&slug=' + this.$route.params.name).then(response => {
+      this.$axios.$get('/series?paginate=0&first=1&releases_mounth=1&slug=' + this.$route.params.name).then(response => {
         console.log(response.data.length)
         if (response.data.length === 0) throw ({ statusCode: 404, message: 'Serie not found' })
-        this.serie = response.data[0]
+        this.serie = response.data
       }).catch(e => {
         return this.$nuxt.error(e)
+      })
+    },
+    analyticsData () {
+      this.$axios.$get('/analytics/?path=/series/' + this.$route.params.name).then(response => {
+        this.analytics += parseInt(response.data[0][0])
+      }).catch(e => {
+      })
+      this.$axios.$get('/analytics/?path=/novel/' + this.$route.params.name).then(response => {
+        this.analytics += parseInt(response.data[0][0])
+      }).catch(e => {
       })
     }
   }
