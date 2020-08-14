@@ -6,9 +6,7 @@
           <div class="imagem-container">
             <img
               class="__image"
-              :src="
-                'https://storage.googleapis.com/centralnovel.com.br/' + getCapa
-              "
+              :src="getCapa"
               alt=""
             />
             <span
@@ -71,7 +69,7 @@ export default {
   },
   computed: {
     getCapa: function () {
-      return this.novel.image == null ? "novels/default.jpg" : this.novel.image;
+      return this.novel.image == null ? "https://storage.googleapis.com/centralnovel.com.br/novels/default.jpg" : 'https://storage.googleapis.com/centralnovel.com.br/' + this.novel.image;
     },
   },
   methods: {
