@@ -23,13 +23,13 @@
               <div class="__infos">
                 <ul>
                   <li>
-                    <b-icon icon="pencil-circle"></b-icon> {{serie.releases_count}} Capítulos
+                    <b-icon icon="book-open-page-variant"></b-icon> {{serie.releases_count}} Capítulos
                   </li>
                   <li>
-                    <b-icon icon="pencil-circle"></b-icon> {{ serie.releases_mounth/4 }} Caps / Semana
+                    <b-icon icon="calendar"></b-icon> {{ serie.releases_mounth/4 }} Caps / Semana
                   </li>
                   <li>
-                    <b-icon icon="heart"></b-icon> Em {{serie.favorites_count}} Bibliotecas
+                    <b-icon icon="book"></b-icon> Em {{serie.favorites_count}} Bibliotecas
                   </li>
                   <li v-if="analytics && analytics >= 1">
                     <b-icon icon="eye"></b-icon> {{analytics}} Visualizações
@@ -220,12 +220,15 @@ export default {
               margin-bottom: 12px;
               h1 {
                 font-size: 36px;
+                font-weight: 600;
+                color: #000;
               }
             }
             .__infos {
               display: flex;
               flex-direction: row;
               margin-bottom: 24px;
+              color: #000;
               .__list-title {
                 margin-right: 12px;
               }
