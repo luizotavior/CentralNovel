@@ -172,6 +172,11 @@ export default {
     };
   },
   methods: {
+    recoveryQueryUrl () {
+      if (this.$route.query.genre) {
+        this.selected.genre.id = this.$route.query.genre
+      }
+    },
     genresData () {
       this.isFetching = true;
       this.$axios
@@ -254,6 +259,7 @@ export default {
     this.StatusesData();
     this.LanguagesData();
     this.loadMore();
+    this.recoveryQueryUrl()
   }
 };
 </script>

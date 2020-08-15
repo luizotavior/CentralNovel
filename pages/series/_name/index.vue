@@ -126,7 +126,7 @@
           v-if="bodyTab == 1"
         >
           <topic-title
-            title="Synopsis"
+            title="Sinopse"
             size="is-size-4"
           />
           <div
@@ -135,7 +135,7 @@
           />
           <div class="__reviews">
             <div class="__title">
-              <h2>Reviews</h2>
+              <h2>Avaliações</h2>
               <star-rating
                 :current-rating="serie.averageRating"
                 :current-votes="serie.numVotes"
