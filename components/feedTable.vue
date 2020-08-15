@@ -32,6 +32,17 @@
         </b-table-column>
         <b-table-column
           field="original_title"
+          label="Grupo"
+        >
+          <nuxt-link
+            :to="'/series/' + props.row.group.slug"
+            class="__titulo"
+          >{{
+            props.row.group == null ? "" : props.row.group.name
+          }}</nuxt-link>
+        </b-table-column>
+        <b-table-column
+          field="original_title"
           label="Release"
         >
           <a
