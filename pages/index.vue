@@ -12,7 +12,8 @@
       <topic-title title="Recomendado" />
       <list-novel
         :mode="2"
-        :api="'/series?paginate=false&limit=9'"
+        :api="'/series?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'"
+      />
       />
       <topic-title
         title="Popular"
