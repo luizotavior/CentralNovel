@@ -258,8 +258,8 @@ export default {
     this.genresData();
     this.StatusesData();
     this.LanguagesData();
-    this.loadMore();
     this.recoveryQueryUrl()
+    this.loadMore();
   }
 };
 </script>
