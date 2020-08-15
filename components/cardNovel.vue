@@ -34,13 +34,10 @@
         v-if="rating"
         :current-rating="novel.averageRating"
       />
-      <div v-if="sinopse">
-        <p>
-          With the rising tide of steam power and machinery, who can come close
-          to being a Beyonder? Shrouded in the fog of history and darkness, who
-          or what is the lurking evil that murmurs into our ears? Waking up to
-          be faced with a string of mysteries, Zhou...
-        </p>
+      <div
+        v-if="sinopse"
+        v-html="novel.synopsis"
+      >
       </div>
     </div>
   </div>
