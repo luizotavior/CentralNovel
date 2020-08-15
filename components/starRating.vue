@@ -8,7 +8,10 @@
         :icon="(formattedRating >= n ? 'star' : (Math.ceil(formattedRating) == n ? 'star-half' : 'star-outline' ))"
       />
     </div>
-    <div class="__texts">
+    <div
+      class="__texts"
+      v-show="!onlyStar"
+    >
       <span :class="size">{{ formattedRating }}</span>
       <span
         :class="size"
@@ -23,6 +26,10 @@ export default {
   name: 'BTableColumn',
   props: {
 
+    onlyStar: {
+      type: Boolean,
+      default: false
+    },
     size: {
       type: String,
       default: "is-small"
