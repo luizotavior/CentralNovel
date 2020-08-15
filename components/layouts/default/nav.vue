@@ -25,13 +25,10 @@
             slot="label"
             class="is-arrowless"
           >
-            <b-icon icon="compass"></b-icon> <span>Browse</span>
+            <b-icon icon="compass"></b-icon> <span>Navegar</span>
           </template>
           <b-navbar-item href="/series">
-            <span>Novels</span>
-          </b-navbar-item>
-          <b-navbar-item @click="isComingSoon = true">
-            <span>Comics (Coming Soon)</span>
+            <span>Series</span>
           </b-navbar-item>
         </b-navbar-dropdown>
 
@@ -48,19 +45,16 @@
             Rankings
           </template>
           <b-navbar-item href="#">
-            <span>Novels Ranking</span>
-          </b-navbar-item>
-          <b-navbar-item @click="isComingSoon = true">
-            <span>Comics Ranking (Coming Soon)</span>
+            <span>Series Ranking</span>
           </b-navbar-item>
         </b-navbar-dropdown>
         <b-navbar-item href="#updates">
           <b-icon icon="flag"></b-icon>
-          Updates
+          Atualizações
         </b-navbar-item>
         <b-navbar-item @click="isCreate = true">
           <b-icon icon="pencil-circle"></b-icon>
-          Create
+          Criar
         </b-navbar-item>
       </template>
       <template slot="end">
@@ -110,7 +104,7 @@
             <b-button
               type="is-primary"
               rounded
-            >Sign In</b-button>
+            >Entrar</b-button>
           </div>
         </b-navbar-item>
       </template>
