@@ -8,7 +8,10 @@
       Series
     </nuxt-link>
     <span class="__limit">/</span>
-    <nuxt-link :to="'/series/'+serie.slug">
+    <nuxt-link
+      class="has-text-weight-semibold"
+      :to="'/series/'+serie.slug"
+    >
       {{ serie.title }}
     </nuxt-link>
   </div>
