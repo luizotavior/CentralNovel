@@ -114,25 +114,119 @@
     </div>
     <div class="__body">
       <div class="__container">
+        <nav class="__serie-nav">
+          <ul>
+            <li :class="{'active': bodyTab == 1}"><span @click="bodyTab = 1">Sobre</span></li>
+            <li :class="{'active': bodyTab == 2}"><span @click="bodyTab = 2">Lançamentos</span></li>
+            <hr />
+          </ul>
+        </nav>
+        <div
+          class="tab-about"
+          v-if="bodyTab == 1"
+        >
+          <topic-title
+            title="Synopsis"
+            size="is-size-4"
+          />
+          <div
+            class="__synopsis"
+            v-html="serie.synopsis"
+          />
+          <div class="__reviews">
+            <div class="__title">
+              <h2>Reviews</h2>
+              <star-rating
+                :current-rating="serie.averageRating"
+                :current-votes="serie.numVotes"
+              />
+            </div>
+            <div class="__content">
+              <div class="__review-header">
+                <div class="__review-header--left">
+                  <ul>
+                    <li>
+                      <span>Qualidade de Tradução</span>
+                      <star-rating
+                        :current-rating="5"
+                        :only-star="true"
+                      />
+                    </li>
+                    <li>
+                      <span>Estabilidade de atualizações</span>
+                      <star-rating
+                        :current-rating="5"
+                        :only-star="true"
+                      />
+                    </li>
+                    <li>
+                      <span>Desenvolvimento de história</span>
+                      <star-rating
+                        :current-rating="5"
+                        :only-star="true"
+                      />
+                    </li>
+                    <li>
+                      <span>Design de personagem</span>
+                      <star-rating
+                        :current-rating="5"
+                        :only-star="true"
+                      />
+                    </li>
+                    <li>
+                      <span>Fundo Mundial</span>
+                      <star-rating
+                        :current-rating="5"
+                        :only-star="true"
+                      />
+                    </li>
+                  </ul>
+                </div>
+                <div class="__review-header--right">
+                  <span>Compartilhe suas idéias com outras pessoas</span>
+                  <b-button
+                    type="is-dark"
+                    size="is-medium"
+                    icon-left="chat"
+                    rounded
+                  >Escreva uma crítica</b-button>
 
-        <pre>{{serie}}</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="tab-releases"
+          v-if="bodyTab == 2"
+        >
+          <release-table
+            v-if="serie.id"
+            :serie="serie"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import releaseTable from '@/components/releaseTable.vue';
 import starRating from "@/components/starRating.vue";
 import breadcrumb from '@/components/breadcrumb.vue';
+import topicTitle from '@/components/topicTitle.vue';
 export default {
   components: {
     breadcrumb,
-    starRating
+    releaseTable,
+    starRating,
+    topicTitle
   },
   data () {
     return {
       serie: {},
-      analytics: 0
+      analytics: 0,
+      bodyTab: 1,
     }
   },
   mounted () {
@@ -292,6 +386,131 @@ export default {
   .__body {
     background-color: #fff;
     min-height: 480px;
+    nav.__serie-nav {
+      widows: 100%;
+      max-width: 450px;
+      margin-top: 24px;
+      margin-bottom: 48px;
+      ul {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        li {
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          @include col(6);
+          margin: 0;
+
+          span {
+            display: inline-block;
+            font-size: 30px;
+            text-decoration: none;
+            color: #333;
+            cursor: pointer;
+          }
+
+          &:nth-child(1).active ~ hr {
+            margin-right: 50%;
+          }
+          &:nth-child(2).active ~ hr {
+            margin-left: 50%;
+          }
+          &:nth-child(1):hover ~ hr {
+            margin-right: 50% !important;
+            margin-left: 0;
+          }
+          &:nth-child(2):hover ~ hr {
+            margin-left: 50% !important;
+            margin-right: 0;
+          }
+        }
+
+        hr {
+          position: absolute;
+          bottom: 0px;
+          height: 0.25rem;
+          width: 48%;
+          margin: 0;
+          height: 3px;
+          background: #83848f;
+          border: none;
+          transition: 0.25s ease-in-out;
+        }
+      }
+    }
+    div.tab-releases {
+    }
+    div.tab-about {
+      .topic-title {
+        padding: 0px;
+        h2 {
+          font-weight: 700;
+        }
+      }
+      p {
+        line-height: 28px;
+      }
+      .__synopsis {
+        margin-bottom: 48px;
+      }
+      .__reviews {
+        display: flex;
+        flex-direction: column;
+        div.__title {
+          margin-bottom: 22px;
+          display: flex;
+          flex-direction: row;
+          padding: 0;
+          @extend %vertical-align-middle;
+          h2 {
+            font-size: 32px;
+            margin-right: 12px;
+          }
+        }
+        div.__content {
+          display: flex;
+          flex-direction: column;
+          .__review-header {
+            display: flex;
+            flex-direction: row;
+            border-top: 2px solid #d7d8e0;
+            border-bottom: 2px solid #d7d8e0;
+            margin-bottom: 24px;
+            .__review-header--left {
+              display: flex;
+              flex-direction: column;
+              border-right: 2px solid #d7d8e0;
+              @include col(5);
+              line-height: 32px;
+              padding: 24px 32px 24px 0;
+              > ul {
+                display: flex;
+                flex-direction: column;
+                li {
+                  display: flex;
+                  flex-direction: row;
+                  flex-wrap: nowrap;
+                  @extend %justify-between;
+                  @extend %vertical-align-middle;
+                }
+              }
+            }
+            .__review-header--right {
+              display: flex;
+              flex-direction: column;
+              @include col(7);
+              @extend %justify-center;
+              @extend %vertical-align-middle;
+              text-align: center;
+              > span {
+                margin-bottom: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 </style>
