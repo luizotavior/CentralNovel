@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-serch">
+  <div class="custom-search">
     <b-autocomplete
       v-model="query"
       :data="data"
@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style lang="scss">
-.custom-serch {
+.custom-search {
   width: 100%;
 }
 </style>

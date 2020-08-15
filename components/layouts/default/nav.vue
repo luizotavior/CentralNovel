@@ -66,7 +66,7 @@
       <template slot="end">
         <b-navbar-item tag="div">
           <b-field>
-            <search label="Search..." />
+            <search label="Pesquisar..." />
           </b-field>
         </b-navbar-item>
         <b-navbar-item @click="isComingSoon = true">
