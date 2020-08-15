@@ -2,64 +2,100 @@
   <div id="suggested-tags">
     <ul>
       <li class="column is-3">
-        <a href="#">
+        <nuxt-link
+          :to="'/series?genre=21'"
+          class="__titulo"
+        >
           <span>Ficção Cientifica</span>
-        </a>
+        </nuxt-link>
       </li>
       <li class="column is-3">
-        <a href="#">
+        <nuxt-link
+          :to="'/series?genre=7'"
+          class="__titulo"
+        >
           <span>Fantasia</span>
-        </a>
+        </nuxt-link>
       </li>
       <li class="column is-3">
-        <a href="#">
+        <nuxt-link
+          :to="'/series?genre=19'"
+          class="__titulo"
+        >
           <span>Romance</span>
-        </a>
+        </nuxt-link>
       </li>
       <li class="column is-3">
-        <a href="#">
+        <nuxt-link
+          :to="'/series?genre=35'"
+          class="__titulo"
+        >
           <span>Xuanhuan</span>
-        </a>
+        </nuxt-link>
       </li>
       <li class="column is-3">
-        <a href="#">
-          <span>Artes Marciais</span>
-        </a>
+        <nuxt-link
+          :to="'/series?genre=20'"
+          class="__titulo"
+        >
+          <span>Vida Escolar</span>
+        </nuxt-link>
       </li>
       <li class="column is-3">
-        <a href="#">
-          <span>Reencarnação</span>
-        </a>
+        <nuxt-link
+          :to="'/series?genre=9'"
+          class="__titulo"
+        >
+          <span>Hárem</span>
+        </nuxt-link>
       </li>
       <li class="column is-3">
-        <a href="#">
-          <span>Vingança</span>
-        </a>
+        <nuxt-link
+          :to="'/series?genre=26'"
+          class="__titulo"
+        >
+          <span>Shounen</span>
+        </nuxt-link>
       </li>
       <li class="column is-3">
-        <a href="#">
+        <nuxt-link
+          :to="'/series?genre=4'"
+          class="__titulo"
+        >
           <span>Comédia</span>
-        </a>
+        </nuxt-link>
       </li>
       <li class="column is-3">
-        <a href="#">
-          <span>Shoujo</span>
-        </a>
+        <nuxt-link
+          :to="'/series?genre=31'"
+          class="__titulo"
+        >
+          <span>Sobrenatural</span>
+        </nuxt-link>
       </li>
       <li class="column is-3">
-        <a href="#">
+        <nuxt-link
+          :to="'/series?genre=13'"
+          class="__titulo"
+        >
           <span>Lolicon</span>
-        </a>
+        </nuxt-link>
       </li>
       <li class="column is-3">
-        <a href="#">
+        <nuxt-link
+          :to="'/series?genre=36'"
+          class="__titulo"
+        >
           <span>Yaoi</span>
-        </a>
+        </nuxt-link>
       </li>
       <li class="column is-3">
-        <a href="#">
+        <nuxt-link
+          :to="'/series?genre=37'"
+          class="__titulo"
+        >
           <span>Yuri</span>
-        </a>
+        </nuxt-link>
       </li>
     </ul>
   </div>
