@@ -61,7 +61,6 @@
       </form>
       <footer class="copyright">
         <span>©2020 Central Novel. Todos os direitos reservados.</span>
-        >
         <span><a href="#">Política de Privacidade</a></span>
       </footer>
     </div>
