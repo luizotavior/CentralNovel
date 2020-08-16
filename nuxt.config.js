@@ -36,7 +36,7 @@ module.exports = {
    ** Customize the progress-bar color
    */
   loading: {
-    color: '#fff'
+    color: '#2B7FCB'
   },
 
   /*
@@ -109,7 +109,8 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
     baseURL: process.env.API_URL,
     proxyHeaders: false,
-    credentials: false
+    credentials: false,
+    progress: false,
   },
 
   /*
@@ -124,6 +125,7 @@ module.exports = {
             method: 'post',
             propertyName: 'access_token'
           },
+          logout: false,
           user: {
             url: 'user',
             method: 'get',
@@ -135,10 +137,11 @@ module.exports = {
       },
       redirect: {
         login: '/login',
-        logout: '/',
-        callback: '/login',
-        user: '/'
-      }
+        logout: '/login',
+        home: '/'
+      },
+      watchLoggedIn: true,
+      rewriteRedirects: true,
     },
   },
 

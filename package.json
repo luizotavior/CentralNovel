@@ -33,6 +33,7 @@
     "style-loader": "^0.23.1",
     "vue": "^2.6.11",
     "vue-agile": "^0.3.7",
+    "vue-avatar": "^2.3.0",
     "vue-infinite-scroll": "^2.0.2",
     "vue-mq": "^1.0.1",
     "vue-multiselect": "^2.1.6",

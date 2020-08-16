@@ -12,54 +12,58 @@
       <topic-title title="Recomendado" />
       <list-novel
         :mode="2"
-        :api="'/series?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'"
+        :api="
+          '/series?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
+        "
       />
-      <topic-title
-        title="Popular"
-        seeMore="#"
+      <topic-title title="Popular" seeMore="#" />
+      <list-novel
+        :api="
+          '/series?paginate=false&limit=9&sortProperty=numVotes&sortDirection=desc'
+        "
       />
-      <list-novel :api="'/series?paginate=false&limit=9&sortProperty=numVotes&sortDirection=desc'" />
-      <topic-title
-        title="Tendências de Histórias Originais"
-        seeMore="#"
+      <topic-title title="Tendências de Histórias Originais" seeMore="#" />
+      <list-novel
+        :api="
+          '/series?paginate=false&limit=9&language=1&sortProperty=averageRating&sortDirection=desc'
+        "
       />
-      <list-novel :api="'/series?paginate=false&limit=9&language=1&sortProperty=averageRating&sortDirection=desc'" />
       <topic-title title="Novos na Central Novel" />
-      <list-novel :api="'/series?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'" />
+      <list-novel
+        :api="
+          '/series?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
+        "
+      />
       <topic-title title="Gêneros Sugeridas" />
       <suggested-tags />
-      <topic-title
-        id="updates"
-        title="Ultimas Atualizações"
-      />
+      <topic-title id="updates" title="Ultimas Atualizações" />
       <feed-table />
     </div>
   </div>
 </template>
 
 <script>
-import defaultSlider from '@/components/layouts/default/slider'
-import topicTitle from '@/components/topicTitle.vue';
-import suggestedTags from '@/components/suggestedTags.vue';
-import feedTable from '@/components/feedTable.vue';
-import listNovel from '@/components/listNovel.vue';
-import quoteReview from '@/components/quoteReview.vue';
+import defaultSlider from "@/components/layouts/default/slider";
+import topicTitle from "@/components/topicTitle.vue";
+import suggestedTags from "@/components/suggestedTags.vue";
+import feedTable from "@/components/feedTable.vue";
+import listNovel from "@/components/listNovel.vue";
+import quoteReview from "@/components/quoteReview.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     defaultSlider,
     topicTitle,
     suggestedTags,
     feedTable,
     listNovel,
-    quoteReview,
+    quoteReview
   },
-  data () {
-    return {
-    }
+  data() {
+    return {};
   }
-}
+};
 </script>
 
 <style lang="scss">
