@@ -60,9 +60,7 @@
         </b-field> -->
       </form>
       <footer class="copyright">
-        <span
-          >©2019 ClienteRei Soluções em TI Ltda. Todos os direitos
-          reservados.</span
+        <span>©2020 Central Novel. Todos os direitos reservados.</span>
         >
         <span><a href="#">Política de Privacidade</a></span>
       </footer>
@@ -76,7 +74,7 @@ export default {
   middleware: ["notAuthenticated"],
   head() {
     return {
-      title: "Login - Encaixei",
+      title: "Login - Central Novel",
       meta: [
         {
           hid: "description",

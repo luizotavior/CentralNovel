@@ -5,9 +5,7 @@
         <div class="logo">
           <img src="/images/logos/logo-white.png" />
         </div>
-        <span>
-          O Encaixei é 100% gratuito. Para sempre.
-        </span>
+        <span> </span>
       </div>
     </div>
     <div class="__right">
@@ -27,11 +25,8 @@
       </div>
       <form @submit.prevent>
         <div class="form-title">
-          <h1>Realize agendamentos gratuitos</h1>
-          <span
-            >O Encaixei é 100% grátis para todos os seus usuários e todos os
-            seus contatos. Para sempre.</span
-          >
+          <h1></h1>
+          <span></span>
         </div>
         <b-field grouped>
           <b-field expanded label="Nome Completo">
@@ -54,28 +49,25 @@
               type="is-primary"
               disabled
               @click="login()"
-              >Obter o Encaixei</b-button
+              >Criar Conta</b-button
             >
           </b-field>
         </b-field>
       </form>
       <footer class="copyright">
         <span class="text"
-          >Ao criar uma conta no Encaixei, você concorda em aceitar os termos de
-          serviço do cliente da Encaixei.</span
+          >Ao criar uma conta na Central Novel, você concorda em aceitar os
+          termos de serviço.</span
         >
         <hr />
         <span class="text">
-          Estamos comprometidos com sua privacidade. O Encaixei usa as
+          Estamos comprometidos com sua privacidade. A Central Novel usa as
           informações que você nos fornece para contatá-lo com relação aos
           nossos conteúdos, produtos e serviços relevantes. Você pode cancelar a
           assinatura dessas comunicações quando quiser. Para mais informações,
           confira nossa <a href="#">Política de privacidade</a>.
         </span>
-        <span
-          >©2019 ClienteRei Soluções em TI Ltda. Todos os direitos
-          reservados.</span
-        >
+        <span>©2020 Central Novel. Todos os direitos reservados.</span>
       </footer>
     </div>
   </div>
@@ -87,7 +79,7 @@ export default {
   middleware: ["notAuthenticated"],
   head() {
     return {
-      title: "Register - Encaixei",
+      title: "Register - Central Novel",
       meta: [
         {
           hid: "description",
