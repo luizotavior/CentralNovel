@@ -1,21 +1,27 @@
 <template>
   <div id="register">
     <div class="__left">
+      <span style="display: none;">Background By Jjnaas (https://www.deviantart.com/jjnaas)</span>
       <div class="title">
         <div class="logo">
-          <img src="/images/logos/logo-white.png" />
+          <!-- <img src="/images/logos/logo.png" /> -->
         </div>
         <span> </span>
       </div>
     </div>
     <div class="__right">
       <div class="__header">
-        <span
-          >Tem uma conta? <nuxt-link :to="'/login'">Entrar</nuxt-link>.</span
-        >
+        <div class="logo">
+          <img src="/images/logos/logo.png" />
+        </div>
+        <span>Tem uma conta? <nuxt-link :to="'/login'">Entrar</nuxt-link></span>
       </div>
       <div class="__steps">
-        <b-steps :has-navigation="false" :clickable="false" size="is-small">
+        <b-steps
+          :has-navigation="false"
+          :clickable="false"
+          size="is-small"
+        >
           <b-step-item />
           <b-step-item />
           <b-step-item />
@@ -29,12 +35,21 @@
           <span></span>
         </div>
         <b-field grouped>
-          <b-field expanded label="Nome Completo">
-            <b-input v-model="user.name" type="text" />
+          <b-field
+            expanded
+            label="Nome Completo"
+          >
+            <b-input
+              v-model="user.name"
+              type="text"
+            />
           </b-field>
         </b-field>
         <b-field grouped>
-          <b-field expanded label="Endereço de email">
+          <b-field
+            expanded
+            label="Endereço de email"
+          >
             <b-input
               v-model="user.email"
               type="email"
@@ -49,16 +64,13 @@
               type="is-primary"
               disabled
               @click="login()"
-              >Criar Conta</b-button
-            >
+            >Criar Conta</b-button>
           </b-field>
         </b-field>
       </form>
       <footer class="copyright">
-        <span class="text"
-          >Ao criar uma conta na Central Novel, você concorda em aceitar os
-          termos de serviço.</span
-        >
+        <span class="text">Ao criar uma conta na Central Novel, você concorda em aceitar os
+          termos de serviço.</span>
         <hr />
         <span class="text">
           Estamos comprometidos com sua privacidade. A Central Novel usa as
@@ -77,7 +89,7 @@
 export default {
   layout: "auth",
   middleware: ["notAuthenticated"],
-  head() {
+  head () {
     return {
       title: "Register - Central Novel",
       meta: [
@@ -89,7 +101,7 @@ export default {
       ]
     };
   },
-  data() {
+  data () {
     return {
       user: {
         name: "",
@@ -102,7 +114,7 @@ export default {
     };
   },
   methods: {
-    async register() {
+    async register () {
       try {
         this.$buefy.toast.open({
           duration: 1000,
@@ -134,7 +146,7 @@ export default {
           .then(response => {
             this.$router.push("/");
           })
-          .catch(error => {});
+          .catch(error => { });
       } catch (e) {
         this.$buefy.toast.open({
           duration: 5000,
@@ -157,10 +169,13 @@ div#register {
   div.__left {
     max-width: 41.66667%;
     width: 100%;
-    background-color: $primary;
     display: flex;
     flex-direction: column;
     @extend %vertical-align-middle;
+    background-image: url("/images/register-background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     div.title {
       display: flex;
       flex-direction: column;
@@ -171,7 +186,7 @@ div#register {
         flex-direction: row;
         @extend %justify-center;
         img {
-          width: 96px;
+          width: 150px;
           margin: 0px 0px 24px;
         }
       }
@@ -190,13 +205,18 @@ div#register {
     width: 100%;
     padding-left: 16px;
     padding-right: 16px;
+    @extend %justify-center;
     div.__header {
       margin-top: 12px;
       margin-bottom: 12px;
+      text-align: center;
       span {
         font-size: 14px;
         text-align: center;
-        font-weight: 300;
+        font-weight: 400;
+      }
+      img {
+        width: 130px;
       }
     }
     .__steps {
@@ -214,7 +234,8 @@ div#register {
       padding-right: 12px;
       margin-left: auto;
       margin-right: auto;
-      max-width: 440px;
+      max-width: 360px;
+      width: 100%;
       div.form-title {
         display: flex;
         flex-direction: column;

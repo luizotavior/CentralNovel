@@ -44,6 +44,7 @@ div#login {
       span {
         text-align: center;
         font-size: 14px;
+        font-weight: 400;
       }
       h1 {
         text-align: center;
