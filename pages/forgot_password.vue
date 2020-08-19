@@ -1,7 +1,7 @@
 <template>
   <div id="register">
     <div class="__left">
-      <span style="display: none;">Background By Jjnaas (https://www.deviantart.com/jjnaas)</span>
+      <span style="display: none;">Background By Rodmendez (https://www.deviantart.com/rodmendez/)</span>
       <div class="title">
         <div class="logo">
           <!-- <img src="/images/logos/logo.png" /> -->
@@ -14,7 +14,10 @@
         <div class="logo">
           <img src="/images/logos/logo.png" />
         </div>
-        <span>Tem uma conta? <nuxt-link :to="'/login'">Entrar</nuxt-link></span>
+        <span>Deseja sair? <a
+            href="#"
+            @click="$auth.logout()"
+          >Logout</a></span>
       </div>
       <div class="__steps">
         <b-steps
@@ -53,45 +56,11 @@
         <b-field grouped>
           <b-field
             expanded
-            label="Nome Completo"
-          >
-            <b-input
-              v-model="user.name"
-              type="text"
-            />
-          </b-field>
-        </b-field>
-        <b-field grouped>
-          <b-field
-            expanded
-            label="Usuário"
-          >
-            <b-input
-              v-model="user.username"
-              type="text"
-            />
-          </b-field>
-        </b-field>
-        <b-field grouped>
-          <b-field
-            expanded
             label="Endereço de email"
           >
             <b-input
               v-model="user.email"
               type="email"
-            />
-          </b-field>
-        </b-field>
-        <b-field grouped>
-          <b-field
-            expanded
-            label="Senha"
-          >
-            <b-input
-              v-model="user.password"
-              type="password"
-              @keyup.native.enter="register()"
             />
           </b-field>
         </b-field>
@@ -108,7 +77,7 @@
               class="is-fullwidth"
               type="is-primary"
               @click="register()"
-            >Criar Conta</b-button>
+            >Verificar E-Mail</b-button>
           </b-field>
         </b-field>
       </form>
@@ -134,7 +103,7 @@ export default {
   layout: "auth",
   head () {
     return {
-      title: "Register - Central Novel",
+      title: "Verified - Central Novel",
       meta: [
         {
           hid: "description",
@@ -146,17 +115,9 @@ export default {
   },
   data () {
     return {
-      activeStep: 1,
+      activeStep: 4,
       user: {
-        name: "",
-        email: "",
-        username: "",
-        password: "",
-        confirm_password: "",
-        cellphone: "",
-        application: "cloud",
         recaptcha: "",
-        sex: "S"
       }
     };
   },
@@ -165,15 +126,13 @@ export default {
       try {
         this.$buefy.toast.open({
           duration: 1000,
-          message: "Registrando ..."
+          message: "Validando ..."
         });
         await this.getRecaptcha();
-        await this.createUser();
-        await this.login(data);
       } catch (e) {
         this.$buefy.toast.open({
           duration: 5000,
-          message: "Erro ao Registrar2",
+          message: "Erro ao Validar",
           type: "is-danger"
         });
       }
@@ -187,35 +146,6 @@ export default {
         // eslint-disable-next-line no-console
         console.log("Login error:", error);
       }
-    },
-    async createUser () {
-      this.$axios
-        .post("users", this.user)
-        .then(response => {
-          this.$buefy.toast.open({
-            message: "User Logado!!",
-            type: "is-success"
-          });
-        })
-        .catch(e => {
-          alert(e);
-        });
-    },
-    async login (data) {
-      var data = {
-        client_id: this.$env.AUTH_CLIENT_ID,
-        client_secret: this.$env.AUTH_CLIENT_SECRET,
-        grant_type: this.$env.AUTH_GRANT_TYPE,
-        scope: this.$env.AUTH_SCOPE,
-        email: this.user.email,
-        password: this.user.password
-      };
-      await this.$auth
-        .login({ data: data })
-        .then(response => {
-          this.$router.push("/");
-        })
-        .catch(error => { });
     },
 
     onError (error) {
@@ -245,7 +175,7 @@ div#register {
     display: flex;
     flex-direction: column;
     @extend %vertical-align-middle;
-    background-image: url("/images/register-background.png");
+    background-image: url("/images/verified-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

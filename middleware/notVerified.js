@@ -8,6 +8,10 @@ export default function ({
     if (process.browser) {
       localStorage.redirect = route.path
     }
-    return redirect('/login')
+    return redirect("/login");
+  }
+  // Caso Usuário Não tenha passado pelas Welcome
+  if (store.state.auth.user.email_verified_at != null) {
+    return redirect("/");
   }
 }

@@ -12,6 +12,7 @@ import defaultFooter from "@/components/layouts/default/footer";
 
 export default {
   name: "Layout",
+  middleware: ['authenticated', 'verified'],
   components: {
     defaultHeader,
     defaultFooter

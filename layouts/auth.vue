@@ -4,6 +4,12 @@
   </div>
 </template>
 
+
+<script>
+export default {
+  middleware: ['authenticated', 'notVerified'],
+}
+</script>
 <style lang="scss" scoped>
 @import "@/assets/sass/main.scss";
 #layout-auth {

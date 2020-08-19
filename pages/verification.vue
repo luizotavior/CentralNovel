@@ -1,7 +1,7 @@
 <template>
   <div id="register">
     <div class="__left">
-      <span style="display: none;">Background By Jjnaas (https://www.deviantart.com/jjnaas)</span>
+      <span style="display: none;">Background By Rodmendez (https://www.deviantart.com/rodmendez/)</span>
       <div class="title">
         <div class="logo">
           <!-- <img src="/images/logos/logo.png" /> -->
@@ -10,11 +10,19 @@
       </div>
     </div>
     <div class="__right">
+      <b-loading
+        :is-full-page="false"
+        :active="verify.signature != null && isLoading"
+        :can-cancel="false"
+      />
       <div class="__header">
         <div class="logo">
           <img src="/images/logos/logo.png" />
         </div>
-        <span>Tem uma conta? <nuxt-link :to="'/login'">Entrar</nuxt-link></span>
+        <span>Deseja sair? <a
+            href="#"
+            @click="$auth.logout()"
+          >Logout</a></span>
       </div>
       <div class="__steps">
         <b-steps
@@ -49,72 +57,44 @@
         <div class="form-title">
           <h1></h1>
           <span></span>
+
         </div>
-        <b-field grouped>
-          <b-field
-            expanded
-            label="Nome Completo"
-          >
-            <b-input
-              v-model="user.name"
-              type="text"
-            />
-          </b-field>
-        </b-field>
-        <b-field grouped>
-          <b-field
-            expanded
-            label="Usuário"
-          >
-            <b-input
-              v-model="user.username"
-              type="text"
-            />
-          </b-field>
-        </b-field>
-        <b-field grouped>
-          <b-field
-            expanded
-            label="Endereço de email"
-          >
-            <b-input
-              v-model="user.email"
-              type="email"
-            />
-          </b-field>
-        </b-field>
-        <b-field grouped>
-          <b-field
-            expanded
-            label="Senha"
-          >
-            <b-input
-              v-model="user.password"
-              type="password"
-              @keyup.native.enter="register()"
-            />
-          </b-field>
-        </b-field>
-        <b-field>
-          <recaptcha
-            @error="onError"
-            @success="onSuccess"
-            @expired="onExpired"
-          />
-        </b-field>
+        <b-message
+          v-if="verify.error"
+          type="is-primary"
+        >
+          O Link utilizado não é valido.
+        </b-message>
         <b-field grouped>
           <b-field expanded>
             <b-button
               class="is-fullwidth"
               type="is-primary"
-              @click="register()"
-            >Criar Conta</b-button>
+              :disabled="disableResend"
+              v-if="!verify.verified"
+              @click="resend()"
+            >Reenviar e-mail de Validação</b-button>
+            <a
+              class="button is-fullwidth is-primary"
+              v-if="verify.verified"
+              href="/"
+            >Voltar para o Inicio</a>
           </b-field>
         </b-field>
       </form>
       <footer class="copyright">
-        <span class="text">Ao criar uma conta na Central Novel, você concorda em aceitar os
-          termos de serviço.</span>
+        <span
+          class="text"
+          v-if="disableResend && !verify.verified"
+        >Você pode solicitar novamente em: {{ timeResend.minutes }}:{{timeResend.seconds}}</span>
+        <span
+          class="text"
+          v-if="!disableResend && !verify.verified"
+        >Você já pode solicitar um novo e-mail de validação.</span>
+        <span
+          class="text"
+          v-if="verify.verified"
+        >Você já foi verificado.</span>
         <hr />
         <span class="text">
           Estamos comprometidos com sua privacidade. A Central Novel usa as
@@ -134,7 +114,7 @@ export default {
   layout: "auth",
   head () {
     return {
-      title: "Register - Central Novel",
+      title: "Verified - Central Novel",
       meta: [
         {
           hid: "description",
@@ -146,88 +126,107 @@ export default {
   },
   data () {
     return {
-      activeStep: 1,
-      user: {
-        name: "",
-        email: "",
-        username: "",
-        password: "",
-        confirm_password: "",
-        cellphone: "",
-        application: "cloud",
-        recaptcha: "",
-        sex: "S"
+      timeResend: {
+        minutes: 1,
+        seconds: 0,
+      },
+      disableResend: false,
+      isLoading: true,
+      activeStep: 4,
+      intervalo: null,
+      verify: {
+        email: null,
+        expires: null,
+        signature: null,
+        verified: false
       }
     };
   },
+  mounted () {
+    this.getQuery()
+    this.verification()
+  },
   methods: {
-    async register () {
-      try {
-        this.$buefy.toast.open({
-          duration: 1000,
-          message: "Registrando ..."
-        });
-        await this.getRecaptcha();
-        await this.createUser();
-        await this.login(data);
-      } catch (e) {
-        this.$buefy.toast.open({
-          duration: 5000,
-          message: "Erro ao Registrar2",
-          type: "is-danger"
-        });
-      }
+    timeoutResend () {
+      const self = this
+      this.intervalo = setInterval(function () {
+        if (self.timeResend.seconds == 0) {
+          self.timeResend.seconds = 59
+          if (self.timeResend.minutes == 0) {
+            self.timeResend.miute = 0
+            self.timeResend.seconds = 0
+            self.disableResend = false;
+            clearInterval(intervalo);
+          } else {
+            self.timeResend.minutes--
+          }
+        } else {
+          self.timeResend.seconds--
+        }
+      }, 1000);
     },
-    async getRecaptcha () {
-      try {
-        this.user.recaptcha = await this.$recaptcha.getResponse();
-        console.log("ReCaptcha token:", token);
-        await this.$recaptcha.reset();
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log("Login error:", error);
-      }
-    },
-    async createUser () {
+    resend () {
       this.$axios
-        .post("users", this.user)
+        .get("user/verify/resend")
         .then(response => {
-          this.$buefy.toast.open({
-            message: "User Logado!!",
-            type: "is-success"
-          });
+          if (response.status === 200) {
+            this.$buefy.toast.open({
+              message: "E-mail Enviado!!",
+              type: "is-success"
+            });
+          }
         })
         .catch(e => {
-          alert(e);
+          this.$buefy.toast.open({
+            message: "Ocorreu um erro no envio, tente novamente.",
+            type: "is-danger"
+          });
         });
-    },
-    async login (data) {
-      var data = {
-        client_id: this.$env.AUTH_CLIENT_ID,
-        client_secret: this.$env.AUTH_CLIENT_SECRET,
-        grant_type: this.$env.AUTH_GRANT_TYPE,
-        scope: this.$env.AUTH_SCOPE,
-        email: this.user.email,
-        password: this.user.password
-      };
-      await this.$auth
-        .login({ data: data })
-        .then(response => {
-          this.$router.push("/");
-        })
-        .catch(error => { });
-    },
 
-    onError (error) {
-      console.log("Error happened:", error);
+      this.disableResend = true;
+      this.timeoutResend()
     },
-    onSuccess (token) {
-      console.log("Succeeded:", token);
-      // here you submit the form
+    async getQuery () {
+      this.verify.email = this.$route.query.email ? this.$route.query.email : null
+      this.verify.expires = this.$route.query.expires ? this.$route.query.expires : null
+      this.verify.signature = this.$route.query.signature ? this.$route.query.signature : null
     },
-    onExpired () {
-      console.log("Expired");
-    }
+    async verification () {
+      if (this.verify.email &&
+        this.verify.expires &&
+        this.verify.signature) {
+        try {
+          await this.$axios
+            .get("user/verify?" +
+              "email=" + this.verify.email +
+              "&expires=" + this.verify.expires +
+              "&signature=" + this.verify.signature)
+            .then(response => {
+              if (response.status === 200) {
+                this.$buefy.toast.open({
+                  message: "Usuário Validado!!",
+                  type: "is-success"
+                })
+                this.isLoading = false;
+                this.verify.verified = true;
+                this.$router.push("/");
+              }
+            })
+            .catch(e => {
+              this.isLoading = false;
+              this.verify.error = true;
+              console.log(e);
+            });
+        } catch (e) {
+          console.log(e);
+          this.$buefy.toast.open({
+            duration: 5000,
+            message: "Erro ao Validar",
+            type: "is-danger"
+          });
+        }
+      }
+    },
   }
 };
 </script>
@@ -245,7 +244,7 @@ div#register {
     display: flex;
     flex-direction: column;
     @extend %vertical-align-middle;
-    background-image: url("/images/register-background.png");
+    background-image: url("/images/verified-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -279,6 +278,7 @@ div#register {
     padding-left: 16px;
     padding-right: 16px;
     @extend %justify-center;
+    position: relative;
     div.__header {
       margin-top: 12px;
       margin-bottom: 12px;

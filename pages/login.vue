@@ -5,14 +5,15 @@
         <div class="logo">
           <img src="/images/logos/logo.png" />
         </div>
-        <span
-          >Não possui uma conta?
-          <nuxt-link :to="'/register'">Inscreva-se</nuxt-link></span
-        >
+        <span>Não possui uma conta?
+          <nuxt-link :to="'/register'">Inscreva-se</nuxt-link></span>
       </div>
       <form @submit.prevent>
         <b-field grouped>
-          <b-field expanded label="Endereço de email">
+          <b-field
+            expanded
+            label="Endereço de email"
+          >
             <b-input
               v-model="user.email"
               type="email"
@@ -22,7 +23,10 @@
           </b-field>
         </b-field>
         <b-field grouped>
-          <b-field expanded label="Senha">
+          <b-field
+            expanded
+            label="Senha"
+          >
             <b-input
               v-model="user.password"
               type="password"
@@ -35,15 +39,17 @@
         <b-field>
           <p class="control __sublink">
             <span>
-              <nuxt-link :to="'/forgot'">Esqueci minha senha</nuxt-link>
+              <nuxt-link :to="'/forgot_password'">Esqueci minha senha</nuxt-link>
             </span>
           </p>
         </b-field>
         <b-field grouped>
           <b-field expanded>
-            <b-button class="is-fullwidth" type="is-primary" @click="login()"
-              >Entrar</b-button
-            >
+            <b-button
+              class="is-fullwidth"
+              type="is-primary"
+              @click="login()"
+            >Entrar</b-button>
           </b-field>
         </b-field>
         <!-- <b-field grouped>
@@ -70,8 +76,7 @@
 <script>
 export default {
   layout: "auth",
-  middleware: ["notAuthenticated"],
-  head() {
+  head () {
     return {
       title: "Login - Central Novel",
       meta: [
@@ -83,7 +88,7 @@ export default {
       ]
     };
   },
-  data() {
+  data () {
     return {
       user: {
         email: "",
@@ -92,7 +97,7 @@ export default {
     };
   },
   methods: {
-    async login() {
+    async login () {
       try {
         this.$buefy.toast.open({
           duration: 1000,
