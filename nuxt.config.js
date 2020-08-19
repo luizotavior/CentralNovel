@@ -95,6 +95,7 @@ module.exports = {
     ['@nuxtjs/google-tag-manager', {
       id: process.env.GOOGLE_TAG_MANAGER_ID
     }],
+    '@nuxtjs/recaptcha',
     ['@nuxtjs/moment', {
       defaultLocale: 'pt-br',
       locales: ['pt-br'],
@@ -102,6 +103,14 @@ module.exports = {
       defaultTimezone: 'America/Sao_Paulo'
     }]
   ],
+
+
+  recaptcha: {
+    hideBadge: false, // Hide badge element (v3 & v2 via size=invisible)
+    siteKey: process.env.GOOGLE_RECAPTCHA_PUBLIC_KEY, // Site key for requests
+    version: 2, // Version
+    size: 'invisible' // Size: 'compact', 'normal', 'invisible' (v2)
+  },
   /*
    ** Axios module configuration
    */
