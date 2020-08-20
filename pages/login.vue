@@ -76,6 +76,7 @@
 <script>
 export default {
   layout: "auth",
+  middleware: ['notAuthenticated'],
   head () {
     return {
       title: "Login - Central Novel",

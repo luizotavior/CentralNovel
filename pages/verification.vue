@@ -112,6 +112,7 @@
 <script>
 export default {
   layout: "auth",
+  middleware: ['notVerified'],
   head () {
     return {
       title: "Verified - Central Novel",
@@ -156,7 +157,7 @@ export default {
             self.timeResend.miute = 0
             self.timeResend.seconds = 0
             self.disableResend = false;
-            clearInterval(intervalo);
+            clearInterval(this.intervalo);
           } else {
             self.timeResend.minutes--
           }

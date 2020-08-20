@@ -1,7 +1,7 @@
 <template>
   <div id="register">
     <div class="__left">
-      <span style="display: none;">Background By Rodmendez (https://www.deviantart.com/rodmendez/)</span>
+      <span style="display: none;">Background By Clockbirds (https://www.deviantart.com/clockbirds)</span>
       <div class="title">
         <div class="logo">
           <!-- <img src="/images/logos/logo.png" /> -->
@@ -14,39 +14,7 @@
         <div class="logo">
           <img src="/images/logos/logo.png" />
         </div>
-        <span>Deseja sair? <a
-            href="#"
-            @click="$auth.logout()"
-          >Logout</a></span>
-      </div>
-      <div class="__steps">
-        <b-steps
-          v-model="activeStep"
-          :has-navigation="false"
-          :clickable="false"
-          size="is-small"
-        >
-          <b-step-item
-            step="1"
-            :clickable="false"
-          />
-          <b-step-item
-            step="2"
-            :clickable="false"
-          />
-          <b-step-item
-            step="3"
-            :clickable="false"
-          />
-          <b-step-item
-            step="4"
-            :clickable="false"
-          />
-          <b-step-item
-            step="5"
-            :clickable="false"
-          />
-        </b-steps>
+        <span>Lembrou a Senha? <nuxt-link :to="'/login'">Entrar</nuxt-link></span>
       </div>
       <form @submit.prevent>
         <div class="form-title">
@@ -61,29 +29,30 @@
             <b-input
               v-model="user.email"
               type="email"
+              placeholder="E-mail"
             />
           </b-field>
-        </b-field>
-        <b-field>
-          <recaptcha
-            @error="onError"
-            @success="onSuccess"
-            @expired="onExpired"
-          />
         </b-field>
         <b-field grouped>
           <b-field expanded>
             <b-button
               class="is-fullwidth"
               type="is-primary"
-              @click="register()"
-            >Verificar E-Mail</b-button>
+              :disabled="disableResend"
+              @click="resend()"
+            >Enviar e-mail de Recuperação</b-button>
           </b-field>
         </b-field>
       </form>
       <footer class="copyright">
-        <span class="text">Ao criar uma conta na Central Novel, você concorda em aceitar os
-          termos de serviço.</span>
+        <span
+          class="text"
+          v-if="disableResend"
+        >Você pode solicitar novamente em: {{ timeResend.minutes }}:{{timeResend.seconds}}</span>
+        <span
+          class="text"
+          v-if="!disableResend"
+        >Você já pode solicitar um novo e-mail de recuperação.</span>
         <hr />
         <span class="text">
           Estamos comprometidos com sua privacidade. A Central Novel usa as
@@ -101,9 +70,10 @@
 <script>
 export default {
   layout: "auth",
+  middleware: ['notAuthenticated'],
   head () {
     return {
-      title: "Verified - Central Novel",
+      title: "Forgot Password - Central Novel",
       meta: [
         {
           hid: "description",
@@ -115,49 +85,59 @@ export default {
   },
   data () {
     return {
-      activeStep: 4,
+      timeResend: {
+        minutes: 1,
+        seconds: 0,
+      },
+      disableResend: false,
+      intervalo: null,
       user: {
-        recaptcha: "",
-      }
+        email: null,
+      },
     };
   },
+  mounted () {
+  },
   methods: {
-    async register () {
-      try {
-        this.$buefy.toast.open({
-          duration: 1000,
-          message: "Validando ..."
-        });
-        await this.getRecaptcha();
-      } catch (e) {
-        this.$buefy.toast.open({
-          duration: 5000,
-          message: "Erro ao Validar",
-          type: "is-danger"
-        });
-      }
+    timeoutResend () {
+      const self = this
+      this.intervalo = setInterval(function () {
+        if (self.timeResend.seconds == 0) {
+          self.timeResend.seconds = 59
+          if (self.timeResend.minutes == 0) {
+            self.timeResend.miute = 0
+            self.timeResend.seconds = 0
+            self.disableResend = false;
+            clearInterval(this.intervalo);
+          } else {
+            self.timeResend.minutes--
+          }
+        } else {
+          self.timeResend.seconds--
+        }
+      }, 1000);
     },
-    async getRecaptcha () {
-      try {
-        this.user.recaptcha = await this.$recaptcha.getResponse();
-        console.log("ReCaptcha token:", token);
-        await this.$recaptcha.reset();
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log("Login error:", error);
-      }
-    },
+    resend () {
+      this.$axios
+        .get("user/forgot/resend?email=" + this.user.email)
+        .then(response => {
+          if (response.status === 200) {
+            this.$buefy.toast.open({
+              message: "E-mail Enviado!!",
+              type: "is-success"
+            });
+          }
+        })
+        .catch(e => {
+          this.$buefy.toast.open({
+            message: "Ocorreu um erro no envio, tente novamente.",
+            type: "is-danger"
+          });
+        });
 
-    onError (error) {
-      console.log("Error happened:", error);
+      this.disableResend = true;
+      this.timeoutResend()
     },
-    onSuccess (token) {
-      console.log("Succeeded:", token);
-      // here you submit the form
-    },
-    onExpired () {
-      console.log("Expired");
-    }
   }
 };
 </script>
@@ -175,7 +155,7 @@ div#register {
     display: flex;
     flex-direction: column;
     @extend %vertical-align-middle;
-    background-image: url("/images/verified-background.jpg");
+    background-image: url("/images/forgot-background.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -209,6 +189,7 @@ div#register {
     padding-left: 16px;
     padding-right: 16px;
     @extend %justify-center;
+    position: relative;
     div.__header {
       margin-top: 12px;
       margin-bottom: 12px;

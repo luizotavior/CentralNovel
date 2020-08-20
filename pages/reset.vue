@@ -1,7 +1,9 @@
 <template>
   <div id="register">
     <div class="__left">
-      <span style="display: none;">Background By Jjnaas (https://www.deviantart.com/jjnaas)</span>
+      <span style="display: none;"
+        >Background By Koyorin (https://www.deviantart.com/koyorin)</span
+      >
       <div class="title">
         <div class="logo">
           <!-- <img src="/images/logos/logo.png" /> -->
@@ -14,7 +16,7 @@
         <div class="logo">
           <img src="/images/logos/logo.png" />
         </div>
-        <span>Tem uma conta? <nuxt-link :to="'/login'">Entrar</nuxt-link></span>
+        <span>Ir para o <nuxt-link :to="'/login'">Login</nuxt-link></span>
       </div>
       <div class="__steps">
         <b-steps
@@ -23,26 +25,11 @@
           :clickable="false"
           size="is-small"
         >
-          <b-step-item
-            step="1"
-            :clickable="false"
-          />
-          <b-step-item
-            step="2"
-            :clickable="false"
-          />
-          <b-step-item
-            step="3"
-            :clickable="false"
-          />
-          <b-step-item
-            step="4"
-            :clickable="false"
-          />
-          <b-step-item
-            step="5"
-            :clickable="false"
-          />
+          <b-step-item step="1" :clickable="false" />
+          <b-step-item step="2" :clickable="false" />
+          <b-step-item step="3" :clickable="false" />
+          <b-step-item step="4" :clickable="false" />
+          <b-step-item step="5" :clickable="false" />
         </b-steps>
       </div>
       <form @submit.prevent>
@@ -51,70 +38,31 @@
           <span></span>
         </div>
         <b-field grouped>
-          <b-field
-            expanded
-            label="Nome Completo"
-          >
-            <b-input
-              v-model="user.name"
-              type="text"
-            />
+          <b-field expanded label="Nova Senha">
+            <b-input v-model="user.password" type="password" />
           </b-field>
         </b-field>
         <b-field grouped>
-          <b-field
-            expanded
-            label="Usuário"
-          >
-            <b-input
-              v-model="user.username"
-              type="text"
-            />
+          <b-field expanded label="Confirmação de Senha">
+            <b-input v-model="user.password_confirmation" type="password" />
           </b-field>
-        </b-field>
-        <b-field grouped>
-          <b-field
-            expanded
-            label="Endereço de email"
-          >
-            <b-input
-              v-model="user.email"
-              type="email"
-            />
-          </b-field>
-        </b-field>
-        <b-field grouped>
-          <b-field
-            expanded
-            label="Senha"
-          >
-            <b-input
-              v-model="user.password"
-              type="password"
-              @keyup.native.enter="register()"
-            />
-          </b-field>
-        </b-field>
-        <b-field>
-          <recaptcha
-            @error="onError"
-            @success="onSuccess"
-            @expired="onExpired"
-          />
         </b-field>
         <b-field grouped>
           <b-field expanded>
             <b-button
               class="is-fullwidth"
               type="is-primary"
-              @click="register()"
-            >Criar Conta</b-button>
+              @click="resetPassword()"
+              >Alterar Senha</b-button
+            >
           </b-field>
         </b-field>
       </form>
       <footer class="copyright">
-        <span class="text">Ao criar uma conta na Central Novel, você concorda em aceitar os
-          termos de serviço.</span>
+        <span class="text"
+          >Ao criar uma conta na Central Novel, você concorda em aceitar os
+          termos de serviço.</span
+        >
         <hr />
         <span class="text">
           Estamos comprometidos com sua privacidade. A Central Novel usa as
@@ -132,10 +80,10 @@
 <script>
 export default {
   layout: "auth",
-  middleware: ['notAuthenticated'],
-  head () {
+  middleware: ["notAuthenticated"],
+  head() {
     return {
-      title: "Register - Central Novel",
+      title: "Verified - Central Novel",
       meta: [
         {
           hid: "description",
@@ -145,89 +93,72 @@ export default {
       ]
     };
   },
-  data () {
+  data() {
     return {
-      activeStep: 0,
+      activeStep: 4,
       user: {
-        name: "",
-        email: "",
-        username: "",
-        password: "",
-        confirm_password: "",
-        cellphone: "",
-        application: "cloud",
-        recaptcha: "",
-        sex: "S"
+        email: "luiz",
+        password: null,
+        password_confirmation: null
+      },
+      verify: {
+        email: null,
+        expires: null,
+        signature: null,
+        verified: false
       }
     };
   },
+  mounted() {
+    this.getQuery();
+  },
   methods: {
-    async register () {
+    async resetPassword() {
       try {
         this.$buefy.toast.open({
           duration: 1000,
-          message: "Registrando ..."
+          message: "Validando ..."
         });
-        await this.getRecaptcha();
-        await this.createUser();
-        await this.login(data);
+        this.$axios
+          .post(
+            "user/forgot?" +
+              "email=" +
+              this.verify.email +
+              "&expires=" +
+              this.verify.expires +
+              "&signature=" +
+              this.verify.signature,
+            this.user
+          )
+          .then(response => {
+            this.$buefy.toast.open({
+              message: "Dados Alterados!",
+              type: "is-success"
+            });
+            this.$router.push("/");
+          })
+          .catch(e => {
+            alert(e);
+          });
       } catch (e) {
         this.$buefy.toast.open({
           duration: 5000,
-          message: "Erro ao Registrar2",
+          message: "Ocorreu um Erro.",
           type: "is-danger"
         });
       }
     },
-    async getRecaptcha () {
-      try {
-        this.user.recaptcha = await this.$recaptcha.getResponse();
-        console.log("ReCaptcha token:", token);
-        await this.$recaptcha.reset();
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log("Login error:", error);
-      }
-    },
-    async createUser () {
-      this.$axios
-        .post("users", this.user)
-        .then(response => {
-          this.$buefy.toast.open({
-            message: "User Logado!!",
-            type: "is-success"
-          });
-        })
-        .catch(e => {
-          alert(e);
-        });
-    },
-    async login (data) {
-      var data = {
-        client_id: this.$env.AUTH_CLIENT_ID,
-        client_secret: this.$env.AUTH_CLIENT_SECRET,
-        grant_type: this.$env.AUTH_GRANT_TYPE,
-        scope: this.$env.AUTH_SCOPE,
-        email: this.user.email,
-        password: this.user.password
-      };
-      await this.$auth
-        .login({ data: data })
-        .then(response => {
-          this.$router.push("/");
-        })
-        .catch(error => { });
-    },
 
-    onError (error) {
-      console.log("Error happened:", error);
-    },
-    onSuccess (token) {
-      console.log("Succeeded:", token);
-      // here you submit the form
-    },
-    onExpired () {
-      console.log("Expired");
+    async getQuery() {
+      this.verify.email = this.$route.query.email
+        ? this.$route.query.email
+        : null;
+      this.verify.expires = this.$route.query.expires
+        ? this.$route.query.expires
+        : null;
+      this.verify.signature = this.$route.query.signature
+        ? this.$route.query.signature
+        : null;
     }
   }
 };
@@ -246,7 +177,7 @@ div#register {
     display: flex;
     flex-direction: column;
     @extend %vertical-align-middle;
-    background-image: url("/images/register-background.png");
+    background-image: url("/images/reset-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

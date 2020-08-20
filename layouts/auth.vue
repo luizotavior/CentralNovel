@@ -7,7 +7,6 @@
 
 <script>
 export default {
-  middleware: ['authenticated', 'notVerified'],
 }
 </script>
 <style lang="scss" scoped>
