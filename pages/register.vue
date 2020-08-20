@@ -45,73 +45,102 @@
           />
         </b-steps>
       </div>
-      <form @submit.prevent>
+      <ValidationObserver
+        ref="observer"
+        v-slot="{ handleSubmit }"
+        tag="form"
+      >
         <div class="form-title">
           <h1></h1>
           <span></span>
         </div>
-        <b-field grouped>
+        <b-message
+          v-for="(error, index) in errors"
+          :key="index"
+          type="is-primary"
+        >
+          {{error[0]}}
+        </b-message>
+        <ValidationProvider
+          rules="required|min:3"
+          name="Nome"
+          v-slot="{ errors, valid }"
+        >
           <b-field
-            expanded
             label="Nome Completo"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors"
           >
             <b-input
               v-model="user.name"
               type="text"
             />
           </b-field>
-        </b-field>
-        <b-field grouped>
+        </ValidationProvider>
+        <ValidationProvider
+          rules="required|min:5"
+          name="Usuário"
+          v-slot="{ errors, valid }"
+        >
           <b-field
-            expanded
-            label="Usuário"
+            label="Username"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors"
           >
             <b-input
               v-model="user.username"
               type="text"
             />
           </b-field>
-        </b-field>
-        <b-field grouped>
+        </ValidationProvider>
+        <ValidationProvider
+          rules="required|email"
+          name="Email"
+          v-slot="{ errors, valid }"
+        >
           <b-field
-            expanded
-            label="Endereço de email"
+            label="Endereço de E-mail"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors"
           >
             <b-input
               v-model="user.email"
               type="email"
             />
           </b-field>
-        </b-field>
-        <b-field grouped>
+        </ValidationProvider>
+        <ValidationProvider
+          rules="required|min:5"
+          name="Senha"
+          v-slot="{ errors, valid }"
+        >
           <b-field
-            expanded
             label="Senha"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors"
           >
             <b-input
               v-model="user.password"
               type="password"
-              @keyup.native.enter="register()"
+              @keyup.native.enter="handleSubmit(register)"
             />
           </b-field>
-        </b-field>
-        <b-field>
-          <recaptcha
-            @error="onError"
-            @success="onSuccess"
-            @expired="onExpired"
-          />
-        </b-field>
+        </ValidationProvider>
+        <recaptcha
+          @error="onError"
+          @success="onSuccess"
+          @expired="onExpired"
+        />
         <b-field grouped>
           <b-field expanded>
             <b-button
               class="is-fullwidth"
               type="is-primary"
-              @click="register()"
+              @click="handleSubmit(register)"
             >Criar Conta</b-button>
           </b-field>
         </b-field>
-      </form>
+      </ValidationObserver>
       <footer class="copyright">
         <span class="text">Ao criar uma conta na Central Novel, você concorda em aceitar os
           termos de serviço.</span>
@@ -147,6 +176,7 @@ export default {
   },
   data () {
     return {
+      gmail: "",
       activeStep: 0,
       user: {
         name: "",
@@ -158,51 +188,48 @@ export default {
         application: "cloud",
         recaptcha: "",
         sex: "S"
-      }
+      },
+      errors: {},
     };
   },
   methods: {
     async register () {
-      try {
-        this.$buefy.toast.open({
-          duration: 1000,
-          message: "Registrando ..."
-        });
-        await this.getRecaptcha();
-        await this.createUser();
-        await this.login(data);
-      } catch (e) {
-        this.$buefy.toast.open({
-          duration: 5000,
-          message: "Erro ao Registrar2",
-          type: "is-danger"
-        });
-      }
+      this.$buefy.toast.open({
+        duration: 1000,
+        message: "Registrando ..."
+      });
+      await this.getRecaptcha();
+      await this.createUser();
     },
     async getRecaptcha () {
       try {
         this.user.recaptcha = await this.$recaptcha.getResponse();
         console.log("ReCaptcha token:", token);
         await this.$recaptcha.reset();
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log("Login error:", error);
+      } catch (e) {
       }
     },
     async createUser () {
       this.$axios
         .post("users", this.user)
         .then(response => {
+
           this.$buefy.toast.open({
-            message: "User Logado!!",
-            type: "is-success"
+            message: response.status
           });
+          this.login();
         })
         .catch(e => {
-          alert(e);
+          if (e.response.status === 400) {
+            this.errors = e.response.data
+          } else {
+            this.$buefy.toast.open({
+              message: "[" + response.status + "] Ocorreu um Erro Inesperado."
+            });
+          }
         });
     },
-    async login (data) {
+    async login () {
       var data = {
         client_id: this.$env.AUTH_CLIENT_ID,
         client_secret: this.$env.AUTH_CLIENT_SECRET,
