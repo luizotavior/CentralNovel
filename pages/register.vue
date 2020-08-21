@@ -226,6 +226,8 @@ export default {
             }
           } else if (e.response.status === 400) {
             this.errors = e.response.data
+          } else if (e.response.status === 500) {
+            this.errors = ["[500] Ocorreu um Erro no Servidor"]
           } else {
             this.$buefy.toast.open({
               message: "[" + response.status + "] Ocorreu um Erro Inesperado."

@@ -135,6 +135,8 @@ export default {
               this.errors = ["Erro na Rede - Servidor Offline"]
             } else if (e.response.status === 400) {
               this.errors = ["Email e/ou Senha Incorretos"]
+            } else if (e.response.status === 500) {
+              this.errors = ["[500] Ocorreu um Erro no Servidor"]
             } else {
               this.$buefy.toast.open({
                 message: "[" + response.status + "] Ocorreu um Erro Inesperado."
