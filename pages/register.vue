@@ -220,7 +220,11 @@ export default {
           this.login();
         })
         .catch(e => {
-          if (e.response.status === 400) {
+          if (!e.response) {
+            this.errors = {
+              'error': ["Erro na Rede - Servidor Offline"]
+            }
+          } else if (e.response.status === 400) {
             this.errors = e.response.data
           } else {
             this.$buefy.toast.open({

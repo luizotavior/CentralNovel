@@ -131,7 +131,9 @@ export default {
             this.$router.push("/");
           })
           .catch(e => {
-            if (e.response.status === 400) {
+            if (!e.response) {
+              this.errors = ["Erro na Rede - Servidor Offline"]
+            } else if (e.response.status === 400) {
               this.errors = ["Email e/ou Senha Incorretos"]
             } else {
               this.$buefy.toast.open({
