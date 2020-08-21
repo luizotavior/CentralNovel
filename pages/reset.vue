@@ -54,6 +54,14 @@
           <h1></h1>
           <span></span>
         </div>
+
+        <b-message
+          v-for="(error, index) in errors"
+          :key="index"
+          type="is-primary"
+        >
+          {{error[0]}}
+        </b-message>
         <b-field grouped>
           <b-field
             expanded
@@ -144,6 +152,7 @@ export default {
   data () {
     return {
       activeStep: 4,
+      errors: {},
       user: {
         email: "luiz",
         password: null,
@@ -186,7 +195,13 @@ export default {
             this.$router.push("/");
           })
           .catch(e => {
-            alert(e);
+            if (e.response.status === 400) {
+              this.errors = e.response.data
+            } else {
+              this.$buefy.toast.open({
+                message: "[" + response.status + "] Ocorreu um Erro Inesperado."
+              });
+            }
           });
       } catch (e) {
         this.$buefy.toast.open({
