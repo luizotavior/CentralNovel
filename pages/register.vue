@@ -210,6 +210,7 @@ export default {
       }
     },
     async createUser () {
+      this.errors = {}
       this.$axios
         .post("users", this.user)
         .then(response => {

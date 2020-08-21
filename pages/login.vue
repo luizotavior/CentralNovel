@@ -107,6 +107,7 @@ export default {
   },
   methods: {
     async login () {
+      this.errors = {}
       try {
         this.$buefy.toast.open({
           duration: 1000,
