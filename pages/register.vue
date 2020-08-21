@@ -110,7 +110,7 @@
           </b-field>
         </ValidationProvider>
         <ValidationProvider
-          rules="required|min:5"
+          rules="required|min:6"
           name="Senha"
           v-slot="{ errors, valid }"
         >

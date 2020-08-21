@@ -8,34 +8,53 @@
         <span>Não possui uma conta?
           <nuxt-link :to="'/register'">Inscreva-se</nuxt-link></span>
       </div>
-      <form @submit.prevent>
-        <b-field grouped>
+
+      <ValidationObserver
+        ref="observer"
+        v-slot="{ handleSubmit }"
+        tag="form"
+      >
+        <b-message
+          v-for="(error, index) in errors"
+          :key="index"
+          type="is-primary"
+        >
+          {{error}}
+        </b-message>
+        <ValidationProvider
+          rules="required|email"
+          name="Email"
+          v-slot="{ errors, valid }"
+        >
           <b-field
-            expanded
-            label="Endereço de email"
+            label="Endereço de E-mail"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors"
           >
             <b-input
               v-model="user.email"
               type="email"
-              placeholder="E-mail"
-              @keyup.native.enter="login()"
             />
           </b-field>
-        </b-field>
-        <b-field grouped>
+        </ValidationProvider>
+        <ValidationProvider
+          rules="required|min:6"
+          name="Senha"
+          v-slot="{ errors, valid }"
+        >
           <b-field
-            expanded
             label="Senha"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors"
           >
             <b-input
               v-model="user.password"
-              type="password"
               password-reveal
-              placeholder="Password"
-              @keyup.native.enter="login()"
+              type="password"
+              @keyup.native.enter="handleSubmit(login)"
             />
           </b-field>
-        </b-field>
+        </ValidationProvider>
         <b-field>
           <p class="control __sublink">
             <span>
@@ -48,23 +67,11 @@
             <b-button
               class="is-fullwidth"
               type="is-primary"
-              @click="login()"
+              @click="handleSubmit(login)"
             >Entrar</b-button>
           </b-field>
         </b-field>
-        <!-- <b-field grouped>
-          <b-field expanded>
-            <a
-              class="button-default"
-              href="#">
-              <span>Log in with Google</span>
-              <img
-                class="google-svg"
-                src="google.svg">
-            </a>
-          </b-field>
-        </b-field> -->
-      </form>
+      </ValidationObserver>
       <footer class="copyright">
         <span>©2020 Central Novel. Todos os direitos reservados.</span>
         <span><a href="#">Política de Privacidade</a></span>
@@ -91,6 +98,7 @@ export default {
   },
   data () {
     return {
+      errors: [],
       user: {
         email: "",
         password: ""
@@ -122,18 +130,12 @@ export default {
             });
             this.$router.push("/");
           })
-          .catch(error => {
-            if (error.response.data.error == "invalid_credentials") {
-              this.$buefy.toast.open({
-                duration: 5000,
-                message: "Email e/ou Senha incorretos",
-                type: "is-danger"
-              });
+          .catch(e => {
+            if (e.response.status === 400) {
+              this.errors = ["Email e/ou Senha Incorretos"]
             } else {
               this.$buefy.toast.open({
-                duration: 5000,
-                message: "Erro ao Autenticar",
-                type: "is-danger"
+                message: "[" + response.status + "] Ocorreu um Erro Inesperado."
               });
             }
           });
