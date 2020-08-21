@@ -1,9 +1,7 @@
 <template>
   <div id="register">
     <div class="__left">
-      <span style="display: none;"
-        >Background By Koyorin (https://www.deviantart.com/koyorin)</span
-      >
+      <span style="display: none;">Background By Koyorin (https://www.deviantart.com/koyorin)</span>
       <div class="title">
         <div class="logo">
           <!-- <img src="/images/logos/logo.png" /> -->
@@ -25,44 +23,94 @@
           :clickable="false"
           size="is-small"
         >
-          <b-step-item step="1" :clickable="false" />
-          <b-step-item step="2" :clickable="false" />
-          <b-step-item step="3" :clickable="false" />
-          <b-step-item step="4" :clickable="false" />
-          <b-step-item step="5" :clickable="false" />
+          <b-step-item
+            step="1"
+            :clickable="false"
+          />
+          <b-step-item
+            step="2"
+            :clickable="false"
+          />
+          <b-step-item
+            step="3"
+            :clickable="false"
+          />
+          <b-step-item
+            step="4"
+            :clickable="false"
+          />
+          <b-step-item
+            step="5"
+            :clickable="false"
+          />
         </b-steps>
       </div>
-      <form @submit.prevent>
+      <ValidationObserver
+        ref="observer"
+        v-slot="{ handleSubmit }"
+        tag="form"
+      >
         <div class="form-title">
           <h1></h1>
           <span></span>
         </div>
         <b-field grouped>
-          <b-field expanded label="Nova Senha">
-            <b-input v-model="user.password" type="password" />
+          <b-field
+            expanded
+            label="Nova Senha"
+          >
+            <b-input
+              v-model="user.password"
+              type="password"
+            />
           </b-field>
         </b-field>
-        <b-field grouped>
-          <b-field expanded label="Confirmação de Senha">
-            <b-input v-model="user.password_confirmation" type="password" />
+        <ValidationProvider
+          rules="required|min:6"
+          name="Senha"
+          v-slot="{ errors, valid }"
+        >
+          <b-field
+            label="Nova Senha"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors"
+          >
+            <b-input
+              v-model="user.password"
+              type="password"
+            />
           </b-field>
-        </b-field>
+        </ValidationProvider>
+        <ValidationProvider
+          rules="required|min:6"
+          name="Senha"
+          v-slot="{ errors, valid }"
+        >
+          <b-field
+            label="Nova Senha"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors"
+          >
+            <b-input
+              v-model="user.password_confirmation"
+              type="password"
+              @keyup.native.enter="handleSubmit(resetPassword)"
+            />
+          </b-field>
+        </ValidationProvider>
         <b-field grouped>
           <b-field expanded>
             <b-button
               class="is-fullwidth"
               type="is-primary"
-              @click="resetPassword()"
-              >Alterar Senha</b-button
-            >
+              @click="handleSubmit(resetPassword)"
+            >Alterar Senha</b-button>
           </b-field>
         </b-field>
-      </form>
+      </ValidationObserver>
       <footer class="copyright">
-        <span class="text"
-          >Ao criar uma conta na Central Novel, você concorda em aceitar os
-          termos de serviço.</span
-        >
+        <span class="text">Ao criar uma conta na Central Novel, você concorda em aceitar os
+          termos de serviço.</span>
         <hr />
         <span class="text">
           Estamos comprometidos com sua privacidade. A Central Novel usa as
@@ -81,7 +129,7 @@
 export default {
   layout: "auth",
   middleware: ["notAuthenticated"],
-  head() {
+  head () {
     return {
       title: "Verified - Central Novel",
       meta: [
@@ -93,7 +141,7 @@ export default {
       ]
     };
   },
-  data() {
+  data () {
     return {
       activeStep: 4,
       user: {
@@ -109,11 +157,11 @@ export default {
       }
     };
   },
-  mounted() {
+  mounted () {
     this.getQuery();
   },
   methods: {
-    async resetPassword() {
+    async resetPassword () {
       try {
         this.$buefy.toast.open({
           duration: 1000,
@@ -122,12 +170,12 @@ export default {
         this.$axios
           .post(
             "user/forgot?" +
-              "email=" +
-              this.verify.email +
-              "&expires=" +
-              this.verify.expires +
-              "&signature=" +
-              this.verify.signature,
+            "email=" +
+            this.verify.email +
+            "&expires=" +
+            this.verify.expires +
+            "&signature=" +
+            this.verify.signature,
             this.user
           )
           .then(response => {
@@ -149,7 +197,7 @@ export default {
       }
     },
 
-    async getQuery() {
+    async getQuery () {
       this.verify.email = this.$route.query.email
         ? this.$route.query.email
         : null;

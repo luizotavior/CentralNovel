@@ -16,34 +16,42 @@
         </div>
         <span>Lembrou a Senha? <nuxt-link :to="'/login'">Entrar</nuxt-link></span>
       </div>
-      <form @submit.prevent>
+      <ValidationObserver
+        ref="observer"
+        v-slot="{ handleSubmit }"
+        tag="form"
+      >
         <div class="form-title">
           <h1></h1>
           <span></span>
         </div>
-        <b-field grouped>
+        <ValidationProvider
+          rules="required|email"
+          name="Email"
+          v-slot="{ errors, valid }"
+        >
           <b-field
-            expanded
-            label="Endereço de email"
+            label="Endereço de E-mail"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors"
           >
             <b-input
               v-model="user.email"
               type="email"
-              placeholder="E-mail"
             />
           </b-field>
-        </b-field>
+        </ValidationProvider>
         <b-field grouped>
           <b-field expanded>
             <b-button
               class="is-fullwidth"
               type="is-primary"
               :disabled="disableResend"
-              @click="resend()"
+              @click="handleSubmit(resend)"
             >Enviar e-mail de Recuperação</b-button>
           </b-field>
         </b-field>
-      </form>
+      </ValidationObserver>
       <footer class="copyright">
         <span
           class="text"
