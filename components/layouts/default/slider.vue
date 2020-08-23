@@ -17,7 +17,7 @@
 
         <div class="slide">
           <img
-            src="images/slides/slide_01.jpg"
+            src="images/slides/slide_02.png"
             alt=""
           >
         </div>
