@@ -159,10 +159,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/sass/layout/_grid.scss";
 @import "@/assets/sass/helpers/_variables.scss";
-@import "slick-carousel/slick/slick.css";
 
 .list-novel {
   margin-bottom: 48px;
@@ -246,6 +245,7 @@ export default {
 // "\2190" outputs ascii character "←"
 // "\2192" outputs ascii character "→"
 // "\2022" outputs ascii character "•"
+@import "slick-carousel/slick/slick.css";
 
 $slick-font-path: "./fonts/" !default;
 $slick-font-family: "slick" !default;
@@ -256,6 +256,9 @@ $slick-next-character: url("/images/right-arrow.svg") !default;
 $slick-opacity-default: 0.75 !default;
 $slick-opacity-on-hover: 1 !default;
 $slick-opacity-not-active: 0.25 !default;
+.slick-slider .slick-track {
+  margin: 0px;
+}
 
 .slick-prev,
 .slick-next {

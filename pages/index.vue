@@ -2,7 +2,19 @@
   <div id="page-home">
     <default-slider />
     <div class="container-page-home">
-      <quote-review />
+
+      <quote-review v-if="!$store.state.auth.loggedIn" />
+
+      <topic-title
+        title="Biblioteca"
+        v-if="$store.state.auth.loggedIn"
+      />
+      <list-novel
+        :api="
+          '/user/library?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
+        "
+        v-if="$store.state.auth.loggedIn"
+      />
       <!-- <topic-title title="Novos Lançamentos em Andamento"/>
       <list-novel :mode="2"/> -->
       <!-- <topic-title title="Recommended"/>
@@ -16,27 +28,30 @@
           '/series?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
         "
       />
-      <topic-title title="Popular" seeMore="#" />
-      <list-novel
-        :api="
+      <topic-title
+        title="Popular"
+        seeMore="#"
+      />
+      <list-novel :api="
           '/series?paginate=false&limit=9&sortProperty=numVotes&sortDirection=desc'
-        "
+        " />
+      <topic-title
+        title="Tendências de Histórias Originais"
+        seeMore="#"
       />
-      <topic-title title="Tendências de Histórias Originais" seeMore="#" />
-      <list-novel
-        :api="
+      <list-novel :api="
           '/series?paginate=false&limit=9&language=1&sortProperty=averageRating&sortDirection=desc'
-        "
-      />
+        " />
       <topic-title title="Novos na Central Novel" />
-      <list-novel
-        :api="
+      <list-novel :api="
           '/series?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
-        "
-      />
+        " />
       <topic-title title="Gêneros Sugeridas" />
       <suggested-tags />
-      <topic-title id="updates" title="Ultimas Atualizações" />
+      <topic-title
+        id="updates"
+        title="Ultimas Atualizações"
+      />
       <feed-table />
     </div>
   </div>
@@ -60,7 +75,7 @@ export default {
     listNovel,
     quoteReview
   },
-  data() {
+  data () {
     return {};
   }
 };
