@@ -21,6 +21,24 @@
             alt=""
           >
         </div>
+        <div class="slide">
+          <img
+            src="images/slides/slide_03.png"
+            alt=""
+          >
+        </div>
+        <div class="slide">
+          <img
+            src="images/slides/slide_04.png"
+            alt=""
+          >
+        </div>
+        <div class="slide">
+          <img
+            src="images/slides/slide_05.png"
+            alt=""
+          >
+        </div>
       </agile>
     </no-ssr>
   </main>
