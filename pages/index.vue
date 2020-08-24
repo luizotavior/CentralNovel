@@ -8,6 +8,7 @@
       <topic-title
         title="Biblioteca"
         v-if="$store.state.auth.loggedIn"
+        see-more="/library"
       />
       <list-novel
         :api="
@@ -30,23 +31,29 @@
       />
       <topic-title
         title="Popular"
-        seeMore="#"
+        seeMore="/series?order=3"
       />
       <list-novel :api="
           '/series?paginate=false&limit=9&sortProperty=numVotes&sortDirection=desc'
         " />
       <topic-title
         title="Tendências de Histórias Originais"
-        seeMore="#"
+        seeMore="/series?language=1"
       />
       <list-novel :api="
           '/series?paginate=false&limit=9&language=1&sortProperty=averageRating&sortDirection=desc'
         " />
-      <topic-title title="Novos na Central Novel" />
+      <topic-title
+        title="Novos na Central Novel"
+        seeMore="/series?order=5"
+      />
       <list-novel :api="
           '/series?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
         " />
-      <topic-title title="Gêneros Sugeridas" />
+      <topic-title
+        title="Gêneros Sugeridas"
+        seeMore="/series"
+      />
       <suggested-tags />
       <topic-title
         id="updates"
