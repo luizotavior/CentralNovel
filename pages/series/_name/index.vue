@@ -98,9 +98,26 @@
                 >Ler</b-button>
                 <b-button
                   type="is-dark"
+                  tag="router-link"
                   icon-left="plus"
+                  v-if="!$store.state.auth.loggedIn"
+                  to="/login"
                   rounded
                 >Adicionar à Biblioteca</b-button>
+                <b-button
+                  type="is-dark"
+                  icon-left="plus"
+                  v-if="$store.state.auth.loggedIn && !inLibrary"
+                  @click="addInLibrary"
+                  rounded
+                >Adicionar à Biblioteca</b-button>
+                <b-button
+                  type="is-dark"
+                  icon-left="minus"
+                  v-if="inLibrary && $store.state.auth.loggedIn"
+                  @click="deleteInLibrary"
+                  rounded
+                >Remover da Biblioteca</b-button>
               </div>
               <div class="small">
                 <a href="#">
@@ -235,6 +252,9 @@ export default {
   },
 
   computed: {
+    inLibrary: function () {
+      return ((this.serie.in_library && Object.keys(this.serie.in_library).length != 1) ? false : true)
+    },
     getCapa: function () {
       return this.serie.image == null ? "https://storage.googleapis.com/centralnovel.com.br/novels/default.jpg" : 'https://storage.googleapis.com/centralnovel.com.br/' + this.serie.image;
     },
@@ -258,6 +278,37 @@ export default {
         this.analytics += parseInt(response.data[0][0])
       }).catch(e => {
       })
+    },
+    addInLibrary () {
+      this.$axios
+        .post("user/library", { series: [this.serie.id] })
+        .then(response => {
+          this.$buefy.toast.open({
+            message: "Adicionado aos Favoritos"
+          });
+          this.serieData()
+        })
+        .catch(e => {
+          this.$buefy.toast.open({
+            message: "[" + e.status + "] Ocorreu um Erro Inesperado."
+          });
+        });
+    },
+    deleteInLibrary () {
+
+      this.$axios
+        .delete("user/library", { data: { series: [this.serie.id] } })
+        .then(response => {
+          this.$buefy.toast.open({
+            message: "Removido dos Favoritos"
+          });
+          this.serieData()
+        })
+        .catch(e => {
+          this.$buefy.toast.open({
+            message: "[" + e.status + "] Ocorreu um Erro Inesperado."
+          });
+        });
     }
   }
 }
