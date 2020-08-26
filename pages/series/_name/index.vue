@@ -31,8 +31,8 @@
                   <li>
                     <b-icon icon="book"></b-icon> Em {{serie.favorites_count}} Bibliotecas
                   </li>
-                  <li v-if="analytics && analytics >= 1">
-                    <b-icon icon="eye"></b-icon> {{analytics}} Visualizações
+                  <li v-if="serie.pageviews && serie.pageviews >= 1">
+                    <b-icon icon="eye"></b-icon> {{serie.pageviews}} Visualizações
                   </li>
                 </ul>
               </div>
@@ -242,13 +242,11 @@ export default {
   data () {
     return {
       serie: {},
-      analytics: 0,
       bodyTab: 1,
     }
   },
   mounted () {
     this.serieData()
-    this.analyticsData()
   },
 
   computed: {
@@ -267,16 +265,6 @@ export default {
         this.serie = response.data
       }).catch(e => {
         return this.$nuxt.error(e)
-      })
-    },
-    analyticsData () {
-      this.$axios.$get('/analytics/?path=/series/' + this.$route.params.name).then(response => {
-        this.analytics += parseInt(response.data[0][0])
-      }).catch(e => {
-      })
-      this.$axios.$get('/analytics/?path=/novel/' + this.$route.params.name).then(response => {
-        this.analytics += parseInt(response.data[0][0])
-      }).catch(e => {
       })
     },
     addInLibrary () {
