@@ -1,31 +1,40 @@
 <template>
   <div class="star-rating">
-    <div class="stars">
-      <b-icon
-        v-for="n in maxRating"
-        :key="n"
-        :size="size"
-        :icon="(formattedRating >= n ? 'star' : (Math.ceil(formattedRating) == n ? 'star-half' : 'star-outline' ))"
-      />
+    <div :class="{ stars: true, clickable }">
+      <span v-for="n in maxRating" :key="n" @click="changeRating(n)">
+        <b-icon
+          :size="size"
+          :icon="
+            formattedRating >= n
+              ? 'star'
+              : Math.ceil(formattedRating) == n
+              ? 'star-half'
+              : 'star-outline'
+          "
+        />
+      </span>
     </div>
-    <div
-      class="__texts"
-      v-show="!onlyStar"
-    >
+    <div class="__texts" v-show="!onlyStar">
       <span :class="size">{{ formattedRating }}</span>
-      <span
-        :class="size"
-        v-if="currentVotes != null"
-      >({{currentVotes}} Avaliações)</span>
+      <span :class="size" v-if="currentVotes != null"
+        >({{ currentVotes }} Avaliações)</span
+      >
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'BTableColumn',
+  name: "starRating",
   props: {
-
+    value: {
+      type: Number,
+      default: 0
+    },
+    clickable: {
+      type: Boolean,
+      default: false
+    },
     onlyStar: {
       type: Boolean,
       default: false
@@ -45,14 +54,23 @@ export default {
     maxRating: {
       type: Number,
       default: 5
-    },
+    }
   },
   computed: {
-    formattedRating () {
-      return (parseFloat(this.currentRating * 100) / 100).toFixed(1);
-    },
+    formattedRating() {
+      return this.clickable
+        ? (parseFloat(this.value * 100) / 100).toFixed(1)
+        : (parseFloat(this.currentRating * 100) / 100).toFixed(1);
+    }
   },
-}
+  methods: {
+    changeRating(n) {
+      if (this.clickable) {
+        this.$emit("input", n);
+      }
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -62,6 +80,11 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  .clickable {
+    span {
+      cursor: pointer;
+    }
+  }
   .stars {
     display: flex;
     flex-direction: row;
