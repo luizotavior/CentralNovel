@@ -18,56 +18,65 @@
           {{ props.column.label }}
         </div>
       </template>
-      <template slot-scope="props">
-        <b-table-column
-          field="original_title"
-          label="Serie"
-        >
-          <nuxt-link
-            :to="'/series/' + props.row.serie.slug"
-            class="__titulo"
-          >{{
+
+      <b-table-column
+        field="serie.title"
+        label="Titulo"
+        sortable
+        v-slot="props"
+      >
+        <nuxt-link
+          :to="'/series/' + props.row.serie.slug"
+          class="__titulo"
+        >{{
             props.row.serie == null ? "" : props.row.serie.title
           }}</nuxt-link>
-        </b-table-column>
-        <b-table-column
-          field="original_title"
-          label="Grupo"
-        >
-          <nuxt-link
-            :to="'/series/' + props.row.group.slug"
-            class="__titulo"
-          >{{
+      </b-table-column>
+      <b-table-column
+        field="original_title"
+        label="Grupo"
+        sortable
+        v-slot="props"
+      >
+        <nuxt-link
+          :to="'/groups/' + props.row.group.slug"
+          class="__titulo"
+        >{{
             props.row.group == null ? "" : props.row.group.name
           }}</nuxt-link>
-        </b-table-column>
-        <b-table-column
-          field="original_title"
-          label="Release"
+      </b-table-column>
+      <b-table-column
+        field="original_title"
+        label="Release"
+        sortable
+        v-slot="props"
+      >
+        <a
+          :href="props.row.url"
+          target="_blank"
+          class="__release"
         >
-          <a
-            :href="props.row.url"
-            target="_blank"
-            class="__release"
-          >
-            {{ props.row.arc ? "a" + props.row.arc + " " : "" }}
-            {{ props.row.volume ? "v" + props.row.volume + "" : "" }}
-            {{ props.row.chapter ? "c" + props.row.chapter + " " : "" }}
-            {{ props.row.part ? "p" + props.row.part + " " : "" }}
-          </a>
-        </b-table-column>
-        <b-table-column
-          field="release_date"
-          label="Data"
-          class="not-overflow"
+          {{ props.row.arc ? "a" + props.row.arc + " " : "" }}
+          {{ props.row.volume ? "v" + props.row.volume + "" : "" }}
+          {{ props.row.chapter ? "c" + props.row.chapter + " " : "" }}
+          {{ props.row.part ? "p" + props.row.part + " " : "" }}
+        </a>
+      </b-table-column>
+      <b-table-column
+        field="release_date"
+        label="Data"
+        v-slot="props"
+      >
+        <b-tooltip
+          :label="$moment(props.row.published_at).format('LLL')"
+          append-to-body
+          position="is-right"
         >
-          <b-tooltip :label="$moment(props.row.published_at).format('LLL')">
-            <span class="__time">
-              {{ dateFromNow(props.row.published_at) }}<br>
-            </span>
-          </b-tooltip>
-        </b-table-column>
-      </template>
+          <span class="__time">
+            {{ dateFromNow(props.row.published_at) }}<br>
+          </span>
+        </b-tooltip>
+      </b-table-column>
     </b-table>
   </section>
 </template>

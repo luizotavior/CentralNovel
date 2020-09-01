@@ -18,42 +18,50 @@
           {{ props.column.label }}
         </div>
       </template>
-      <template slot-scope="props">
-        <b-table-column
-          field="original_title"
-          label="Serie"
+
+      <b-table-column
+        field="original_title"
+        label="Grupo"
+        sortable
+        v-slot="props"
+      >
+        <nuxt-link
+          :to="'/groups/' + props.row.group.slug"
+          class="__titulo"
+        >{{
+            props.row.group == null ? "" : props.row.group.name
+          }}</nuxt-link>
+      </b-table-column>
+      <b-table-column
+        field="original_title"
+        label="Release"
+        sortable
+        v-slot="props"
+      >
+        <a
+          :href="props.row.url"
+          target="_blank"
+          class="__release"
         >
-          <a
-            :href="props.row.url"
-            target="_blank"
-            class="__release"
-          >
-            {{ props.row.arc ? "Arco " + props.row.arc + " " : "" }}
-            {{ props.row.volume ? "Volume " + props.row.volume + " " : "" }}
-            {{ props.row.chapter ? "Capítulo " + props.row.chapter + " " : "" }}
-            {{ props.row.part ? "Parte " + props.row.part + " " : "" }}</a>
-        </b-table-column>
-        <b-table-column
-          field="group_title"
-          label="Grupo"
-        >
-          <nuxt-link
-            :to="'/series/' + props.row.group.slug"
-            class="__titulo"
-          >{{ props.row.group.name }}</nuxt-link>
-        </b-table-column>
-        <b-table-column
-          field="release_date"
-          label="Data"
-          class="not-overflow"
-        >
-          <b-tooltip :label="$moment(props.row.published_at).format('LLL')">
-            <span class="__time">
-              {{ dateFromNow(props.row.published_at) }}<br>
-            </span>
-          </b-tooltip>
-        </b-table-column>
-      </template>
+          {{ props.row.arc ? "a" + props.row.arc + " " : "" }}
+          {{ props.row.volume ? "v" + props.row.volume + "" : "" }}
+          {{ props.row.chapter ? "c" + props.row.chapter + " " : "" }}
+          {{ props.row.part ? "p" + props.row.part + " " : "" }}
+        </a>
+      </b-table-column>
+      <b-table-column
+        field="release_date"
+        label="Data"
+        class="not-overflow"
+        sortable
+        v-slot="props"
+      >
+        <b-tooltip :label="$moment(props.row.published_at).format('LLL')">
+          <span class="__time">
+            {{ dateFromNow(props.row.published_at) }}<br>
+          </span>
+        </b-tooltip>
+      </b-table-column>
     </b-table>
   </section>
 </template>
