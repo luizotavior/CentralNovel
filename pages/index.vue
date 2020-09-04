@@ -2,7 +2,6 @@
   <div id="page-home">
     <default-slider />
     <div class="container-page-home">
-
       <quote-review v-if="!$store.state.auth.loggedIn" />
 
       <!-- <topic-title
@@ -16,6 +15,15 @@
         "
         v-if="$store.state.auth.loggedIn"
       /> -->
+      <!-- Principal-01 -->
+      <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-7781654679401477"
+        data-ad-slot="6790288185"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
       <!-- <topic-title title="Novos Lançamentos em Andamento"/>
       <list-novel :mode="2"/> -->
       <!-- <topic-title title="Recommended"/>
@@ -29,36 +37,30 @@
           '/series?id=125,12,427&paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
         "
       />
-      <topic-title
-        title="Popular"
-        seeMore="/series?order=3"
-      />
-      <list-novel :api="
+      <topic-title title="Popular" seeMore="/series?order=3" />
+      <list-novel
+        :api="
           '/series?paginate=false&limit=9&sortProperty=numVotes&sortDirection=desc'
-        " />
+        "
+      />
       <topic-title
         title="Tendências de Histórias Originais"
         seeMore="/series?language=1"
       />
-      <list-novel :api="
+      <list-novel
+        :api="
           '/series?paginate=false&limit=9&language=1&sortProperty=averageRating&sortDirection=desc'
-        " />
-      <topic-title
-        title="Novos na Central Novel"
-        seeMore="/series?order=5"
+        "
       />
-      <list-novel :api="
+      <topic-title title="Novos na Central Novel" seeMore="/series?order=5" />
+      <list-novel
+        :api="
           '/series?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
-        " />
-      <topic-title
-        title="Gêneros Sugeridas"
-        seeMore="/series"
+        "
       />
+      <topic-title title="Gêneros Sugeridas" seeMore="/series" />
       <suggested-tags />
-      <topic-title
-        id="updates"
-        title="Ultimas Atualizações"
-      />
+      <topic-title id="updates" title="Ultimas Atualizações" />
       <feed-table />
     </div>
   </div>
@@ -82,7 +84,7 @@ export default {
     listNovel,
     quoteReview
   },
-  data () {
+  data() {
     return {};
   }
 };

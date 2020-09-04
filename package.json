@@ -16,6 +16,7 @@
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/google-adsense": "^1.0.1",
     "@nuxtjs/google-tag-manager": "^2.3.2",
     "@nuxtjs/recaptcha": "^0.6.2",
     "aos": "^2.3.4",
