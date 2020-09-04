@@ -23,7 +23,7 @@
         <div class="filter-selects">
           <multiselect
             v-model="selected.language"
-            deselect-label="Can't remove this value"
+            deselect-label="Não é possível remover este valor"
             track-by="name"
             label="name"
             :options="languages"
@@ -39,7 +39,7 @@
           </multiselect>
           <multiselect
             v-model="selected.status"
-            deselect-label="Can't remove this value"
+            deselect-label="Não é possível remover este valor"
             track-by="name"
             label="name"
             @input="changeFilter"
@@ -55,7 +55,7 @@
           </multiselect>
           <multiselect
             v-model="selected.sortOrder"
-            deselect-label="Can't remove this value"
+            deselect-label="Não é possível remover este valor"
             track-by="name"
             label="name"
             :options="sortOrder"
@@ -130,19 +130,23 @@ export default {
       sortOrder: [
         {
           id: 1,
-          name: "Popular"
+          name: "Alfabética"
         },
         {
           id: 1,
-          name: "Popular"
+          name: "Mais Capítulos"
         },
         {
           id: 1,
-          name: "Popular"
+          name: "Mais Acessadas"
         },
         {
           id: 1,
-          name: "Popular"
+          name: "Melhores Avaliadas"
+        },
+        {
+          id: 1,
+          name: "Recém Adicionadas"
         }
       ],
       isFetching: true,
