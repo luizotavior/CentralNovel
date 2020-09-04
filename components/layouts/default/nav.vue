@@ -34,7 +34,10 @@
             <span>Grupos</span>
           </b-navbar-item>
         </b-navbar-dropdown>
-        <b-navbar-item href="/ranking">
+        <b-navbar-item
+          v-if="false"
+          href="/ranking"
+        >
           <b-icon icon="fire"></b-icon>
           Rankings
         </b-navbar-item>
@@ -42,7 +45,10 @@
           <b-icon icon="flag"></b-icon>
           Atualizações
         </b-navbar-item>
-        <b-navbar-item @click="isCreate = true">
+        <b-navbar-item
+          v-if="false"
+          @click="isCreate = true"
+        >
           <b-icon icon="pencil-circle"></b-icon>
           Criar
         </b-navbar-item>
@@ -53,7 +59,10 @@
             <search label="Pesquisar..." />
           </b-field>
         </b-navbar-item>
-        <b-navbar-item @click="isComingSoon = true">
+        <b-navbar-item
+          v-if="false"
+          @click="isComingSoon = true"
+        >
           <b-tooltip
             label="Get the App"
             position="is-bottom"
@@ -71,7 +80,10 @@
             <b-icon icon="book"></b-icon>
           </b-tooltip>
         </b-navbar-item>
-        <b-navbar-item @click="isComingSoon = true">
+        <b-navbar-item
+          v-if="false"
+          @click="isComingSoon = true"
+        >
           <b-tooltip
             label="Inbox"
             position="is-bottom"
@@ -80,7 +92,10 @@
             <b-icon icon="inbox"></b-icon>
           </b-tooltip>
         </b-navbar-item>
-        <b-navbar-item @click="isComingSoon = true">
+        <b-navbar-item
+          v-if="false"
+          @click="isComingSoon = true"
+        >
           <b-tooltip
             label="Forum"
             position="is-bottom"

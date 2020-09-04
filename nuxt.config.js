@@ -12,7 +12,8 @@ module.exports = {
    */
   head: {
     title: pkg.name,
-    meta: [{
+    meta: [
+      {
         charset: "utf-8"
       },
       {
@@ -25,11 +26,13 @@ module.exports = {
         content: pkg.description
       }
     ],
-    link: [{
-      rel: "icon",
-      type: "image/x-icon",
-      href: "/favicon.ico"
-    }]
+    link: [
+      {
+        rel: "icon",
+        type: "image/x-icon",
+        href: "/favicon.ico"
+      }
+    ]
   },
 
   /*
@@ -42,7 +45,8 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [{
+  css: [
+    {
       src: "~assets/sass/themes/_theme.scss",
       lang: "scss"
     }
@@ -52,7 +56,8 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{
+  plugins: [
+    {
       src: "~/plugins/vue-agile",
       ssr: false
     },

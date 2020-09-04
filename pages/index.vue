@@ -5,7 +5,7 @@
 
       <quote-review v-if="!$store.state.auth.loggedIn" />
 
-      <topic-title
+      <!-- <topic-title
         title="Biblioteca"
         v-if="$store.state.auth.loggedIn"
         see-more="/library"
@@ -15,7 +15,7 @@
           '/user/library?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
         "
         v-if="$store.state.auth.loggedIn"
-      />
+      /> -->
       <!-- <topic-title title="Novos Lançamentos em Andamento"/>
       <list-novel :mode="2"/> -->
       <!-- <topic-title title="Recommended"/>
@@ -26,7 +26,7 @@
       <list-novel
         :mode="2"
         :api="
-          '/series?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
+          '/series?id=125,12,427&paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
         "
       />
       <topic-title
