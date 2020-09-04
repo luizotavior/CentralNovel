@@ -34,7 +34,7 @@
       <list-novel
         :mode="2"
         :api="
-          '/series?id=125,12,427&paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
+          '/series?id=125,12,427,163,428,290,18,425,1&paginate=false&limit=9'
         "
       />
       <topic-title title="Popular" seeMore="/series?order=3" />
