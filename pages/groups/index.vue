@@ -245,4 +245,51 @@ export default {
     }
   }
 }
+
+@media (max-width: 1024px) {
+  #page-groups {
+    .section-filter {
+      padding: 0 18px;
+    }
+  }
+}
+@media (max-width: 768px) {
+  #page-groups {
+    .section-groups {
+      .__container {
+        ul.list-groups {
+          li {
+            @include col(3);
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 425px) {
+  #page-groups {
+    .section-groups {
+      .__container {
+        ul.list-groups {
+          li {
+            @include col(4);
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 375px) {
+  #page-groups {
+    .section-groups {
+      .__container {
+        ul.list-groups {
+          li {
+            @include col(6);
+          }
+        }
+      }
+    }
+  }
+}
 </style>
