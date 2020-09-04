@@ -83,6 +83,7 @@
           <li
             v-for="(novel, index) in series"
             :key="index"
+            class="--item"
             style="margin-bottom: 2rem;"
             data-aos="slide-up"
             data-aos-offset="100"
@@ -355,6 +356,53 @@ export default {
           display: flex;
           flex-direction: column;
           @include col(2);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  #page-novels {
+    .section-filter {
+      padding: 0 18px;
+    }
+  }
+}
+@media (max-width: 768px) {
+  #page-novels {
+    .section-series {
+      .__container {
+        ul.list-series {
+          li {
+            @include col(3);
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 425px) {
+  #page-novels {
+    .section-series {
+      .__container {
+        ul.list-series {
+          li {
+            @include col(4);
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 375px) {
+  #page-novels {
+    .section-series {
+      .__container {
+        ul.list-series {
+          li {
+            @include col(6);
+          }
         }
       }
     }
