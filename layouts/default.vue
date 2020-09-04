@@ -12,12 +12,11 @@ import defaultFooter from "@/components/layouts/default/footer";
 
 export default {
   name: "Layout",
-  middleware: ['authenticated', 'verified'],
   components: {
     defaultHeader,
     defaultFooter
   },
-  head () {
+  head() {
     return {
       title: "Central Novel",
       meta: [
@@ -29,7 +28,7 @@ export default {
       ]
     };
   },
-  data () {
+  data() {
     return {};
   }
 };
