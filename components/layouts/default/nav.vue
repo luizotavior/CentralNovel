@@ -41,7 +41,7 @@
           <b-icon icon="fire"></b-icon>
           Rankings
         </b-navbar-item>
-        <b-navbar-item href="#updates">
+        <b-navbar-item href="/#updates">
           <b-icon icon="flag"></b-icon>
           Atualizações
         </b-navbar-item>

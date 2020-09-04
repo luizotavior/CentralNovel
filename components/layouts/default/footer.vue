@@ -2,19 +2,34 @@
   <footer>
     <div class="columns">
       <div class="column is-4 column-first">
-        <a href="#" title="Central Novel"
-          ><img src="/images/logos/logo-quadrada.png" alt="Logo Central Novel"
-        /></a>
+        <a
+          href="#"
+          title="Central Novel"
+        ><img
+            src="/images/logos/logo-quadrada.png"
+            alt="Logo Central Novel"
+          /></a>
 
         <div>
           <p class="social">
-            <a href="https://www.facebook.com/centralnovel" title="Facebook">
-              <b-icon icon="facebook"
-            /></a>
-            <a href="#" title="Instagram"> <b-icon icon="instagram"/></a>
-            <a href="https://discord.gg/qCjSsdX" title="Discord">
-              <b-icon icon="discord"
-            /></a>
+            <a
+              href="https://www.facebook.com/centralnovel"
+              title="Facebook"
+            >
+              <b-icon icon="facebook" />
+            </a>
+            <a
+              href="#"
+              title="Instagram"
+            >
+              <b-icon icon="instagram" />
+            </a>
+            <a
+              href="https://discord.gg/qCjSsdX"
+              title="Discord"
+            >
+              <b-icon icon="discord" />
+            </a>
           </p>
           <p class="cn-marca">© 2015-2019 Central Novel</p>
         </div>
@@ -22,36 +37,49 @@
       <div class="column is-3  is-hidden-mobile">
         <h4>Contatos</h4>
         <p>
-          <a href="#" title="Tradutores e Editores">Tradutores e Editores</a>
-          <a href="#" title="Link Teste">Link Teste</a>
-          <a href="#" title="Ajuda e Serviço">Ajuda e Serviço</a>
+          <a
+            href="#"
+            title="Tradutores e Editores"
+          >Tradutores e Editores</a>
+          <a
+            href="#"
+            title="Ajuda e Serviço"
+          >Ajuda e Serviço</a>
         </p>
       </div>
       <div class="column is-3 is-hidden-mobile">
         <h4>Recursos</h4>
         <p>
-          <a href="#" title="Baixar aplicativo">Baixar aplicativo</a>
-          <a href="#" title="Seja um autor">Seja um autor</a>
-          <a href="#" title="Central de Ajuda">Central de Ajuda</a>
-          <a href="#" title="Política de Privacidade"
-            >Política de Privacidade</a
-          >
-          <a href="#" title="Termos de Serviço">Termos de Serviço</a>
+          <!-- <a href="#" title="Baixar aplicativo">Baixar aplicativo</a> -->
+          <!-- <a href="#" title="Seja um autor">Seja um autor</a> -->
+          <a
+            href="#"
+            title="Central de Ajuda"
+          >Central de Ajuda</a>
+          <a
+            href="#"
+            title="Política de Privacidade"
+          >Política de Privacidade</a>
+          <a
+            href="#"
+            title="Termos de Serviço"
+          >Termos de Serviço</a>
         </p>
       </div>
       <div class="column is-2 is-hidden-mobile">
         <h4>Referências</h4>
         <p>
-          <a href="https://www.webnovel.com/" target="_blank" title="WebNovel"
-            >WebNovel</a
-          >
+          <a
+            href="https://www.webnovel.com/"
+            target="_blank"
+            title="WebNovel"
+          >WebNovel</a>
           <a
             href="https://www.novelupdates.com/"
             target="_blank"
             title="NovelUpdates"
-            >NovelUpdates</a
-          >
-          <a href="http://novels.com.br/" target="_blank" title="Palácio do Dao"
+          >NovelUpdates</a>
+          <!-- <a href="http://novels.com.br/" target="_blank" title="Palácio do Dao"
             >Palácio do Dao</a
           >
           <a
@@ -59,7 +87,7 @@
             target="_blank"
             title="Luiz Otávio Rodrigues"
             >Luiz Otávio Rodrigues</a
-          >
+          > -->
         </p>
       </div>
     </div>
