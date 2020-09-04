@@ -1,18 +1,13 @@
 <template>
   <div class="card-novel">
     <div class="header-card">
-      <a :href="'/series/'+novel.slug">
+      <a :href="'/series/' + novel.slug">
         <i>
           <div class="imagem-container">
-            <img
-              class="__image"
-              :src="getCapa"
-              alt=""
-            />
-            <span
-              v-if="novel.language_id == 1"
-              class="__original"
-            >Original</span>
+            <img class="__image" :src="getCapa" alt="" />
+            <span v-if="novel.language_id == 1" class="__original"
+              >Original</span
+            >
           </div>
         </i>
         <h3>{{ novel.title }}</h3>
@@ -24,21 +19,14 @@
         v-for="(author, index) in novel.authors"
         :key="index"
       >
-        <a :href="'/authors/'+author.slug">
-          {{author.name}}
+        <a :href="'/authors/' + author.slug">
+          {{ author.name }}
         </a>
       </div>
     </div>
     <div class="footer-card">
-      <star-rating
-        v-if="rating"
-        :current-rating="novel.averageRating"
-      />
-      <div
-        v-if="sinopse"
-        v-html="novel.synopsis"
-      >
-      </div>
+      <star-rating v-if="rating" :current-rating="novel.averageRating" />
+      <div v-if="sinopse" v-html="novel.synopsis.substr(0, 450) + '...'"></div>
     </div>
   </div>
 </template>
@@ -53,7 +41,7 @@ export default {
   props: {
     novel: {
       type: Object,
-      default: () => { }
+      default: () => {}
     },
     rating: {
       type: Boolean,
@@ -65,12 +53,15 @@ export default {
     }
   },
   computed: {
-    getCapa: function () {
-      return this.novel.image == null ? "https://storage.googleapis.com/centralnovel.com.br/novels/default.jpg" : 'https://storage.googleapis.com/centralnovel.com.br/' + this.novel.image;
-    },
+    getCapa: function() {
+      return this.novel.image == null
+        ? "https://storage.googleapis.com/centralnovel.com.br/novels/default.jpg"
+        : "https://storage.googleapis.com/centralnovel.com.br/" +
+            this.novel.image;
+    }
   },
   methods: {
-    isEmptyObject (obj) {
+    isEmptyObject(obj) {
       var name;
 
       for (name in obj) return false;
