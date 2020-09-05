@@ -34,33 +34,39 @@
       <list-novel
         :mode="2"
         :api="
-          '/series?id=125,12,427,163,428,290,18,425,1&paginate=false&limit=9'
+          '/series?id=125,12,427,163,428,290,18,366,429&sortProperty=id&sortDirection=desc&paginate=false&limit=9'
         "
       />
-      <topic-title title="Popular" seeMore="/series?order=3" />
-      <list-novel
-        :api="
+      <topic-title
+        title="Popular"
+        seeMore="/series?order=3"
+      />
+      <list-novel :api="
           '/series?paginate=false&limit=9&sortProperty=numVotes&sortDirection=desc'
-        "
-      />
+        " />
       <topic-title
         title="Tendências de Histórias Originais"
         seeMore="/series?language=1"
       />
-      <list-novel
-        :api="
+      <list-novel :api="
           '/series?paginate=false&limit=9&language=1&sortProperty=averageRating&sortDirection=desc'
-        "
+        " />
+      <topic-title
+        title="Novos na Central Novel"
+        seeMore="/series?order=5"
       />
-      <topic-title title="Novos na Central Novel" seeMore="/series?order=5" />
-      <list-novel
-        :api="
+      <list-novel :api="
           '/series?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
-        "
+        " />
+      <topic-title
+        title="Gêneros Sugeridas"
+        seeMore="/series"
       />
-      <topic-title title="Gêneros Sugeridas" seeMore="/series" />
       <suggested-tags />
-      <topic-title id="updates" title="Ultimas Atualizações" />
+      <topic-title
+        id="updates"
+        title="Ultimas Atualizações"
+      />
       <feed-table />
     </div>
   </div>
@@ -84,7 +90,7 @@ export default {
     listNovel,
     quoteReview
   },
-  data() {
+  data () {
     return {};
   }
 };
