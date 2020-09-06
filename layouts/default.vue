@@ -23,7 +23,7 @@ export default {
         {
           hid: "description",
           name: "description",
-          content: "a Mais completa e organizada Biblioteca de Novels e Livros traduzidos para o português."
+          content: "A Mais completa e organizada Biblioteca de Novels e Livros traduzidos para o português."
         }
       ]
     };
