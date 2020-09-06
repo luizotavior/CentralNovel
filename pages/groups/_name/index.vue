@@ -1,9 +1,8 @@
 <template>
-  <div id="page-novel">
+  <div id="page-group">
     <div class="__header">
       <div class="__container">
         <div class="__top">
-          <breadcrumb :serie="serie" />
         </div>
         <div class="__bottom">
           <div class="__left">
@@ -17,75 +16,21 @@
           <div class="__right">
             <div class="__content">
               <div class="__title">
-                <h1>{{ serie.title }}</h1>
+                <h1>{{ group.name }}</h1>
               </div>
               <div class="__infos">
                 <ul>
                   <li>
                     <b-icon icon="book-open-page-variant"></b-icon>
-                    {{ serie.releases_count }} Capítulos
+                    {{ group.releases_count }} Lançamentos
                   </li>
                   <li>
                     <b-icon icon="calendar"></b-icon>
-                    {{ serie.releases_mounth / 4 }} Caps / Semana
+                    {{ group.releases_mounth / 4 }} Caps / Semana
                   </li>
-                  <li>
-                    <b-icon icon="book"></b-icon> Em
-                    {{ serie.favorites_count }} Bibliotecas
-                  </li>
-                  <li v-if="serie.pageviews && serie.pageviews >= 1">
+                  <li v-if="group.pageviews && group.pageviews >= 1">
                     <b-icon icon="eye"></b-icon>
-                    {{ serie.pageviews }} Visualizações
-                  </li>
-                </ul>
-              </div>
-              <div
-                v-if="serie.authors && serie.authors.length >= 1"
-                class="__infos"
-              >
-                <span class="__list-title">{{
-                  serie.authors.length > 1 ? "Autores:" : "Autor:"
-                }}</span>
-                <ul class="__authors">
-                  <li
-                    v-for="(author, index) in serie.authors"
-                    :key="index"
-                  >
-                    <a :href="'/authors/' + author.slug">
-                      {{ author.name }}
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div
-                v-if="serie.editors && serie.editors.length >= 1"
-                class="__infos"
-              >
-                <span class="__list-title">{{
-                  serie.editors.length > 1 ? "Editores:" : "Editor:"
-                }}</span>
-                <ul class="__authors">
-                  <li
-                    v-for="(editor, index) in serie.editors"
-                    :key="index"
-                  >
-                    {{ editor.name }}
-                  </li>
-                </ul>
-              </div>
-              <div
-                v-if="serie.translators && serie.translators.length >= 1"
-                class="__infos"
-              >
-                <span class="__list-title">{{
-                  serie.translators.length > 1 ? "Tradutores:" : "Tradutor:"
-                }}</span>
-                <ul class="__authors">
-                  <li
-                    v-for="(translator, index) in serie.translators"
-                    :key="index"
-                  >
-                    {{ translator.name }}
+                    {{ group.pageviews }} Visualizações
                   </li>
                 </ul>
               </div>
@@ -93,39 +38,29 @@
               <div class="__rating">
                 <star-rating
                   size="is-medium"
-                  :current-rating="serie.averageRating"
-                  :current-votes="serie.numVotes"
+                  :current-rating="group.averageRating"
+                  :current-votes="group.numVotes"
                 />
               </div>
             </div>
             <div class="__actions">
               <div>
                 <b-button
+                  tag="a"
+                  target="_blank"
                   type="is-primary"
                   rounded
-                >Ler</b-button>
+                  :href="group.site"
+                >Acessar o Site</b-button>
                 <b-button
+                  v-if="group.donation"
+                  tag="a"
+                  target="_blank"
                   type="is-dark"
-                  tag="router-link"
-                  icon-left="plus"
-                  v-if="!$store.state.auth.loggedIn"
-                  to="/login"
+                  icon-left="currency-usd-circle-outline"
+                  :href="group.donation"
                   rounded
-                >Adicionar à Biblioteca</b-button>
-                <b-button
-                  type="is-dark"
-                  icon-left="plus"
-                  v-if="$store.state.auth.loggedIn && !inLibrary"
-                  @click="addInLibrary"
-                  rounded
-                >Adicionar à Biblioteca</b-button>
-                <b-button
-                  type="is-dark"
-                  icon-left="minus"
-                  v-if="inLibrary && $store.state.auth.loggedIn"
-                  @click="deleteInLibrary"
-                  rounded
-                >Remover da Biblioteca</b-button>
+                >Realizar Doação</b-button>
               </div>
               <div class="small">
                 <a href="#">
@@ -139,7 +74,7 @@
     </div>
     <div class="__body">
       <div class="__container">
-        <nav class="__serie-nav">
+        <nav class="__group-nav">
           <ul>
             <li :class="{ active: bodyTab == 1 }">
               <span @click="bodyTab = 1">Sobre</span>
@@ -155,22 +90,22 @@
           v-if="bodyTab == 1"
         >
           <topic-title
-            title="Sinopse"
+            title="Sobre"
             size="is-size-4"
           />
           <div
-            class="__synopsis"
-            v-html="serie.synopsis"
+            class="__about"
+            v-html="group.about"
           />
-          <reviews :data="serie" />
+          <reviews :data="group" />
         </div>
         <div
           class="tab-releases"
           v-if="bodyTab == 2"
         >
-          <serie-release-table
-            v-if="serie.id"
-            :serie="serie"
+          <group-release-table
+            v-if="group.id"
+            :group="group"
           />
         </div>
       </div>
@@ -179,16 +114,14 @@
 </template>
 
 <script>
-import serieReleaseTable from "@/components/serieReleaseTable.vue";
+import groupReleaseTable from "@/components/groupReleaseTable.vue";
 import starRating from "@/components/starRating.vue";
-import breadcrumb from "@/components/breadcrumb.vue";
 import topicTitle from "@/components/topicTitle.vue";
 import reviews from "@/components/reviews/index.vue";
 import avatar from "vue-avatar";
 export default {
   components: {
-    breadcrumb,
-    serieReleaseTable,
+    groupReleaseTable,
     starRating,
     topicTitle,
     reviews,
@@ -197,82 +130,46 @@ export default {
   },
   data () {
     return {
-      serie: {},
+      group: {},
       bodyTab: 1
     };
   },
   mounted () {
-    this.serieData();
+    this.groupData();
   },
 
   computed: {
-    inLibrary: function () {
-      return this.serie.in_library &&
-        Object.keys(this.serie.in_library).length != 1
-        ? false
-        : true;
-    },
     getCapa: function () {
-      return this.serie.image == null
-        ? "https://storage.googleapis.com/centralnovel.com.br/novels/default.jpg"
+      return this.group.image == null
+        ? "https://storage.googleapis.com/centralnovel.com.br/grupos/default.jpg"
         : "https://storage.googleapis.com/centralnovel.com.br/" +
-        this.serie.image;
+        this.group.image;
     }
   },
   methods: {
-    serieData () {
+    groupData () {
       this.$axios
         .$get(
-          "/series?pageview=true&paginate=0&first=1&releases_mounth=1&slug=" +
+          "/groups?pageview=true&paginate=0&first=true&releases_mounth=1&slug=" +
           this.$route.params.name
         )
         .then(response => {
           console.log(response.data.length);
           if (response.data.length === 0)
-            throw { statusCode: 404, message: "Serie not found" };
-          this.serie = response.data;
+            throw { statusCode: 404, message: "group not found" };
+          this.group = response.data;
         })
         .catch(e => {
           return this.$nuxt.error(e);
         });
     },
-    addInLibrary () {
-      this.$axios
-        .post("user/library", { series: [this.serie.id] })
-        .then(response => {
-          this.$buefy.toast.open({
-            message: "Adicionado aos Favoritos"
-          });
-          this.serieData();
-        })
-        .catch(e => {
-          this.$buefy.toast.open({
-            message: "[" + e.status + "] Ocorreu um Erro Inesperado."
-          });
-        });
-    },
-    deleteInLibrary () {
-      this.$axios
-        .delete("user/library", { data: { series: [this.serie.id] } })
-        .then(response => {
-          this.$buefy.toast.open({
-            message: "Removido dos Favoritos"
-          });
-          this.serieData();
-        })
-        .catch(e => {
-          this.$buefy.toast.open({
-            message: "[" + e.status + "] Ocorreu um Erro Inesperado."
-          });
-        });
-    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/sass/main.scss";
-#page-novel {
+#page-group {
   .__header,
   .__body {
     display: flex;
@@ -393,7 +290,7 @@ export default {
   .__body {
     background-color: #fff;
     min-height: 480px;
-    nav.__serie-nav {
+    nav.__group-nav {
       width: 100%;
       max-width: 450px;
       margin-top: 24px;
@@ -458,7 +355,7 @@ export default {
       p {
         line-height: 28px;
       }
-      .__synopsis {
+      .__about {
         margin-bottom: 48px;
       }
     }
