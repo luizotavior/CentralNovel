@@ -16,19 +16,19 @@ export default {
     defaultHeader,
     defaultFooter
   },
-  head() {
+  head () {
     return {
       title: "Central Novel",
       meta: [
         {
           hid: "description",
           name: "description",
-          content: "My custom description"
+          content: "a Mais completa e organizada Biblioteca de Novels e Livros traduzidos para o português."
         }
       ]
     };
   },
-  data() {
+  data () {
     return {};
   }
 };
