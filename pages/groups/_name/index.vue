@@ -79,6 +79,9 @@
             <li :class="{ active: bodyTab == 1 }">
               <span @click="bodyTab = 1">Sobre</span>
             </li>
+            <li :class="{ active: bodyTab == 3 }">
+              <span @click="clickSeries">Series</span>
+            </li>
             <li :class="{ active: bodyTab == 2 }">
               <span @click="bodyTab = 2">Lançamentos</span>
             </li>
@@ -108,12 +111,40 @@
             :group="group"
           />
         </div>
+        <div
+          class="tab-series"
+          v-if="bodyTab == 3"
+        >
+
+          <div class="section-series">
+            <div class="__container">
+              <ul class="list-series">
+                <li
+                  v-for="(serie, index) in series"
+                  :key="index"
+                  class="--item"
+                  style="margin-bottom: 2rem;"
+                  data-aos="slide-up"
+                  data-aos-offset="100"
+                  data-aos-easing="ease-out-back"
+                  data-aos-once="true"
+                >
+                  <card-novel
+                    :novel="serie.serie"
+                    :rating="true"
+                  />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import cardNovel from "@/components/cardNovel.vue";
 import groupReleaseTable from "@/components/groupReleaseTable.vue";
 import starRating from "@/components/starRating.vue";
 import topicTitle from "@/components/topicTitle.vue";
@@ -125,11 +156,12 @@ export default {
     starRating,
     topicTitle,
     reviews,
-
+    cardNovel,
     avatar
   },
   data () {
     return {
+      series: null,
       group: {},
       bodyTab: 1
     };
@@ -147,6 +179,25 @@ export default {
     }
   },
   methods: {
+    clickSeries () {
+      this.bodyTab = 3;
+      this.getSeries();
+    },
+    getSeries () {
+      this.$axios
+        .$get(
+          "groups/" +
+          this.group.id +
+          "/series"
+        )
+        .then(data => {
+          this.series = data.data
+          this.busy = false;
+        })
+        .catch(error => {
+          this.busy = false;
+        });
+    },
     groupData () {
       this.$axios
         .$get(
@@ -292,7 +343,7 @@ export default {
     min-height: 480px;
     nav.__group-nav {
       width: 100%;
-      max-width: 450px;
+      max-width: 500px;
       margin-top: 24px;
       margin-bottom: 48px;
       ul {
@@ -303,7 +354,7 @@ export default {
           display: flex;
           flex-direction: column;
           text-align: center;
-          @include col(6);
+          @include col(4);
           margin: 0;
 
           span {
@@ -315,17 +366,24 @@ export default {
           }
 
           &:nth-child(1).active ~ hr {
-            margin-right: 50%;
+            margin-right: 33%;
           }
           &:nth-child(2).active ~ hr {
-            margin-left: 50%;
+            margin-left: 33%;
+          }
+          &:nth-child(3).active ~ hr {
+            margin-left: 66%;
           }
           &:nth-child(1):hover ~ hr {
-            margin-right: 50% !important;
+            margin-right: 33% !important;
             margin-left: 0;
           }
           &:nth-child(2):hover ~ hr {
-            margin-left: 50% !important;
+            margin-left: 33% !important;
+            margin-right: 0;
+          }
+          &:nth-child(3):hover ~ hr {
+            margin-left: 66% !important;
             margin-right: 0;
           }
         }
@@ -334,7 +392,7 @@ export default {
           position: absolute;
           bottom: 0px;
           height: 0.25rem;
-          width: 48%;
+          width: 32%;
           margin: 0;
           height: 3px;
           background: #83848f;
@@ -357,6 +415,72 @@ export default {
       }
       .__about {
         margin-bottom: 48px;
+      }
+    }
+    div.tab-series {
+      .section-series {
+        display: flex;
+        flex-direction: row;
+        @extend %justify-center;
+        .__container {
+          display: flex;
+          flex-direction: column;
+          @extend %row;
+          width: 100%;
+          padding-top: 12px;
+          padding-bottom: 32px;
+          ul.list-series {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-top: 38px;
+            li {
+              display: flex;
+              flex-direction: column;
+              @include col(2);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #page-group {
+    .section-series {
+      .__container {
+        ul.list-series {
+          li {
+            @include col(3);
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 425px) {
+  #page-group {
+    .section-series {
+      .__container {
+        ul.list-series {
+          li {
+            @include col(4);
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 375px) {
+  #page-group {
+    .section-series {
+      .__container {
+        ul.list-series {
+          li {
+            @include col(6);
+          }
+        }
       }
     }
   }
