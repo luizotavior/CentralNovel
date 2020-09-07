@@ -12,8 +12,7 @@ module.exports = {
    */
   head: {
     title: pkg.name,
-    meta: [
-      {
+    meta: [{
         charset: "utf-8"
       },
       {
@@ -27,20 +26,12 @@ module.exports = {
       }
     ],
 
-    script: [
-      {
-        src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
-        "data-ad-client": "ca-pub-7781654679401477",
-        async: true
-      }
-    ],
-    link: [
-      {
-        rel: "icon",
-        type: "image/x-icon",
-        href: "/favicon.ico"
-      }
-    ]
+    script: [],
+    link: [{
+      rel: "icon",
+      type: "image/x-icon",
+      href: "/favicon.ico"
+    }]
   },
 
   /*
@@ -53,8 +44,7 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [
-    {
+  css: [{
       src: "~assets/sass/themes/_theme.scss",
       lang: "scss"
     }
@@ -64,8 +54,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    {
+  plugins: [{
       src: "~/plugins/vue-agile",
       ssr: false
     },
