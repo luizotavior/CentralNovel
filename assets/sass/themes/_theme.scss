@@ -1,6 +1,7 @@
 // Import Bulma's core
 @import "~bulma/sass/utilities/_all";
 @import "../helpers/_variables.scss";
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600,700');
 
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 // Links
@@ -8,7 +9,6 @@ $link: $primary;
 $link-invert: $primary-invert;
 $link-focus-border: $primary;
 $family-primary: 'Source Sans Pro';
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600,700');
 
 $colors: ("white": ($white, $black),
   "black": ($black, $white),
@@ -21,7 +21,44 @@ $colors: ("white": ($white, $black),
   "danger": ($danger, $danger-invert),
   "twitter": ($twitter, $twitter-invert));
 
-$navbar-height: 5rem;
+
 // Import Bulma and Buefy styles
+$weight-semibold: 400;
+$label-color: #12263f;
+$label-weight: 400;
+$input-shadow: 0px;
+$family-primary: 'Source Sans Pro';
+$navbar-height: 5rem;
+// $control-padding-vertical: 1.55rem;
+// $control-padding-horizontal : 1.3rem;
+//Modal Background-color
+$modal-background-background-color: rgba(0, 0, 0, .32);
+//
+
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
+
+.label {
+  color: #12263f;
+}
+
+input {
+  &::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgba(103, 103, 103, 0.5) !important;
+    opacity: 1;
+    /* Firefox */
+  }
+
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgba(103, 103, 103, 0.5) !important;
+  }
+
+  &::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: rgba(103, 103, 103, 0.5) !important;
+  }
+}
+
+@import "@mdi/font/css/materialdesignicons.min.css";

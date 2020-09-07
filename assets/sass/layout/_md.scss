@@ -1,0 +1,84 @@
+.md-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  width: 100%;
+  padding-top: 36px;
+
+  >div.__left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  >div.__right {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.md-card {
+  width: 100%;
+  background-color: #fff;
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  position: relative;
+  border-radius: 4px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  margin-bottom: 2.3076923077rem;
+  padding: 1.4rem 1.9rem;
+
+  &.no-padding {
+    padding: 0px;
+  }
+
+  .title {
+    font-size: 18px;
+    line-height: 27px;
+    padding: 0;
+    margin: 0;
+  }
+
+  &.is-default {
+    width: 435px;
+  }
+
+  >.__header {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-bottom: 1.4rem;
+
+    .__title {
+      display: flex;
+      flex-direction: row;
+      @extend %justify-between;
+      @extend %vertical-align-middle;
+    }
+
+    h4 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    &.is-borded::after {
+      bottom: 0;
+      border-top: 1px solid #ebeff2;
+      content: "";
+      display: block;
+      left: -1.9rem;
+      right: -1.9rem;
+      position: absolute;
+    }
+  }
+
+  >.__body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  >.__footer {
+    display: flex;
+    flex-direction: column;
+    margin: 2.4615384615rem 0 0;
+  }
+}
