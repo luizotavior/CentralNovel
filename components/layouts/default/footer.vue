@@ -31,7 +31,7 @@
               <b-icon icon="discord" />
             </a>
           </p>
-          <p class="cn-marca">© 2015-2019 Central Novel</p>
+          <p class="cn-marca">© 2015-{{new Date().getFullYear()}} Central Novel</p>
         </div>
       </div>
       <div class="column is-3  is-hidden-mobile">
