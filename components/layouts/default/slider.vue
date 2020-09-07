@@ -14,6 +14,18 @@
             alt=""
           >
         </div>
+        <div class="slide">
+
+          <a
+            href="https://tsundokutraducoes.com.br/"
+            target="_blank"
+          >
+            <img
+              src="images/slides/slide_06.png"
+              alt=""
+            >
+          </a>
+        </div>
 
         <div class="slide">
 
