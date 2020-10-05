@@ -15,15 +15,10 @@
         "
         v-if="$store.state.auth.loggedIn"
       /> -->
-      <!-- Principal-01 -->
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-7781654679401477"
-        data-ad-slot="6790288185"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      ></ins>
+      <adsbygoogle
+     ad-client="ca-pub-7781654679401477"
+     ad-slot="9239531397"
+     ad-format="auto"/>
       <!-- <topic-title title="Novos Lançamentos em Andamento"/>
       <list-novel :mode="2"/> -->
       <!-- <topic-title title="Recommended"/>

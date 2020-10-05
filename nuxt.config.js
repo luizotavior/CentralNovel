@@ -12,7 +12,8 @@ module.exports = {
    */
   head: {
     title: pkg.name,
-    meta: [{
+    meta: [
+      {
         charset: "utf-8"
       },
       {
@@ -27,11 +28,13 @@ module.exports = {
     ],
 
     script: [],
-    link: [{
-      rel: "icon",
-      type: "image/x-icon",
-      href: "/favicon.ico"
-    }]
+    link: [
+      {
+        rel: "icon",
+        type: "image/x-icon",
+        href: "/favicon.ico"
+      }
+    ]
   },
 
   /*
@@ -44,7 +47,8 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [{
+  css: [
+    {
       src: "~assets/sass/themes/_theme.scss",
       lang: "scss"
     }
@@ -54,27 +58,29 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{
+  plugins: [
+    {
       src: "~/plugins/vue-agile",
-      ssr: false
+      mode: "client"
     },
     {
       src: "~/plugins/hotjar.js",
-      ssr: false
+      mode: "client"
     },
     {
       src: "~/plugins/aos.js",
-      ssr: false
+      mode: "client"
     },
     {
       src: "~/plugins/infiniteScroll.js",
-      ssr: false
+      mode: "client"
     },
     {
       src: "~plugins/vee-validate.js",
-      ssr: false
+      mode: "client"
     },
-    "plugins/vue-mq.js"
+    "plugins/vue-mq.js",
+    { src: "plugins/tui-editor.client.js", mode: "client" }
   ],
   buefy: {
     css: false
@@ -123,9 +129,13 @@ module.exports = {
         timezone: true,
         defaultTimezone: "America/Sao_Paulo"
       }
-    ]
+    ],
+    ['@nuxtjs/google-adsense']
   ],
 
+  'google-adsense': {
+    id: 'pub-7781654679401477'
+  },
   recaptcha: {
     hideBadge: false, // Hide badge element (v3 & v2 via size=invisible)
     siteKey: process.env.GOOGLE_RECAPTCHA_PUBLIC_KEY, // Site key for requests
