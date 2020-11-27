@@ -133,7 +133,13 @@
               :username="this.$auth.$state.user.username"
             />
           </template>
-          <!-- <hr class="dropdown-divider" /> -->
+            <b-navbar-item
+              aria-role="menuitem"
+              v-if="$auth.$state.user.permissions.some(e => e.name === 'dashboard.show')"
+              tag="router-link"
+              :to="'/dashboard/users'"
+            >Dashboard</b-navbar-item>
+          <hr class="dropdown-divider" />
           <b-navbar-item
             value="logout"
             aria-role="menuitem"

@@ -1,0 +1,52 @@
+@import "@/assets/sass/helpers/_helpers--margin.scss";
+
+.is-flex-vcenter {
+  display: flex;
+  @extend %vertical-align-middle;
+
+}
+
+.label-opacity .label {
+  opacity: 0;
+}
+
+//Helpers
+.is-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.is-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.is-flex-left {
+  display: flex;
+  @extend %justify-left;
+}
+
+.is-flex-right {
+  display: flex;
+  @extend %justify-right;
+}
+
+.is-margin-left-6 {
+  margin-left: 6px;
+}
+
+.is-margin-left-12 {
+  margin-left: 12px;
+}
+
+.is-margin-left-24 {
+  margin-left: 12px;
+}
+
+.is-margin-right-12 {
+  margin-right: 12px;
+}
+
+.is-margin-right-24 {
+  margin-right: 12px;
+}
