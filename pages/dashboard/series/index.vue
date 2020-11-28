@@ -24,8 +24,8 @@
       <b-table
         :data="data.data"
         :loading="isFetching"
-        :total="data.total"
-        :per-page="data.per_page"
+        :total="data.meta ? data.meta.total : 0"
+        :per-page="perPage"
         @page-change="onPageChange"
         :mobile-cards="false"
         paginated
@@ -50,14 +50,21 @@
           sortable
           v-slot="props"
         >{{
-            props.row.releases_count}}
+            props.row.releases_count || 0}}
         </b-table-column>
         <b-table-column
-          field="averageRating"
-          label="Nota (Votos)"
+          field="language.name"
+          label="Linguagem"
           sortable
           v-slot="props"
-        >{{ props.row.averageRating}} ({{  props.row.numVotes}} )
+        >{{ props.row.language.name}}
+        </b-table-column>
+        <b-table-column
+          field="type.name"
+          label="Tipo"
+          sortable
+          v-slot="props"
+        >{{ props.row.type.name}}
         </b-table-column>
         <b-table-column
           field="pageviews"
@@ -118,7 +125,7 @@ export default {
   data () {
     return {
       query: "",
-      isFetching: false,
+      isFetching: true,
       digitedTypingTime: null,
       data: [],
       empty: false,
@@ -137,18 +144,12 @@ export default {
           this.data = []
           this.isFetching = true
 
-          this.$axios.$get('/series?page=' + this.page + '&per_page=' + this.perPage + '&q=' + this.query)
+          this.$axios.$get('/series?page=' + this.page + '&per_page=' + this.perPage + '&relationships=language,type&q=' + this.query)
             .then(data => {
 
               this.data = [];
               this.isFetching = false
-              this.empty = (data.length == 0)
-              let currentTotal = data.total;
-              if (data.total / this.perPage > 1000) {
-                currentTotal = this.perPage * 1000;
-              }
-              this.total = currentTotal;
-              this.data = data.data;
+              this.data = data;
             })
             .catch(error => {
               this.isFetching = false

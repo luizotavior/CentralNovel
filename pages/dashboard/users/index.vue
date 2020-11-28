@@ -18,8 +18,8 @@
       <b-table
         :data="data.data"
         :loading="isFetching"
-        :total="data.total"
-        :per-page="data.per_page"
+        :total="data.meta ? data.meta.total : 0"
+        :per-page="perPage"
         @page-change="onPageChange"
         :mobile-cards="false"
         paginated
@@ -45,6 +45,27 @@
           v-slot="props"
         >{{
             props.row.sex}}
+        </b-table-column>
+        <b-table-column
+          field="favorites.length"
+          label="Favoritos"
+          sortable
+          v-slot="props"
+        >{{ props.row.favorites.length}}
+        </b-table-column>
+        <b-table-column
+          field="serie_reviews.length"
+          label="Serie Reviews"
+          sortable
+          v-slot="props"
+        >{{ props.row.serie_reviews.length}}
+        </b-table-column>
+        <b-table-column
+          field="group_reviews.length"
+          label="Grupo Reviews"
+          sortable
+          v-slot="props"
+        >{{ props.row.group_reviews.length}}
         </b-table-column>
         <b-table-column
           field="created_at"
@@ -116,18 +137,12 @@ export default {
           this.data = []
           this.isFetching = true
 
-          this.$axios.$get('/users?page=' + this.page + '&per_page=' + this.perPage + '&q=' + this.query)
+          this.$axios.$get('/users?page=' + this.page + '&per_page=' + this.perPage + '&relationships=favorites,serieReviews,groupReviews&q=' + this.query)
             .then(data => {
 
               this.data = [];
               this.isFetching = false
-              this.empty = (data.length == 0)
-              let currentTotal = data.total;
-              if (data.total / this.perPage > 1000) {
-                currentTotal = this.perPage * 1000;
-              }
-              this.total = currentTotal;
-              this.data = data.data;
+              this.data = data;
             })
             .catch(error => {
               this.isFetching = false

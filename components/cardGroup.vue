@@ -56,8 +56,10 @@ export default {
     }
   },
   computed: {
-    getCapa: function () {
-      return this.group.image == null ? "https://storage.googleapis.com/centralnovel.com.br/grupos/default.jpg" : 'https://storage.googleapis.com/centralnovel.com.br/' + this.novel.image;
+    getCapa: function() {
+      return this.group.image == null
+        ? "https://storage.googleapis.com/centralnovel.com.br/grupos/default.jpg"
+        : "https://storage.googleapis.com/centralnovel.com.br/" + this.group.image;
     },
   },
   methods: {

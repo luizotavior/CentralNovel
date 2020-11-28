@@ -229,7 +229,7 @@ export default {
     },
     loadMore () {
       if (this.paginate.page >= this.seriesInfo.last_page) {
-        console.log("Last Page!!!");
+        //Last Page
         return;
       }
       this.busy = true;
@@ -250,8 +250,8 @@ export default {
         )
         .then(data => {
           console.log("Adding 20 more data results");
-          this.series = this.series.concat(data.data.data);
-          this.seriesInfo = data.data;
+          this.series = this.series.concat(data.data);
+          this.seriesInfo = data.meta;
           this.busy = false;
         })
         .catch(error => {

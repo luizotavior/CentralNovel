@@ -137,7 +137,7 @@
               aria-role="menuitem"
               v-if="$auth.$state.user.permissions.some(e => e.name === 'dashboard.show')"
               tag="router-link"
-              :to="'/dashboard/users'"
+              :to="'/dashboard'"
             >Dashboard</b-navbar-item>
           <hr class="dropdown-divider" />
           <b-navbar-item

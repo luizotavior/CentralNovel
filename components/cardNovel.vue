@@ -56,8 +56,7 @@ export default {
     getCapa: function() {
       return this.novel.image == null
         ? "https://storage.googleapis.com/centralnovel.com.br/novels/default.jpg"
-        : "https://storage.googleapis.com/centralnovel.com.br/" +
-            this.novel.image;
+        : "https://storage.googleapis.com/centralnovel.com.br/" + this.novel.image;
     }
   },
   methods: {

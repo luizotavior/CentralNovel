@@ -137,8 +137,8 @@ export default {
         )
         .then(data => {
           console.log("Adding 20 more data results");
-          this.groups = this.groups.concat(data.data.data);
-          this.groupsInfo = data.data;
+          this.groups = this.groups.concat(data.data);
+          this.groupsInfo = data.meta;
           this.busy = false;
         })
         .catch(error => {

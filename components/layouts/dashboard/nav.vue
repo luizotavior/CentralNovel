@@ -29,13 +29,16 @@
               icon="account-circle"
               v-if="$auth.$state.user.permissions.some(e => e.name === 'dashboard.show')"
               label="Dashboard"
-              disabled
+              tag="router-link"
+              :to="'/dashboard'"
+              exact-active-class="is-active"
             ></b-menu-item>
             <b-menu-item
               icon="account-circle"
               v-if="$auth.$state.user.permissions.some(e => e.name === 'releases.edit')"
               label="Releases"
               disabled
+              active-class="is-active"
             ></b-menu-item>
             <b-menu-item
               icon="book"
@@ -43,6 +46,7 @@
               v-if="$auth.$state.user.permissions.some(e => e.name === 'series.edit')"
               tag="router-link"
               :to="'/dashboard/series'"
+              active-class="is-active"
             ></b-menu-item>
             <b-menu-item
               icon="account-circle"
@@ -50,6 +54,7 @@
               label="Grupos"
               tag="router-link"
               :to="'/dashboard/groups'"
+              active-class="is-active"
             ></b-menu-item>
             <b-menu-item
               icon="account-circle"
@@ -57,11 +62,13 @@
               v-if="$auth.$state.user.permissions.some(e => e.name === 'users.edit')"
               tag="router-link"
               :to="'/dashboard/users'"
+              active-class="is-active"
             ></b-menu-item>
             <b-menu-item
               icon="account-circle"
               v-if="$auth.$state.user.permissions.some(e => e.name === 'adsense.show')"
               label="Adsense Interno"
+              active-class="is-active"
               disabled
             ></b-menu-item>
           </b-menu-list>

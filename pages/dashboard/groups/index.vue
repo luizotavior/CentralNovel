@@ -45,13 +45,6 @@
           }}</nuxt-link>
         </b-table-column>
         <b-table-column
-          field="releases_count"
-          label="Releases"
-          sortable
-          v-slot="props"
-        >{{ props.row.releases_count || '0'}}
-        </b-table-column>
-        <b-table-column
           field="series_count"
           label="Series"
           sortable
@@ -60,19 +53,27 @@
             props.row.series_count || '0' }}
         </b-table-column>
         <b-table-column
+          field="releases_count"
+          label="Releases"
+          sortable
+          v-slot="props"
+        >{{ props.row.releases_count || '0'}}
+        </b-table-column>
+        <b-table-column
           field="releases_mounth"
-          label="Lançamentos / Mês"
+          label="Frequêcia (Last 31 Dias)"
           sortable
           v-slot="props"
         >{{
             props.row.releases_mounth || '0'}}
         </b-table-column>
         <b-table-column
-          field="averageRating"
-          label="Nota (Votos)"
+          field="pageviews"
+          label="PageViews"
           sortable
           v-slot="props"
-        >{{ props.row.averageRating || '0'}} ({{  props.row.numVotes  || '0'}})
+        >{{
+            props.row.pageviews}}
         </b-table-column>
         <b-table-column
           field="pageviews"
