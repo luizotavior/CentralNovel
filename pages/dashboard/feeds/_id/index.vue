@@ -84,12 +84,88 @@
           </div>
           <div id="change-password">
             <h1 class="is-size-6 has-text-weight-medium">
-
+              Adicionar Release
             </h1>
             <form>
-              <b-field label="Descrição" expanded>
-                <TuiViewer :initialValue="data.description"/>
+              <b-field
+                grouped
+              >
+              <b-field
+                expanded
+                label="Serie"
+              >
+                <b-autocomplete
+                  v-model="series.query"
+                  :data="series.data"
+                  field="title"
+                  @input="getAsyncSerie(series.query)"
+                  @select="option => {release.serie = option; release.serie_id = option ? option.id : null}">
+                  <template slot="empty">No results found</template>
+                </b-autocomplete>
               </b-field>
+              <b-field
+                expanded
+                label="Grupo"
+              >
+                <b-input
+                  type="text"
+                  v-model="release.group.name"
+                  disabled
+                />
+              </b-field>
+              </b-field>
+              <b-field
+                grouped
+              >
+              <b-field
+                expanded
+                label="Arco"
+              >
+                <b-input
+                  type="text"
+                  v-model="release.arc"
+                />
+              </b-field>
+                <b-field
+                  expanded
+                  label="Volume"
+                >
+                  <b-input
+                    type="text"
+                    v-model="release.volume"
+                  />
+                </b-field>
+              </b-field>
+              <b-field grouped>
+                <b-field
+                  expanded
+                  label="Capítulo"
+                >
+                  <b-input
+                    type="text"
+                    v-model="release.chapter"
+                  />
+                </b-field>
+                <b-field
+                  expanded
+                  label="Parte"
+                >
+                  <b-input
+                    type="text"
+                    v-model="release.part"
+                  />
+                </b-field>
+              </b-field>
+
+              <div
+                class=" buttons"
+              >
+                <b-button
+                  @click="newRelease()"
+                  type="is-info"
+                  expanded
+                >Adicionar</b-button>
+              </div>
             </form>
           </div>
         </div>
@@ -196,15 +272,8 @@
       </div>
     </div>
 
-    <b-modal
-      :active.sync="isCardModalActive"
-      :width="600"
-      scroll="keep"
-    >
-      <collaborator-new @refresh="getAsyncData (query)" />
-    </b-modal>
-
     </div>
+
   </div>
 
 </template>
@@ -224,12 +293,21 @@ export default {
   data() {
     return {
       //Configs
-      isCardModalActive: false,
       data: {
       },
-      roles: {
+      release: {
+        arc: null,
+        volume: null,
+        chapter: null,
+        part: null,
+        url: null,
+      },
+      series: {
         data: [],
-        loading: false
+        query: '',
+        loading: false,
+        digitedTypingTime: null,
+        selected: null,
       },
       loading: false
     };
@@ -283,10 +361,48 @@ export default {
           var responseData = response.data;
           this.data = responseData;
           this.loading = false;
+          this.release.feed_id = this.data.id
+          this.release.url = this.data.permalink
+          this.release.group_id = this.data.group_id
+          this.release.group = this.data.group
         })
         .catch(error => {
           // this.$router.push("/dashboard/feeds");
         });
+    },
+    newRelease(){
+      this.$buefy.toast.open({
+        message: 'Carregando...'
+      })
+      this.release.feed_id = this.data.id
+      this.release.url = this.data.permalink
+      this.release.group_id = this.data.group_id
+      this.$axios
+        .post("releases",this.release)
+        .then(response => {
+          var msg = ""
+          if(response.status == 200){
+            msg = "Ação Realizada!"
+          }else{
+            msg = "Ocorreu um Erro! ["+response.status+"]"
+          }
+          this.$buefy.toast.open({
+            message: msg
+          });
+          this.release.data = [];
+          this.feedData()
+        })
+        .catch(e => {
+          if (!e.response) {
+            this.errors = {
+              'error': ["Erro na Rede - Servidor Offline"]
+            }
+          } else {
+            this.$buefy.toast.open({
+              message: "[" + response.status + "] Ocorreu um Erro Inesperado."
+            });
+          }
+        })
     },
     confirmUpdateRelease (release) {
       this.$buefy.dialog.confirm({
@@ -375,6 +491,25 @@ export default {
             });
           }
         })
+    },
+    getAsyncSerie (query) {
+      clearTimeout(this.series.digitedTypingTime);
+      this.series.digitedTypingTime = setTimeout(() => {
+        if (query.length > 0) {
+          this.series.data = []
+          this.series.isFetching = true
+          this.$axios.$get('/series/?paginate=false&q=' + this.series.query)
+            .then(data => {
+              //data.data.forEach((item) => this.data.push(item))
+              this.series.data = data.data;
+              this.series.isFetching = false
+            })
+            .catch(error => {
+              this.series.sFetching = false
+              throw error
+            })
+        }
+      }, 500);
     },
   }
 };
