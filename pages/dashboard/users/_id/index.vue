@@ -86,7 +86,7 @@
               >
                 <b-input
                   type="text"
-                  v-model="data.created_at"
+                  :value="$moment(data.created_at).format('lll')"
                   disabled
                 />
               </b-field>
@@ -203,7 +203,7 @@ export default {
           this.loading = false;
         })
         .catch(error => {
-          //this.$router.push("/dashboard/series");
+          this.$router.push("/dashboard/users");
         });
     },
     rolesData() {

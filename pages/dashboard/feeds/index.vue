@@ -1,6 +1,6 @@
 <template>
-  <div id="page-groups">
-    <div class="group-filter">
+  <div id="page-feeds">
+    <div class="release-filter">
       <div class="md-card no-padding">
         <b-input
           v-model="query"
@@ -8,19 +8,13 @@
           expanded
           class="md-search"
           icon="magnify"
-          placeholder="Pesquisar Grupos"
+          placeholder="Pesquisar Feeds"
           @input="getAsyncData(query)"
         />
 
       </div>
-      <b-button
-        class="md-button"
-        type="is-primary"
-        tag="router-link"
-        :to="'/dashboard/groups/new'"
-      >Adicionar Grupo</b-button>
     </div>
-    <div class="groups-table md-card no-padding">
+    <div class="releases-table md-card no-padding">
       <b-table
         :data="data.data"
         :loading="isFetching"
@@ -32,55 +26,65 @@
         backend-pagination
       >
         <b-table-column
-          field="name"
-          label="Nome"
+          field="title"
+          label="Titulo"
           sortable
           v-slot="props"
         >
           <nuxt-link
-            :to="'/dashboard/groups/' + props.row.id"
+            :to="'/dashboard/feeds/' + props.row.id"
             class="__titulo"
           >{{
-            props.row.name
+            props.row.title
           }}</nuxt-link>
         </b-table-column>
         <b-table-column
-          field="series_count"
-          label="Series"
+          field="group.name"
+          label="Grupo"
           sortable
           v-slot="props"
-        >{{
-            props.row.series_count || '0' }}
+        >
+          <nuxt-link
+            :to="'/dashboard/groups/' + props.row.group.id"
+            class="__titulo"
+          >{{
+            props.row.group.name
+          }}</nuxt-link>
         </b-table-column>
         <b-table-column
-          field="releases_count"
-          label="Releases"
+          field="releases.length"
+          label="Assimilado"
           sortable
           v-slot="props"
-        >{{ props.row.releases_count || '0'}}
+        >
+          <span
+            v-for="(release, index) in props.row.releases"
+            :key="index"
+          >
+            <a :href="'/dashboard/series/' + release.serie.id" target="_blank">
+              <b-tag type="is-info">
+                  {{ release.serie.title }}
+              </b-tag>
+            </a> -
+            <a :href="'/dashboard/releases/' + release.id" target="_blank">
+            <b-tag type="is-warning">
+                {{ release.arc ? "A" + release.arc + " " : "" }}
+                {{ release.volume ? "V" + release.volume + "" : "" }}
+                {{ release.chapter ? "C" + release.chapter + " " : "" }}
+                {{ release.part ? "P" + release.part + " " : "" }}
+            </b-tag>
+            </a>
+          </span>
+          <b-tag type="is-danger" v-if="props.row.releases.length == 0">Nenhuma Serie Encontrada</b-tag>
+
         </b-table-column>
         <b-table-column
-          field="releases_mounth"
-          label="Frequêcia (Last 31 Dias)"
+          field="published_at"
+          label="Publicado"
           sortable
           v-slot="props"
-        >{{
-            props.row.releases_mounth || '0'}}
-        </b-table-column>
-        <b-table-column
-          field="is_active"
-          label="Status"
-          sortable
-          v-slot="props"
-        >{{ props.row.is_active ? 'Ativo' : 'Desativado' }}
-        </b-table-column>
-        <b-table-column
-          field="pageviews"
-          label="PageViews"
-          sortable
-          v-slot="props"
-        >{{
-            props.row.pageviews}}
+        >
+          {{$moment(props.row.published_at).format('LLL')}}
         </b-table-column>
         <b-table-column
           field="pageviews"
@@ -88,14 +92,16 @@
           sortable
           v-slot="props"
         >
+        <b-tooltip label="Feed External Link">
           <a
-            :href="'/groups/' + props.row.slug"
+            :href="props.row.permalink"
             target="_blank"
             class="__titulo"
           >
             <b-icon
                 icon="link"/>
           </a>
+          </b-tooltip>
         </b-table-column>
 
         <template slot="empty">
@@ -107,7 +113,7 @@
                   size="is-large"
                 />
               </p>
-              <p>Não há grupos disponiveis para visualização.</p>
+              <p>Você não possui releases ainda.</p>
             </div>
           </section>
         </template>
@@ -127,7 +133,7 @@ export default {
   middleware: ['permissions'],
   meta: {
     permissions: [
-      'groups.edit'
+      'feeds.edit'
     ]
   },
   data () {
@@ -152,7 +158,7 @@ export default {
           this.data = []
           this.isFetching = true
 
-          this.$axios.$get('/groups?page=' + this.page + '&per_page=' + this.perPage + '&q=' + this.query)
+          this.$axios.$get('/feeds?page=' + this.page + '&per_page=' + this.perPage + '&q=' + this.query)
             .then(data => {
 
               this.data = [];
@@ -180,13 +186,13 @@ export default {
     async deletelocation (id, notify = true) {
       await this.$axios
         .delete(
-          "/groups/" + id
+          "/releases/" + id
         )
         .then(response => {
           if (notify) {
             this.$buefy.snackbar.open({
               duration: 5000,
-              message: 'O Grupo foi Removido com Sucesso.',
+              message: 'A Release foi Removida com Sucesso.',
               position: 'is-bottom-left',
               queue: false,
             })
@@ -211,8 +217,8 @@ export default {
 </script>
 <style lang="scss">
 @import "@/assets/sass/main.scss";
-#page-groups {
-  .group-filter {
+#page-feeds {
+  .release-filter {
     display: flex;
     flex-direction: row;
     .md-card {
@@ -244,7 +250,7 @@ export default {
       height: 55px;
     }
   }
-  .groups-table {
+  .releases-table {
     padding-bottom: 12px;
   }
   div.b-table {
@@ -254,7 +260,7 @@ export default {
         display: flex;
         flex-direction: row;
         align-items: center;
-        .groups {
+        .releases {
           padding-left: 15px;
           color: #323c47;
           font-weight: 500;

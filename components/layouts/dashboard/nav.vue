@@ -26,7 +26,7 @@
         <b-menu>
           <b-menu-list label="Menu">
             <b-menu-item
-              icon="account-circle"
+              icon="view-dashboard"
               v-if="$auth.$state.user.permissions.some(e => e.name === 'dashboard.show')"
               label="Dashboard"
               tag="router-link"
@@ -34,14 +34,23 @@
               exact-active-class="is-active"
             ></b-menu-item>
             <b-menu-item
-              icon="account-circle"
-              v-if="$auth.$state.user.permissions.some(e => e.name === 'releases.edit')"
-              label="Releases"
-              disabled
+              icon="bookmark-outline"
+              v-if="$auth.$state.user.permissions.some(e => e.name === 'feeds.edit')"
+              label="Feeds"
+              tag="router-link"
+              :to="'/dashboard/feeds'"
               active-class="is-active"
             ></b-menu-item>
             <b-menu-item
-              icon="book"
+              icon="bookmark"
+              v-if="$auth.$state.user.permissions.some(e => e.name === 'releases.edit')"
+              label="Releases"
+              tag="router-link"
+              :to="'/dashboard/releases'"
+              active-class="is-active"
+            ></b-menu-item>
+            <b-menu-item
+              icon="bookmark-multiple"
               label="Series"
               v-if="$auth.$state.user.permissions.some(e => e.name === 'series.edit')"
               tag="router-link"
@@ -49,7 +58,7 @@
               active-class="is-active"
             ></b-menu-item>
             <b-menu-item
-              icon="account-circle"
+              icon="home-city"
               v-if="$auth.$state.user.permissions.some(e => e.name === 'groups.edit')"
               label="Grupos"
               tag="router-link"
@@ -57,7 +66,7 @@
               active-class="is-active"
             ></b-menu-item>
             <b-menu-item
-              icon="account-circle"
+              icon="account-multiple"
               label="Usuários"
               v-if="$auth.$state.user.permissions.some(e => e.name === 'users.edit')"
               tag="router-link"
@@ -65,7 +74,7 @@
               active-class="is-active"
             ></b-menu-item>
             <b-menu-item
-              icon="account-circle"
+              icon="google-ads"
               v-if="$auth.$state.user.permissions.some(e => e.name === 'adsense.show')"
               label="Adsense Interno"
               active-class="is-active"
@@ -74,10 +83,12 @@
           </b-menu-list>
           <b-menu-list label="Ações">
             <b-menu-item
+              icon="home"
               label="Retornar"
               tag="router-link"
               :to="'/'"></b-menu-item>
             <b-menu-item
+              icon="exit-to-app"
             label="Sair"
             @click="$auth.logout()"></b-menu-item>
           </b-menu-list>

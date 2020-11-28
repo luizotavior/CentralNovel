@@ -72,8 +72,8 @@
           label="Membro desde"
           sortable
           v-slot="props"
-        >{{
-            props.row.created_at}}
+        >
+          {{$moment(props.row.published_at).format('l')}}
         </b-table-column>
         <b-table-column
           field="pageviews"
