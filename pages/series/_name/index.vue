@@ -227,7 +227,6 @@ export default {
           this.$route.params.name
         )
         .then(response => {
-          console.log(response.data.length);
           if (response.data.length === 0)
             throw { statusCode: 404, message: "Serie not found" };
           this.serie = response.data;
@@ -237,8 +236,9 @@ export default {
         });
     },
     addInLibrary () {
+      let data = { series: [this.serie] }
       this.$axios
-        .post("user/library", { series: [this.serie.id] })
+        .post("user/library",data)
         .then(response => {
           this.$buefy.toast.open({
             message: "Adicionado aos Favoritos"
@@ -252,8 +252,11 @@ export default {
         });
     },
     deleteInLibrary () {
+      let data = {
+        series: [this.serie]
+      }
       this.$axios
-        .delete("user/library", { data: { series: [this.serie.id] } })
+        .post("user/library/delete",data)
         .then(response => {
           this.$buefy.toast.open({
             message: "Removido dos Favoritos"

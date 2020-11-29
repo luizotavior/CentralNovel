@@ -161,7 +161,7 @@ export default {
             }
           } else {
             this.$buefy.toast.open({
-              message: "[" + response.status + "] Ocorreu um Erro Inesperado."
+              message: "[" + e.response.status + "] Ocorreu um Erro Inesperado."
             });
           }
         })

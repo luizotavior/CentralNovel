@@ -3,7 +3,7 @@
     <div class="__title">
       <h2>Avaliações</h2>
       <star-rating
-        :current-rating="data.averageRating"
+        :current-rating="data.rating_avg"
         :current-votes="data.numVotes"
       />
     </div>
@@ -13,23 +13,23 @@
           <ul>
             <li>
               <span>Qualidade da Tradução</span>
-              <star-rating :current-rating="data.averageRating" />
+              <star-rating :current-rating="data.rating_1_avg" />
             </li>
             <li>
               <span>Estabilidade de atualizações</span>
-              <star-rating :current-rating="data.averageRating" />
+              <star-rating :current-rating="data.rating_2_avg" />
             </li>
             <li>
               <span>Desenvolvimento de história</span>
-              <star-rating :current-rating="data.averageRating" />
+              <star-rating :current-rating="data.rating_3_avg" />
             </li>
             <li>
               <span>Design de personagem</span>
-              <star-rating :current-rating="data.averageRating" />
+              <star-rating :current-rating="data.rating_4_avg" />
             </li>
             <li>
               <span>Fundo Mundial</span>
-              <star-rating :current-rating="data.averageRating" />
+              <star-rating :current-rating="data.rating_5_avg" />
             </li>
           </ul>
         </div>
