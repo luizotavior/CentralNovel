@@ -54,12 +54,12 @@
               {{ option.name }}</template>
           </multiselect>
           <multiselect
-            v-model="selected.sortOrder"
+            v-model="selected.sortProperty"
             deselect-label="Não é possível remover este valor"
             track-by="name"
             label="name"
             :options="sortOrder"
-            @input="changeFilter"
+            @input="orderClick"
             :preselect-first="true"
             :allow-empty="false"
           >
@@ -130,24 +130,34 @@ export default {
       ],
       sortOrder: [
         {
-          id: 1,
-          name: "Alfabética"
+          name: "Alfabética",
+          sortProperty: "title",
+          sortDirection: "asc",
         },
         {
-          id: 1,
-          name: "Mais Capítulos"
+          name: "Melhores Avaliadas",
+          sortProperty: "averageRating",
+          sortDirection: "desc",
         },
         {
-          id: 1,
-          name: "Mais Acessadas"
+          name: "Mais Capítulos",
+          sortProperty: "title",
+          sortDirection: "desc",
         },
         {
-          id: 1,
-          name: "Melhores Avaliadas"
+          name: "Mais Acessadas",
+          sortProperty: "pageviews",
+          sortDirection: "desc",
         },
         {
-          id: 1,
-          name: "Recém Adicionadas"
+          name: "Mais Avaliadas",
+          sortProperty: "numVotes",
+          sortDirection: "desc",
+        },
+        {
+          name: "Recém Adicionadas",
+          sortProperty: "created_at",
+          sortDirection: "desc",
         }
       ],
       isFetching: true,
@@ -166,7 +176,11 @@ export default {
           id: 0,
           name: "Todos"
         },
-        sortOrder: null
+        sortOrder: {
+          name: "Alfabética",
+          sortProperty: "title",
+          sortDirection: "asc",
+        },
       },
       paginate: {
         busy: false,
@@ -222,6 +236,10 @@ export default {
       this.selected.genre = genre
       this.changeFilter()
     },
+    orderClick (property) {
+      this.selected.sortOrder = property
+      this.changeFilter()
+    },
     changeFilter () {
       this.paginate.page = 0
       this.series = []
@@ -246,7 +264,11 @@ export default {
           "&page=" +
           this.paginate.page +
           "&per_page=" +
-          this.paginate.perPage
+          this.paginate.perPage +
+          "&sortProperty=" +
+          this.selected.sortOrder.sortProperty +
+          "&sortDirection=" +
+          this.selected.sortOrder.sortDirection
         )
         .then(data => {
           console.log("Adding 20 more data results");

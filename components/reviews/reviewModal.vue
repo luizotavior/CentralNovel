@@ -22,7 +22,7 @@
               <li>
                 <span>Qualidade de Tradução</span>
                 <star-rating
-                  v-model="rating_1"
+                  v-model="data.rating_1"
                   :only-star="true"
                   :clickable="true"
                 />
@@ -30,7 +30,7 @@
               <li>
                 <span>Estabilidade de atualizações</span>
                 <star-rating
-                  v-model="rating_2"
+                  v-model="data.rating_2"
                   :only-star="true"
                   :clickable="true"
                 />
@@ -38,7 +38,7 @@
               <li>
                 <span>Desenvolvimento de história</span>
                 <star-rating
-                  v-model="rating_3"
+                  v-model="data.rating_3"
                   :only-star="true"
                   :clickable="true"
                 />
@@ -46,7 +46,7 @@
               <li>
                 <span>Design de personagem</span>
                 <star-rating
-                  v-model="rating_4"
+                  v-model="data.rating_4"
                   :clickable="true"
                   :only-star="true"
                 />
@@ -54,7 +54,7 @@
               <li>
                 <span>Fundo Mundial</span>
                 <star-rating
-                  v-model="rating_5"
+                  v-model="data.rating_5"
                   :clickable="true"
                   :only-star="true"
                 />
@@ -77,6 +77,7 @@
             minlength="140"
             maxlength="500"
             type="textarea"
+            v-model="data.review"
             placeholder="Digite seu comentário aqui. Por favor, escreva sua avaliação o mais detalhado possível. Seus comentários são muito importantes para a história (pelo menos 140 caracteres)."
           />
         </div>
@@ -98,31 +99,73 @@ export default {
   components: {
     starRating
   },
+  props: {
+    api: {
+      type: String,
+      default: ''
+    },
+    id: {
+      type: Number,
+      default: 0
+    }
+  },
   data () {
     return {
-      rating_1: 0,
-      rating_2: 0,
-      rating_3: 0,
-      rating_4: 0,
-      rating_5: 0
+      data: {
+        review: "",
+        rating_1: 0,
+        rating_2: 0,
+        rating_3: 0,
+        rating_4: 0,
+        rating_5: 0,
+        spoiler: false,
+      }
     };
   },
   computed: {
     avg: function () {
       return (
-        (this.rating_1 +
-          this.rating_2 +
-          this.rating_3 +
-          this.rating_4 +
-          this.rating_5) /
+        (this.data.rating_1 +
+          this.data.rating_2 +
+          this.data.rating_3 +
+          this.data.rating_4 +
+          this.data.rating_5) /
         5
       );
     }
   },
   methods: {
-    sendReview () {
-      this.$buefy.snackbar.open('Review Send')
-    }
+    sendReview (){
+      this.$buefy.toast.open({
+        message: 'Carregando...'
+      })
+      this.data.serie_id = this.id
+      this.$axios
+        .post(this.api, this.data)
+        .then(response => {
+          var msg = ""
+          if(response.status == 200){
+            msg = "Ação Realizada!"
+          }else{
+            msg = "Ocorreu um Erro! ["+response.status+"]"
+          }
+          this.$buefy.toast.open({
+            message: msg
+          });
+
+        })
+        .catch(e => {
+          if (!e.response) {
+            this.errors = {
+              'error': ["Erro na Rede - Servidor Offline"]
+            }
+          } else {
+            this.$buefy.toast.open({
+              message: "[" + response.status + "] Ocorreu um Erro Inesperado."
+            });
+          }
+        })
+    },
   }
 };
 </script>

@@ -48,7 +48,6 @@ export default {
       default: null
     },
     currentRating: {
-      type: Number,
       default: 0
     },
     maxRating: {

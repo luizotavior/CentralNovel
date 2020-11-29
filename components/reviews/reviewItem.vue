@@ -5,27 +5,20 @@
         <div class="__left">
           <avatar
             :size="38"
-            username="Luiz Rodrigues"
+            :username="data.user.username"
           />
         </div>
         <div class="__right">
-          <span class="username">LuizR</span>
+          <span class="username">{{data.user.username}}</span>
           <star-rating
             v-if="showRating"
-            :current-rating="5"
+            :current-rating="Number(data.rating)"
             only-star
           />
         </div>
       </div>
       <div class="content-item">
-        <p>
-          “Spirit Cultivation” é o primeiro livro. Esta continuação da história
-          de Xuefeng, junto com suas muitas esposas poderosas e lindas, é uma
-          jornada que vale a pena percorrer. Siga seu conto épico. Você vai se
-          apaixonar por suas esposas e por cada uma de suas histórias únicas e
-          como todos eles se apaixonaram pelo mesmo homem. O cultivo de
-          elementos poderosos combinado com companheiros espirituais do Destino
-          leva a uma força imensa .... eventualmente.
+        <p v-html="data.review">
         </p>
       </div>
       <div class="footer-item">
@@ -36,11 +29,15 @@
             @click="likeReview"
           >
             <b-icon
+            @click="likeReview"
+            :class="{
+              'animate__animated': animated,
+              'animate__bounce' : true,
+              'animate__repeat-3' : true
+            }"
               icon="thumb-up-outline"
               size="is-small"
-            />
-            123
-          </span>
+            />123</span>
           <span
             class="action --reply"
             @click="showReply = true"
@@ -78,6 +75,7 @@
     <skeleton v-else />
     <b-modal
       v-if="reply"
+      :active.sync="showReply"
       v-model="showReply"
       :can-cancel="['x']"
       :width="600"
@@ -104,6 +102,10 @@ export default {
     skeleton
   },
   props: {
+    data: {
+      type: Object,
+      default: {}
+    },
     reply: {
       type: Boolean,
       default: true
@@ -117,12 +119,14 @@ export default {
     return {
       showReply: false,
       skeleton: false,
-      animated: false
+      animation: true
     };
   },
   methods: {
     likeReview () {
-      this.animated = true;
+      console.log('click')
+      this.animation = true
+       setTimeout(this.animation = false, 1000);
     }
   }
 };

@@ -1,22 +1,31 @@
 <template>
-  <div class="__review-content">
+  <div class="__review-content" v-if="data">
     <nav class="__review-nav">
       <ul>
-        <li :class="{ active: reviewFilter == 1 }">
-          <span @click="reviewFilter = 1">Curtido</span>
+        <li :class="{ active: sortOrder == 'created_at' }">
+          <span @click="changeSortOrder('created_at')">Novos</span>
         </li>
-        <li :class="{ active: reviewFilter == 2 }">
-          <span @click="reviewFilter = 2">Novo</span>
+        <li :class="{ active: sortOrder == 'like_count' }">
+          <span @click="changeSortOrder('like_count')">Melhores</span>
         </li>
         <hr />
       </ul>
     </nav>
-    <div class="__reviews-itens">
+    <div class="__reviews-itens" v-if="data.data">
       <review-item
         :reply="false"
-        v-for="(item, index) in 10"
+        v-for="(item, index) in data.data"
         :key="index"
+        :data="item"
       />
+    </div>
+    <div class="__reviews-empty alert_icon" v-if="data.data && data.data.length == 0 || data.length == 0">
+        <b-icon
+          icon="alert-circle"
+          size="is-large"
+        />
+        <h1>Não há avaliações disponiveis!</h1>
+      </div>
     </div>
   </div>
 </template>
@@ -32,11 +41,55 @@ export default {
     avatar,
     reviewItem
   },
+  props: {
+    api: {
+      type: String,
+      default: ''
+    }
+  },
   data () {
     return {
-      reviewFilter: 1
+      sortOrder: 'created_at',
+      data: [],
+      total: 0,
+      loading: false,
+      page: 1,
+      perPage: 10
     };
-  }
+  },
+  mounted() {
+    this.loadAsyncData()
+  },
+  methods: {
+    changeSortOrder(sortOrder){
+      this.sortOrder = sortOrder
+      this.loadAsyncData()
+    },
+    async loadAsyncData () {
+      const params = [
+        `?paginate=1`,
+        `reviewNotNull=1`,
+        `sortProperty=${this.sortOrder}`,
+        `page=${this.page}`,
+        `per_page=${this.perPage}`
+      ].join("&");
+
+      this.loading = true;
+      this.$axios
+        .$get(this.api + params)
+        .then(response => {
+          this.data = [];
+          this.data = response;
+          this.loading = false;
+        })
+        .catch(error => {
+          this.data = [];
+          this.total = 0;
+          this.loading = false;
+          throw error;
+        });
+    },
+  },
 };
 </script>
 
@@ -46,7 +99,7 @@ export default {
 .__review-content {
   nav.__review-nav {
     width: 100%;
-    max-width: 150px;
+    max-width: 250px;
     margin-top: 0px;
     margin-bottom: 24px;
     ul {
@@ -67,6 +120,7 @@ export default {
           color: $primary;
           cursor: pointer;
           font-weight: 600;
+          padding: 6px 0 ;
         }
 
         &:nth-child(1).active ~ hr {
@@ -95,6 +149,16 @@ export default {
         border: none;
         transition: 0.25s ease-in-out;
       }
+    }
+  }
+  .__reviews-empty{
+    display: flex;
+    flex-direction: column;
+    @extend %vertical-align-middle;
+    @extend %justify-center;
+    padding: 60px 0;
+    span.icon{
+      padding-bottom: 16px;
     }
   }
 }

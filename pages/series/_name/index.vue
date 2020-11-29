@@ -162,7 +162,7 @@
             class="__synopsis"
             v-html="serie.synopsis"
           />
-          <reviews :data="serie" />
+          <reviews type="series" :data="serie" />
         </div>
         <div
           class="tab-releases"

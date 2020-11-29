@@ -7,12 +7,12 @@
         :current-votes="data.numVotes"
       />
     </div>
-    <div class="__content">
+    <div class="__content" v-if="data.id">
       <div class="__review-header">
         <div class="__review-header--left">
           <ul>
             <li>
-              <span>Qualidade de Tradução</span>
+              <span>Qualidade da Tradução</span>
               <star-rating :current-rating="data.averageRating" />
             </li>
             <li>
@@ -39,12 +39,12 @@
             type="is-dark"
             size="is-medium"
             icon-left="chat"
-            @click="$buefy.snackbar.open('Função Desabilitada')"
+            @click="showReview = true"
             rounded
           >Escreva uma crítica</b-button>
         </div>
       </div>
-      <review-list v-if="false" />
+      <review-list :api="type+'/'+data.id+'/reviews'"/>
     </div>
 
     <b-modal
@@ -54,7 +54,8 @@
       scroll="keep"
     >
       <template #default="props">
-        <review-modal @close="props.close" />
+        <!-- Modal de Criação de Review-->
+        <review-modal :api="type+'/'+data.id+'/reviews'" :id="data.id" @close="props.close" />
       </template>
     </b-modal>
   </div>
@@ -76,13 +77,19 @@ export default {
     data: {
       type: Object,
       default: {}
-    }
+    },
+    type: {
+      type: String,
+      default: ''
+    },
   },
   data () {
     return {
-      showReview: false
+      showReview: false,
     };
-  }
+  },
+  mounted() {
+  },
 };
 </script>
 
