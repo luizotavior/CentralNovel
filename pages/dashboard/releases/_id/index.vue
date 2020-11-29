@@ -1,11 +1,11 @@
 <template>
   <div id="page-perfil">
-    <div class="md-card is-flex-column" v-if="data.id">
+    <div class="md-card is-flex-column" v-if="data">
       <div class="__header is-borded">
         <div class="__title">
 
           <h1 class="is-size-6 has-text-weight-medium">
-            Perfil do Feed
+            Perfil do Release
           </h1>
         </div>
         <p class="is-size-7">Bla bla bla bla</p>
@@ -28,31 +28,91 @@
                   disabled
                 />
               </b-field>
+              <b-field grouped>
+                <b-field
+                  expanded
+                  label="Serie"
+                >
+                  <b-autocomplete
+                    v-model="series.query"
+                    :data="series.data"
+                    field="title"
+                    open-on-focus
+                    @input="getAsyncSerie(series.query)"
+                    @select="option => this.data.serie_id = option.id">
+                    <template slot="empty">
+                      <div v-if="!series.loading">Nenhuma Serie encontrada</div>
+                      <div v-else>Pesquisando...</div>
+                    </template>
+                  </b-autocomplete>
+                </b-field>
+                <b-field
+                  expanded
+                  label="Grupo"
+                >
+                  <b-autocomplete
+                    v-model="groups.query"
+                    :data="groups.data"
+                    field="name"
+                    @input="getAsyncGroup(groups.query)"
+                    @select="option => this.data.group_id = option.id">
+                    <template slot="empty">
+                      <div v-if="!groups.loading">Nenhum Grupo encontrado</div>
+                      <div v-else>Pesquisando...</div>
+                    </template>
+                  </b-autocomplete>
+                </b-field>
+              </b-field>
+              <b-field
+                expanded
+                label="Link para o Release"
+              >
+                <b-input
+                  type="text"
+                  v-model="data.url"
+                />
+              </b-field>
               <b-field
                 grouped
               >
               <b-field
                 expanded
-                label="Grupo"
-                v-if="data.group"
+                label="Arco"
               >
                 <b-input
                   type="text"
-                  v-model="data.group.name"
-                  disabled
+                  v-model="data.arc"
                 />
               </b-field>
+                <b-field
+                  expanded
+                  label="Volume"
+                >
+                  <b-input
+                    type="text"
+                    v-model="data.volume"
+                  />
+                </b-field>
               </b-field>
-              <b-field
-                expanded
-                label="Link Publicação"
-                v-if="data.permalink"
-              >
-                <b-input
-                  type="text"
-                  v-model="data.permalink"
-                  disabled
-                />
+              <b-field grouped>
+                <b-field
+                  expanded
+                  label="Capítulo"
+                >
+                  <b-input
+                    type="text"
+                    v-model="data.chapter"
+                  />
+                </b-field>
+                <b-field
+                  expanded
+                  label="Parte"
+                >
+                  <b-input
+                    type="text"
+                    v-model="data.part"
+                  />
+                </b-field>
               </b-field>
               <b-field
                 grouped
@@ -68,95 +128,7 @@
                   disabled
                 />
               </b-field>
-              <b-field
-                expanded
-                label="Criado no Sistema"
-                v-if="data.created_at"
-              >
-                <b-input
-                  type="text"
-                  :value="$moment(data.created_at).format('lll')"
-                  disabled
-                />
               </b-field>
-              </b-field>
-            </form>
-          </div>
-          <div id="change-password">
-            <h1 class="is-size-6 has-text-weight-medium">
-              Adicionar Release
-            </h1>
-            <form>
-              <b-field
-                grouped
-              >
-              <b-field
-                expanded
-                label="Serie"
-              >
-                <b-autocomplete
-                  v-model="series.query"
-                  :data="series.data"
-                  field="title"
-                  @input="getAsyncSerie(series.query)"
-                  @select="option => {release.serie = option; release.serie_id = option ? option.id : null}">
-                  <template slot="empty">No results found</template>
-                </b-autocomplete>
-              </b-field>
-              <b-field
-                expanded
-                label="Grupo"
-              >
-                <b-input
-                  type="text"
-                  v-model="release.group.name"
-                  disabled
-                />
-              </b-field>
-              </b-field>
-              <b-field
-                grouped
-              >
-              <b-field
-                expanded
-                label="Arco"
-              >
-                <b-input
-                  type="text"
-                  v-model="release.arc"
-                />
-              </b-field>
-                <b-field
-                  expanded
-                  label="Volume"
-                >
-                  <b-input
-                    type="text"
-                    v-model="release.volume"
-                  />
-                </b-field>
-              </b-field>
-              <b-field grouped>
-                <b-field
-                  expanded
-                  label="Capítulo"
-                >
-                  <b-input
-                    type="text"
-                    v-model="release.chapter"
-                  />
-                </b-field>
-                <b-field
-                  expanded
-                  label="Parte"
-                >
-                  <b-input
-                    type="text"
-                    v-model="release.part"
-                  />
-                </b-field>
-              </b-field>
-
               <div
                 class=" buttons"
               >
@@ -164,116 +136,102 @@
                   @click="newRelease()"
                   type="is-info"
                   expanded
-                >Adicionar</b-button>
+                > Salvar</b-button>
               </div>
+            </form>
+          </div>
+          <div id="change-password"  v-if="data.feed">
+            <h1 class="is-size-6 has-text-weight-medium">
+              Informações Feed
+            </h1>
+            <form>
+
+              <b-field
+                grouped
+              >
+              <b-field
+                expanded
+                label="Título"
+                v-if="data.feed.title"
+              >
+                <b-input
+                  type="text"
+                  v-model="data.feed.title"
+                  disabled
+                />
+              </b-field>
+
+              <b-field
+                expanded
+                label="Grupo"
+                v-if="data.feed.group"
+              >
+                <b-input
+                  type="text"
+                  v-model="data.feed.group.name"
+                  disabled
+                />
+              </b-field>
+              </b-field>
+              <b-field
+                expanded
+                label="Link Publicação"
+                v-if="data.feed.permalink"
+              >
+                <b-input
+                  type="text"
+                  v-model="data.feed.permalink"
+                  disabled
+                />
+              </b-field>
+              <b-field
+                grouped
+              >
+              <b-field
+                expanded
+                label="Publicado"
+                v-if="data.feed.published_at"
+              >
+                <b-input
+                  type="text"
+                  :value="$moment(data.feed.published_at).format('lll')"
+                  disabled
+                />
+              </b-field>
+              <b-field
+                expanded
+                label="Criado no Sistema"
+                v-if="data.feed.created_at"
+              >
+                <b-input
+                  type="text"
+                  :value="$moment(data.feed.created_at).format('lll')"
+                  disabled
+                />
+              </b-field>
+              </b-field>
+              <b-field
+                expanded
+                label="Associação do Release/Feed"
+                v-if="data.feed.title"
+              >
+                <b-tooltip position="is-bottom" multilined>
+                  <b-switch v-model="data.feed_id"
+                      :true-value="data.feed.id"
+                      :false-value="null">
+                      {{ data.feed_id ? 'Sincronizado' : 'Dessincronizado'}}
+                  </b-switch>
+                  <template v-slot:content>
+                      <b>ATENÇÃO</b>, ao desativar toda a sincronização com o Feed será perdida.
+                  </template>
+                </b-tooltip>
+              </b-field>
             </form>
           </div>
         </div>
 
       </div>
     </div>
-    <div id="releases" class="md-card no-padding" v-if="data.id">
-    <div class="__header">
-      <div class="__top">
-        <h1 class="is-size-5 has-text-grey-darker has-text-weight-medium">
-          Releases
-        </h1>
-        <div class="__top-button">
-          <b-button
-            type="is-info"
-            outlined
-            @click="isCardModalActive = true"
-          >
-            Adicionar
-          </b-button>
-        </div>
-
-      </div>
-    </div>
-    <div class="__body">
-      <ul class="items">
-        <li
-          v-for="release in data.releases"
-          :key="release.id"
-          class="item"
-        >
-          <div class="item--left">
-            <a :href="'/dashboard/series/' + release.serie.id" target="_blank">
-              <b-tag type="is-info" >
-                  {{ release.serie.title }}
-              </b-tag>
-            </a>
-          </div>
-          <div class="item-option">
-            <b-field>
-              <b-field
-                label="Arco"
-              >
-                <b-input
-                 size="is-small"
-                  type="text"
-                  v-model="release.arc"
-                />
-              </b-field>
-              <b-field
-                label="Volume"
-              >
-                <b-input
-                 size="is-small"
-                  type="text"
-                  v-model="release.volume"
-                />
-              </b-field>
-              <b-field
-                label="Capítulo"
-              >
-                <b-input
-                 size="is-small"
-                  type="text"
-                  v-model="release.chapter"
-                />
-              </b-field>
-              <b-field
-                label="Parte"
-              >
-                <b-input
-                 size="is-small"
-                  type="text"
-                  v-model="release.part"
-                />
-              </b-field>
-              <div
-                class=" buttons"
-              >
-                <b-button
-                  @click="confirmUpdateRelease(release)"
-                  icon-left="check"
-                  type="is-info"
-                >Salvar</b-button>
-                <b-button
-                  @click="confirmDeleteRelease(release.id)"
-                  icon-left="delete"
-                  type="is-danger"
-                >Remover</b-button>
-              </div>
-            </b-field>
-          </div>
-        </li>
-      </ul>
-      <div
-        v-if="data.releases.length == 0"
-        class="alert_icon"
-      >
-        <b-icon
-          icon="alert-circle"
-          size="is-medium"
-        />
-        <h1>Nenhum item encontrado</h1>
-      </div>
-    </div>
-
-    </div>
-
   </div>
 
 </template>
@@ -295,14 +253,15 @@ export default {
       //Configs
       data: {
       },
-      release: {
-        arc: null,
-        volume: null,
-        chapter: null,
-        part: null,
-        url: null,
-      },
+      feed: {},
       series: {
+        data: [],
+        query: '',
+        loading: false,
+        digitedTypingTime: null,
+        selected: null,
+      },
+      groups: {
         data: [],
         query: '',
         loading: false,
@@ -313,22 +272,22 @@ export default {
     };
   },
   mounted() {
-    this.feedData()
+    this.getAsyncSerie('')
+    this.getAsyncGroup('')
+    if(this.$route.params.id != 'new'){this.releaseData()}
   },
   methods: {
-    feedData() {
+    releaseData() {
       this.loading = true;
+      if(this.$route.params.id != 'new'){this.data._method = 'PUT';}
       this.$axios
-        .$get("/feeds/" + this.$route.params.id)
+        .$get("/releases/" + this.$route.params.id)
         .then(response => {
           var responseData = response.data;
           this.data = responseData;
+          this.series.query = this.data.serie.title
+          this.groups.query = this.data.group.name
           this.loading = false;
-          this.release.published_at = this.data.published_at
-          this.release.feed_id = this.data.id
-          this.release.url = this.data.permalink
-          this.release.group_id = this.data.group_id
-          this.release.group = this.data.group
         })
         .catch(error => {
           // this.$router.push("/dashboard/feeds");
@@ -338,11 +297,9 @@ export default {
       this.$buefy.toast.open({
         message: 'Carregando...'
       })
-      this.release.feed_id = this.data.id
-      this.release.url = this.data.permalink
-      this.release.group_id = this.data.group_id
+      if(this.$route.params.id != 'new'){this.data._method = 'PUT';}
       this.$axios
-        .post("releases",this.release)
+        .post("releases"+(this.data.id ? '/'+this.data.id : ''),this.data)
         .then(response => {
           var msg = ""
           if(response.status == 200){
@@ -353,96 +310,7 @@ export default {
           this.$buefy.toast.open({
             message: msg
           });
-          this.release.data = [];
-          this.feedData()
-        })
-        .catch(e => {
-          if (!e.response) {
-            this.errors = {
-              'error': ["Erro na Rede - Servidor Offline"]
-            }
-          } else {
-            this.$buefy.toast.open({
-              message: "[" + response.status + "] Ocorreu um Erro Inesperado."
-            });
-          }
-        })
-    },
-    confirmUpdateRelease (release) {
-      this.$buefy.dialog.confirm({
-        title: "Update account",
-        message:
-          "Are you sure you want to <b>update</b> your account? This action cannot be undone.",
-        confirmText: "Update Account",
-        type: "is-success",
-        hasIcon: true,
-        onConfirm: () => this.updateRelease(release)
-      });
-    },
-    updateRelease(release){
-      this.$buefy.toast.open({
-        message: 'Carregando...'
-      })
-      release._method = 'PUT'
-      this.$axios
-        .post(
-          "releases/"+release.id,
-          release
-        )
-        .then(response => {
-          var msg = ""
-          if(response.status == 200){
-            msg = "Ação Realizada!"
-          }else{
-            msg = "Ocorreu um Erro! ["+response.status+"]"
-          }
-          this.$buefy.toast.open({
-            message: msg
-          });
-          this.feedData()
-        })
-        .catch(e => {
-          if (!e.response) {
-            this.errors = {
-              'error': ["Erro na Rede - Servidor Offline"]
-            }
-          } else {
-            this.$buefy.toast.open({
-              message: "[" + response.status + "] Ocorreu um Erro Inesperado."
-            });
-          }
-        })
-    },
-    confirmDeleteRelease (id) {
-      this.$buefy.dialog.confirm({
-        title: "Deleting account",
-        message:
-          "Are you sure you want to <b>delete</b> your account? This action cannot be undone.",
-        confirmText: "Delete Account",
-        type: "is-danger",
-        hasIcon: true,
-        onConfirm: () => this.deleteRelease(id)
-      });
-    },
-    deleteRelease(id){
-      this.$buefy.toast.open({
-        message: 'Carregando...'
-      })
-      this.$axios
-        .delete(
-          "releases/"+id
-        )
-        .then(response => {
-          var msg = ""
-          if(response.status == 200){
-            msg = "Ação Realizada!"
-          }else{
-            msg = "Ocorreu um Erro! ["+response.status+"]"
-          }
-          this.$buefy.toast.open({
-            message: msg
-          });
-          this.feedData()
+          this.$router.push("/dashboard/releases");
         })
         .catch(e => {
           if (!e.response) {
@@ -459,20 +327,35 @@ export default {
     getAsyncSerie (query) {
       clearTimeout(this.series.digitedTypingTime);
       this.series.digitedTypingTime = setTimeout(() => {
-        if (query.length > 0) {
           this.series.data = []
-          this.series.isFetching = true
+          this.series.loading = true
           this.$axios.$get('/series/?paginate=false&q=' + this.series.query)
             .then(data => {
               //data.data.forEach((item) => this.data.push(item))
               this.series.data = data.data;
-              this.series.isFetching = false
+              this.series.loading = false
             })
             .catch(error => {
-              this.series.sFetching = false
+              this.series.loading = false
               throw error
             })
-        }
+      }, 500);
+    },
+    getAsyncGroup (query) {
+      clearTimeout(this.groups.digitedTypingTime);
+      this.groups.digitedTypingTime = setTimeout(() => {
+          this.groups.data = []
+          this.groups.loading = true
+          this.$axios.$get('/groups/?paginate=false&q=' + this.groups.query)
+            .then(data => {
+              //data.data.forEach((item) => this.data.push(item))
+              this.groups.data = data.data;
+              this.groups.loading = false
+            })
+            .catch(error => {
+              this.groups.sFetching = false
+              throw error
+            })
       }, 500);
     },
   }

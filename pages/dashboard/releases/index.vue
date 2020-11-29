@@ -8,11 +8,17 @@
           expanded
           class="md-search"
           icon="magnify"
-          placeholder="Pesquisar Feeds"
+          placeholder="Pesquisar Releases"
           @input="getAsyncData(query)"
         />
 
       </div>
+      <b-button
+        class="md-button"
+        type="is-primary"
+        tag="router-link"
+        :to="'/dashboard/releases/new'"
+      >Adicionar Release</b-button>
     </div>
     <div class="releases-table md-card no-padding">
       <b-table
@@ -32,51 +38,53 @@
           v-slot="props"
         >
           <nuxt-link
-            :to="'/dashboard/feeds/' + props.row.id"
+            :to="'/dashboard/releases/' + props.row.id"
             class="__titulo"
-          >{{
-            props.row.title
-          }}</nuxt-link>
-        </b-table-column>
-        <b-table-column
-          field="group.name"
-          label="Grupo"
-          sortable
-          v-slot="props"
-        >
-          <nuxt-link
-            :to="'/dashboard/groups/' + props.row.group.id"
-            class="__titulo"
-          >{{
-            props.row.group.name
-          }}</nuxt-link>
-        </b-table-column>
-        <b-table-column
-          field="releases.length"
-          label="Assimilado"
-          sortable
-          v-slot="props"
-        >
-          <span
-            v-for="(release, index) in props.row.releases"
-            :key="index"
           >
-            <a :href="'/dashboard/series/' + release.serie.id" target="_blank">
-              <b-tag type="is-info">
-                  {{ release.serie.title }}
-              </b-tag>
-            </a> -
-            <a :href="'/dashboard/releases/' + release.id" target="_blank">
+            {{ props.row.serie.title }}
             <b-tag type="is-warning">
-                {{ release.arc ? "A" + release.arc + " " : "" }}
-                {{ release.volume ? "V" + release.volume + "" : "" }}
-                {{ release.chapter ? "C" + release.chapter + " " : "" }}
-                {{ release.part ? "P" + release.part + " " : "" }}
+              {{ props.row.arc ? "A" + props.row.arc + " " : "" }}
+              {{ props.row.volume ? "V" + props.row.volume + "" : "" }}
+              {{ props.row.chapter ? "C" + props.row.chapter + " " : "" }}
+              {{ props.row.part ? "P" + props.row.part + " " : "" }}
             </b-tag>
-            </a>
-          </span>
-          <b-tag type="is-danger" v-if="props.row.releases.length == 0">Nenhuma Serie Encontrada</b-tag>
-
+          </nuxt-link>
+        </b-table-column>
+        <b-table-column
+          field="pageviews"
+          label="Feed"
+          sortable
+          v-slot="props"
+        >
+        <b-tooltip label="Group Link">
+          <a
+            :href="'/dashboard/groups/'+props.row.group.id"
+            target="_blank"
+            class="__titulo"
+          >
+              {{props.row.group.name}}
+          </a>
+        </b-tooltip>
+        </b-table-column>
+        <b-table-column
+          field="pageviews"
+          label="Feed"
+          sortable
+          v-slot="props"
+        >
+        <b-tooltip label="Feed External Link">
+          <a
+            :href="'/dashboard/feeds/'+props.row.feed_id"
+            target="_blank"
+            class="__titulo"
+            v-if="props.row.feed_id"
+          >
+            <b-tag type="is-info">
+              {{props.row.feed.title}}
+            </b-tag>
+          </a>
+        </b-tooltip>
+        <b-tag type="is-danger" v-if="!props.row.feed_id">Nenhum Feed Relacionado</b-tag>
         </b-table-column>
         <b-table-column
           field="published_at"
@@ -92,15 +100,35 @@
           sortable
           v-slot="props"
         >
-        <b-tooltip label="Feed External Link">
+        <b-tooltip label="Edit Release">
           <a
-            :href="props.row.permalink"
+            :href="'/dashboard/releases/' + props.row.id"
+            target="_blank"
+            class="__titulo"
+          >
+            <b-icon
+                icon="pencil"/>
+          </a>
+          </b-tooltip>
+        <b-tooltip label="Release External Link">
+          <a
+            :href="props.row.url"
             target="_blank"
             class="__titulo"
           >
             <b-icon
                 icon="link"/>
           </a>
+          </b-tooltip>
+        <b-tooltip label="Deletar Release!">
+          <span
+            @click="confirmDeleteRelease(props.row.id)"
+            target="_blank"
+            class="__titulo"
+          >
+            <b-icon
+                icon="delete"/>
+          </span>
           </b-tooltip>
         </b-table-column>
 
@@ -133,7 +161,7 @@ export default {
   middleware: ['permissions'],
   meta: {
     permissions: [
-      'feeds.edit'
+      'releases.edit'
     ]
   },
   data () {
@@ -158,9 +186,8 @@ export default {
           this.data = []
           this.isFetching = true
 
-          this.$axios.$get('/feeds?page=' + this.page + '&per_page=' + this.perPage + '&q=' + this.query)
+          this.$axios.$get('/releases?page=' + this.page + '&per_page=' + this.perPage + '&sortProperty=created_at&q=' + this.query)
             .then(data => {
-
               this.data = [];
               this.isFetching = false
               this.data = data;
@@ -175,7 +202,50 @@ export default {
     onPageChange (page) {
       this.page = page;
       this.getAsyncData(this.query);
-    }
+    },
+    confirmDeleteRelease (id) {
+      this.$buefy.dialog.confirm({
+        title: "Deleting account",
+        message:
+          "Are you sure you want to <b>delete</b> your account? This action cannot be undone.",
+        confirmText: "Delete Account",
+        type: "is-danger",
+        hasIcon: true,
+        onConfirm: () => this.deleteRelease(id)
+      });
+    },
+    deleteRelease(id){
+      this.$buefy.toast.open({
+        message: 'Carregando...'
+      })
+      this.$axios
+        .delete(
+          "releases/"+id
+        )
+        .then(response => {
+          var msg = ""
+          if(response.status == 200){
+            msg = "Ação Realizada!"
+          }else{
+            msg = "Ocorreu um Erro! ["+response.status+"]"
+          }
+          this.$buefy.toast.open({
+            message: msg
+          });
+          this.getAsyncData(this.query);
+        })
+        .catch(e => {
+          if (!e.response) {
+            this.errors = {
+              'error': ["Erro na Rede - Servidor Offline"]
+            }
+          } else {
+            this.$buefy.toast.open({
+              message: "[" + response.status + "] Ocorreu um Erro Inesperado."
+            });
+          }
+        })
+    },
   },
 
 };

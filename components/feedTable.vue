@@ -1,14 +1,15 @@
 <template>
   <section id="feed-table">
     <b-table
-      :data="data"
+      v-if="data"
+      :data="data.data"
       :loading="loading"
-      paginated
-      backend-pagination
-      :total="total"
+      :total="data.meta ? data.meta.total : 0"
       :per-page="perPage"
       @page-change="onPageChange"
       :mobile-cards="false"
+      paginated
+      backend-pagination
     >
       <template
         slot-scope="props"
@@ -63,19 +64,11 @@
         </a>
       </b-table-column>
       <b-table-column
-        field="release_date"
-        label="Data"
+        field="published_at"
+        label="Publicado"
         v-slot="props"
       >
-        <b-tooltip
-          :label="$moment(props.row.published_at).format('LLL')"
-          append-to-body
-          position="is-right"
-        >
-          <span class="__time">
-            {{ dateFromNow(props.row.published_at) }}<br>
-          </span>
-        </b-tooltip>
+        {{ dateFromNow(props.row.published_at) }}
       </b-table-column>
     </b-table>
   </section>
@@ -87,7 +80,7 @@ export default {
     return {
       data: [],
       total: 0,
-      loading: false,
+      loading: true,
       page: 1,
       perPage: 20
     };
@@ -101,23 +94,18 @@ export default {
     },
     loadAsyncData () {
       const params = [
-        "paginate=1",
         `page=${this.page}`,
-        `per_page=${this.perPage}`
+        `per_page=${this.perPage}`,
+        `sortProperty=published_at`
       ].join("&");
 
       this.loading = true;
       this.$axios
         .$get("/releases?" + params)
-        .then(({ data }) => {
+        .then(data => {
           this.data = [];
-          let currentTotal = data.total;
-          if (data.total / this.perPage > 1000) {
-            currentTotal = this.perPage * 1000;
-          }
-          this.total = currentTotal;
-          this.data = data.data;
-          this.loading = false;
+          this.loading = false
+          this.data = data;
         })
         .catch(error => {
           this.data = [];
