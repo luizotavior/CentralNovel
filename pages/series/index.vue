@@ -259,11 +259,13 @@ export default {
         });
     }
   },
+  beforeMount(){
+    this.recoveryQueryUrl()
+  },
   mounted () {
     this.genresData();
     this.StatusesData();
     this.LanguagesData();
-    this.recoveryQueryUrl()
     this.loadMore();
   }
 };
