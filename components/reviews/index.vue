@@ -4,7 +4,7 @@
       <h2>Avaliações</h2>
       <star-rating
         :current-rating="data.rating_avg"
-        :current-votes="data.numVotes"
+        :current-votes="data.reviews_count"
       />
     </div>
     <div class="__content" v-if="data.id">

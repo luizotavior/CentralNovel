@@ -1,14 +1,14 @@
 <template>
   <section id="feed-table">
     <b-table
-      :data="data"
+      :data="data.data"
       :loading="loading"
-      paginated
-      backend-pagination
-      :total="total"
+      :total="data.meta ? data.meta.total : 0"
       :per-page="perPage"
       @page-change="onPageChange"
       :mobile-cards="false"
+      paginated
+      backend-pagination
     >
       <template
         slot-scope="props"
@@ -79,7 +79,7 @@ export default {
     return {
       data: [],
       total: 0,
-      loading: false,
+      loading: true,
       page: 1,
       perPage: 20
     };
@@ -102,14 +102,9 @@ export default {
       this.loading = true;
       this.$axios
         .$get("/releases?" + params)
-        .then(({ data }) => {
+        .then(response=> {
           this.data = [];
-          let currentTotal = data.total;
-          if (data.total / this.perPage > 1000) {
-            currentTotal = this.perPage * 1000;
-          }
-          this.total = currentTotal;
-          this.data = data.data;
+          this.data = response;
           this.loading = false;
         })
         .catch(error => {
@@ -125,7 +120,7 @@ export default {
     onPageChange (page) {
       this.page = page;
       this.loadAsyncData();
-    }
+    },
   },
   mounted () {
     this.loadAsyncData();

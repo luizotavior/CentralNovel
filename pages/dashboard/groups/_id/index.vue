@@ -22,7 +22,7 @@
         </b-upload>
       </div>
       <div class="__right">
-        <ValidationObserver ref="observer" v-slot="{ handleSubmit }" tag="form">
+        <ValidationObserver ref="observer" tag="form">
           <b-field grouped>
             <b-field expanded label="Nome">
               <b-input type="text" v-model="group.data.name" expanded />
@@ -67,7 +67,7 @@
             </b-field>
           </b-field>
           <b-field grouped>
-            <b-button @click="handleSubmit(sendForm)" type="is-primary" expanded>Salvar</b-button>
+            <b-button @click="sendForm" type="is-primary" expanded>Salvar</b-button>
           </b-field>
         </ValidationObserver>
       </div>
@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { ValidationProvider, extend } from 'vee-validate';
 import avatar from "vue-avatar";
 export default {
   layout: "dashboard",
@@ -86,7 +87,7 @@ export default {
     ]
   },
   components: {
-    avatar
+    avatar,ValidationProvider
   },
   data() {
     return {

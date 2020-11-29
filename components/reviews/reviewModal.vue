@@ -14,11 +14,25 @@
         <b-icon icon="close"></b-icon>
       </span>
     </header>
-    <div class="card-content">
+
+    <ValidationObserver
+      ref="observer"
+      v-slot="{ handleSubmit }"
+      tag="div"
+      class="card-content"
+    >
       <div class="content">
-        <div class="avaliations">
+        <ValidationProvider
+          rules="between:1,5"
+          name="rating"
+          class="avaliations"
+          tag="div"
+          v-slot="{ errors, valid }"
+          >
+            {{error}}
+          </b-message>
           <div class="__left">
-            <ul>
+            <ul >
               <li>
                 <span>Qualidade de Tradução</span>
                 <star-rating
@@ -71,33 +85,47 @@
               />
             </div>
           </div>
-        </div>
+        </ValidationProvider>
         <div class="comments">
-          <b-input
-            minlength="140"
-            maxlength="500"
-            type="textarea"
-            v-model="data.review"
-            placeholder="Digite seu comentário aqui. Por favor, escreva sua avaliação o mais detalhado possível. Seus comentários são muito importantes para a história (pelo menos 140 caracteres)."
-          />
+          <ValidationProvider
+            rules="min:140"
+            name="resenha"
+            v-slot="{ errors, valid }"
+            >
+            <b-field
+              :type="{ 'is-danger': errors[0], 'is-success': valid }"
+              :message="errors">
+              <b-input
+                minlength="140"
+                maxlength="500"
+                type="textarea"
+                v-model="data.review"
+                placeholder="Digite seu comentário aqui. Por favor, escreva sua avaliação o mais detalhado possível. Seus comentários são muito importantes para a história (pelo menos 140 caracteres)."
+              />
+          </b-field>
+          </ValidationProvider>
         </div>
       </div>
-    </div>
 
-    <footer class="card-footer">
-      <span
-        class="card-footer-item review--send"
-        @click="sendReview"
-      >Postar</span>
-    </footer>
+      <footer class="card-footer">
+        <span
+          class="card-footer-item review--send"
+          @click="handleSubmit(sendReview)"
+        >Postar</span>
+      </footer>
+    </ValidationObserver>
   </div>
 </template>
 
 <script>
+import { ValidationProvider, extend } from 'vee-validate';
 import starRating from "@/components/starRating.vue";
+import StarRating from '../starRating.vue';
+
 export default {
   components: {
-    starRating
+    starRating,ValidationProvider,
+    StarRating
   },
   props: {
     api: {
@@ -146,12 +174,15 @@ export default {
           var msg = ""
           if(response.status == 200){
             msg = "Ação Realizada!"
+          }else if(response.status == 400){
+            msg = "O Usuário só é permitido realizar 1 Review por Serie."
           }else{
             msg = "Ocorreu um Erro! ["+response.status+"]"
           }
           this.$buefy.toast.open({
             message: msg
           });
+          if(response.status == 200){this.$parent.close() }
 
         })
         .catch(e => {
@@ -159,6 +190,10 @@ export default {
             this.errors = {
               'error': ["Erro na Rede - Servidor Offline"]
             }
+          }else if(e.response.status == 400){
+            this.$buefy.toast.open({
+              message: "O Usuário só é permitido realizar 1 Review por Serie."
+            });
           } else {
             this.$buefy.toast.open({
               message: "[" + e.response.status + "] Ocorreu um Erro Inesperado."
