@@ -5,7 +5,6 @@ require("dotenv").config({
 const pkg = require("./package");
 
 module.exports = {
-  mode: "universal",
 
   /*
    ** Headers of the page
@@ -51,7 +50,8 @@ module.exports = {
     {
       src: "~assets/sass/themes/_theme.scss",
       lang: "scss"
-    }
+    },
+    "node_modules/animate.css/animate.min.css",
     //{ src: '~assets/css/main.sass', lang: 'scss' },
   ],
 

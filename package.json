@@ -20,6 +20,7 @@
     "@nuxtjs/google-tag-manager": "^2.3.2",
     "@nuxtjs/recaptcha": "^0.6.2",
     "@toast-ui/vue-editor": "^2.5.1",
+    "animate.css": "^4.1.1",
     "aos": "^2.3.4",
     "buefy": "^0.9.4",
     "cross-env": "^5.2.1",
