@@ -5,6 +5,7 @@ require("dotenv").config({
 const pkg = require("./package");
 
 module.exports = {
+  target: 'static',
 
   /*
    ** Headers of the page
