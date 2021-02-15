@@ -4,6 +4,13 @@
     <div class="container-page-home">
       <quote-review v-if="!$store.state.auth.loggedIn" />
 
+      <topic-title
+        id="updates"
+        title="Ultimas Atualizações"
+      />
+      <feed-table />
+
+      <suggested-tags />
       <!-- <topic-title
         title="Biblioteca"
         v-if="$store.state.auth.loggedIn"
@@ -57,12 +64,6 @@
         title="Gêneros Sugeridas"
         seeMore="/series"
       />
-      <suggested-tags />
-      <topic-title
-        id="updates"
-        title="Ultimas Atualizações"
-      />
-      <feed-table />
     </div>
   </div>
 </template>
