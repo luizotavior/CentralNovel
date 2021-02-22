@@ -154,7 +154,7 @@ export default {
       activeStep: 4,
       errors: {},
       user: {
-        email: "luiz",
+        email: "",
         password: null,
         password_confirmation: null
       },
