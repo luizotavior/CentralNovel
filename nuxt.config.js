@@ -2,11 +2,7 @@ require("dotenv").config({
   silent: process.env.NODE_ENV === "production"
 });
 
-const pkg = require("./package");
-
-module.exports = {
-  target: 'static',
-
+export default {
   /*
    ** Headers of the page
    */
@@ -176,9 +172,5 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(config, ctx) {}
   }
 };
