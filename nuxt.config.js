@@ -56,10 +56,6 @@ module.exports = {
       mode: "client"
     },
     {
-      src: "~/plugins/hotjar.js",
-      mode: "client"
-    },
-    {
       src: "~/plugins/aos.js",
       mode: "client"
     },
@@ -71,7 +67,6 @@ module.exports = {
       src: "~plugins/vee-validate.js",
       mode: "client"
     },
-    "plugins/vue-mq.js",
     { src: "plugins/tui-editor.client.js", mode: "client" }
   ],
   buefy: {
