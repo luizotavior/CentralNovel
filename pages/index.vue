@@ -2,68 +2,25 @@
   <div id="page-home">
     <default-slider />
     <div class="container-page-home">
-      <quote-review v-if="!$store.state.auth.loggedIn" />
 
       <topic-title
         id="updates"
         title="Ultimas Atualizações"
       />
       <feed-table />
-
-      <suggested-tags />
-      <!-- <topic-title
-        title="Biblioteca"
-        v-if="$store.state.auth.loggedIn"
-        see-more="/library"
-      />
-      <list-novel
-        :api="
-          '/user/library?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
-        "
-        v-if="$store.state.auth.loggedIn"
-      /> -->
       <adsbygoogle
      ad-client="ca-pub-7781654679401477"
      ad-slot="9239531397"
      ad-format="auto"/>
-      <!-- <topic-title title="Novos Lançamentos em Andamento"/>
-      <list-novel :mode="2"/> -->
-      <!-- <topic-title title="Recommended"/>
-      <list-novel :mode="2"/> -->
-      <!-- <topic-title title="Power Ranking" seeMore="#"/>
-      <list-novel/> -->
-      <topic-title title="Recomendado" />
-      <list-novel
-        :mode="2"
-        :api="
-          '/series?id=125,12,427,163,428,290,18,366,429&sortProperty=id&sortDirection=desc&paginate=false&limit=9'
-        "
-      />
-      <topic-title
-        title="Popular"
-        seeMore="/series?order=3"
-      />
-      <list-novel :api="
-          '/series?paginate=false&limit=9&sortProperty=numVotes&sortDirection=desc'
-        " />
-      <topic-title
-        title="Tendências de Histórias Originais"
-        seeMore="/series?language=1"
-      />
-      <list-novel :api="
-          '/series?paginate=false&limit=9&language=1&sortProperty=averageRating&sortDirection=desc'
-        " />
-      <topic-title
-        title="Novos na Central Novel"
-        seeMore="/series?order=5"
-      />
-      <list-novel :api="
-          '/series?paginate=false&limit=9&sortProperty=created_at&sortDirection=desc'
-        " />
       <topic-title
         title="Gêneros Sugeridas"
         seeMore="/series"
       />
+      <suggested-tags />
+      <adsbygoogle
+     ad-client="ca-pub-7781654679401477"
+     ad-slot="9239531397"
+     ad-format="auto"/>
     </div>
   </div>
 </template>
