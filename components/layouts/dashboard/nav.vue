@@ -20,7 +20,7 @@
             :username="'Luiz'"
           />
           <span class="username is-hidden-touch">{{
-            this.$auth.$state.user.username
+            this.$auth.$state.user.name
           }}</span>
         </div>
         <b-menu>
